@@ -27,6 +27,11 @@ final class Eulogin implements CasInterface
     private $cas;
 
     /**
+     * @var \Psr\Http\Message\StreamFactoryInterface
+     */
+    private $streamFactory;
+
+    /**
      * Eulogin constructor.
      *
      * @param \Psr\Http\Message\ServerRequestInterface $serverRequest
@@ -61,6 +66,8 @@ final class Eulogin implements CasInterface
             $cache,
             $logger
         );
+
+        $this->streamFactory = $streamFactory;
     }
 
     /**
@@ -106,16 +113,18 @@ final class Eulogin implements CasInterface
     /**
      * {@inheritdoc}
      */
-    public function requestProxyCallback(array $parameters = []): ResponseInterface
-    {
+    public function requestProxyCallback(
+        array $parameters = [],
+        ?ResponseInterface $response = null
+    ): ?ResponseInterface {
         $body = '<?xml version="1.0" encoding="utf-8"?><proxySuccess xmlns="http://www.yale.edu/tp/casClient" />';
 
         return $this
             ->cas
-            ->requestProxyCallback()
+            ->requestProxyCallback($parameters, $response)
             ->withBody(
                 $this
-                    ->getStreamFactory()
+                    ->streamFactory
                     ->createStream($body)
             );
     }
@@ -123,33 +132,41 @@ final class Eulogin implements CasInterface
     /**
      * {@inheritdoc}
      */
-    public function requestProxyTicket(array $parameters = []): ?ResponseInterface
-    {
-        return $this->cas->requestProxyTicket($parameters);
+    public function requestProxyTicket(
+        array $parameters = [],
+        ?ResponseInterface $response = null
+    ): ?ResponseInterface {
+        return $this->cas->requestProxyTicket($parameters, $response);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function requestProxyValidate(array $parameters = []): ?ResponseInterface
-    {
-        return $this->cas->requestProxyValidate($parameters);
+    public function requestProxyValidate(
+        array $parameters = [],
+        ?ResponseInterface $response = null
+    ): ?ResponseInterface {
+        return $this->cas->requestProxyValidate($parameters, $response);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function requestServiceValidate(array $parameters = []): ?ResponseInterface
-    {
-        return $this->cas->requestServiceValidate($parameters);
+    public function requestServiceValidate(
+        array $parameters = [],
+        ?ResponseInterface $response = null
+    ): ?ResponseInterface {
+        return $this->cas->requestServiceValidate($parameters, $response);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function requestTicketValidation(array $parameters = []): ?ResponseInterface
-    {
-        return $this->cas->requestTicketValidation($parameters);
+    public function requestTicketValidation(
+        array $parameters = [],
+        ?ResponseInterface $response = null
+    ): ?ResponseInterface {
+        return $this->cas->requestTicketValidation($parameters, $response);
     }
 
     /**
@@ -158,14 +175,6 @@ final class Eulogin implements CasInterface
     public function supportAuthentication(): bool
     {
         return $this->cas->supportAuthentication();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function validateTicketResponse(ResponseInterface $response): ?ResponseInterface
-    {
-        return $this->cas->validateTicketResponse($response);
     }
 
     /**
