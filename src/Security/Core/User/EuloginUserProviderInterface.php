@@ -6,6 +6,7 @@ namespace drupol\EuloginBundle\Security\Core\User;
 
 use drupol\CasBundle\Security\Core\User\CasUserInterface;
 use drupol\CasBundle\Security\Core\User\CasUserProviderInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Interface EuloginUserProviderInterface.
@@ -13,9 +14,9 @@ use drupol\CasBundle\Security\Core\User\CasUserProviderInterface;
 interface EuloginUserProviderInterface extends CasUserProviderInterface
 {
     /**
-     * @param array $data
+     * @param \Psr\Http\Message\ResponseInterface $response
      *
      * @return \drupol\CasBundle\Security\Core\User\CasUserInterface|\drupol\EuloginBundle\Security\Core\User\EuloginUserInterface
      */
-    public function loadUserByArray(array $data): CasUserInterface;
+    public function loadUserByResponse(ResponseInterface $response): CasUserInterface;
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace drupol\EuloginBundle\Security\Core\User;
 
-use SimpleXMLElement;
+use drupol\CasBundle\Security\Core\User\CasUser;
 
 /**
  * Class EuloginUser.
@@ -12,11 +12,9 @@ use SimpleXMLElement;
 final class EuloginUser implements EuloginUserInterface
 {
     /**
-     * The user storage.
-     *
-     * @var array
+     * @var \drupol\CasBundle\Security\Core\User\CasUser
      */
-    private $storage;
+    private $user;
 
     /**
      * EuloginUser constructor.
@@ -25,7 +23,7 @@ final class EuloginUser implements EuloginUserInterface
      */
     public function __construct(array $data)
     {
-        $this->storage = $data['serviceResponse']['authenticationSuccess'];
+        $this->user = new CasUser($this->normalizeUserData($data));
     }
 
     /**
@@ -46,7 +44,7 @@ final class EuloginUser implements EuloginUserInterface
 
     public function getAssuranceLevel()
     {
-        return $this->get('assuranceLevel');
+        return $this->user->getAttribute('assuranceLevel');
     }
 
     /**
@@ -54,7 +52,7 @@ final class EuloginUser implements EuloginUserInterface
      */
     public function getAttributes(): array
     {
-        return $this->getStorage();
+        return $this->user->getAttributes();
     }
 
     public function getDepartmentNumber()
@@ -64,52 +62,52 @@ final class EuloginUser implements EuloginUserInterface
 
     public function getDomain()
     {
-        return $this->get('domain');
+        return $this->user->getAttribute('domain');
     }
 
     public function getDomainUsername()
     {
-        return $this->get('domainUsername');
+        return $this->user->getAttribute('domainUsername');
     }
 
     public function getEmail()
     {
-        return $this->get('email');
+        return $this->user->getAttribute('email');
     }
 
     public function getEmployeeNumber()
     {
-        return $this->get('employeeNumber');
+        return $this->user->getAttribute('employeeNumber');
     }
 
     public function getEmployeeType()
     {
-        return $this->get('employeeType');
+        return $this->user->getAttribute('employeeType');
     }
 
     public function getFirstName()
     {
-        return $this->get('firstName');
+        return $this->user->getAttribute('firstName');
     }
 
     public function getGroups()
     {
-        return $this->get('groups');
+        return $this->user->getAttribute('groups');
     }
 
     public function getLastName()
     {
-        return $this->get('lastName');
+        return $this->user->getAttribute('lastName');
     }
 
     public function getLocale()
     {
-        return $this->get('locale');
+        return $this->user->getAttribute('locale');
     }
 
     public function getLoginDate()
     {
-        return $this->get('loginDate');
+        return $this->user->getAttribute('loginDate');
     }
 
     public function getOrgId()
@@ -125,7 +123,7 @@ final class EuloginUser implements EuloginUserInterface
 
     public function getPgt(): ?string
     {
-        return $this->get('proxyGrantingTicket');
+        return $this->user->getAttribute('proxyGrantingTicket');
     }
 
     /**
@@ -133,7 +131,7 @@ final class EuloginUser implements EuloginUserInterface
      */
     public function getPgtIOU(): ?string
     {
-        return $this->get('proxyGrantingTicket');
+        return $this->user->getAttribute('proxyGrantingTicket');
     }
 
     /**
@@ -161,17 +159,17 @@ final class EuloginUser implements EuloginUserInterface
 
     public function getSso()
     {
-        return $this->get('sso');
+        return $this->user->getAttribute('sso');
     }
 
     public function getStrengths()
     {
-        return $this->get('strength');
+        return $this->user->getAttribute('strength');
     }
 
     public function getTelephoneNumber()
     {
-        return $this->get('telephone');
+        return $this->user->getAttribute('telephone');
     }
 
     public function getTeleworkingPriority()
@@ -180,17 +178,17 @@ final class EuloginUser implements EuloginUserInterface
 
     public function getTicketType()
     {
-        return $this->get('ticketType');
+        return $this->user->getAttribute('ticketType');
     }
 
     public function getUid()
     {
-        return $this->get('uid');
+        return $this->user->getAttribute('uid');
     }
 
     public function getUser()
     {
-        return $this->get('user');
+        return $this->user->getAttribute('user');
     }
 
     /**
@@ -198,19 +196,7 @@ final class EuloginUser implements EuloginUserInterface
      */
     public function getUsername()
     {
-        return $this->get('user');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function withPgt(string $pgt): EuloginUser
-    {
-        $clone = clone $this;
-
-        $clone->storage['proxyGrantingTicket'] = $pgt;
-
-        return $clone;
+        return $this->user->getAttribute('user');
     }
 
     /**
@@ -222,34 +208,30 @@ final class EuloginUser implements EuloginUserInterface
      * @return mixed
      *   The value.
      */
-    private function get($key)
+    private function getAttribute($key)
     {
-        return $this->getStorage()[$key] ?? null;
+        return $this->user->getAttribute($key);
     }
 
     /**
-     * Get the storage.
+     * Normalize user data from EU Login to standard CAS user data.
+     *
+     * @param array $data
+     *   The data from EU Login
      *
      * @return array
+     *   The normalized data.
      */
-    private function getStorage()
+    private function normalizeUserData(array $data): array
     {
-        return $this->storage;
-    }
+        $storage = [];
+        $rootAttributes = ['user', 'proxyGrantingTicket'];
 
-    /**
-     * @param SimpleXMLElement $data
-     *
-     * @return array
-     */
-    private function parseXml(SimpleXMLElement $data): array
-    {
-        $array = [];
-
-        foreach ((array) $data as $index => $node) {
-            $array[$index] = ($node instanceof SimpleXMLElement) ? $this->parseXml($node) : (string) $node;
+        foreach ($rootAttributes as $rootAttribute) {
+            $storage[$rootAttribute] = $data[$rootAttribute] ?? null;
         }
+        $storage['attributes'] = array_diff_key($data, array_flip($rootAttributes));
 
-        return $array;
+        return array_filter($storage) + ['attributes' => []];
     }
 }

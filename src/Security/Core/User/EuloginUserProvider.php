@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace drupol\EuloginBundle\Security\Core\User;
 
 use drupol\CasBundle\Security\Core\User\CasUserInterface;
+use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -15,9 +17,13 @@ class EuloginUserProvider implements EuloginUserProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function loadUserByArray(array $data): CasUserInterface
+    public function loadUserByResponse(ResponseInterface $response): CasUserInterface
     {
-        return new EuloginUser($data);
+        if (false === $user = json_decode((string) $response->getBody(), true)) {
+            throw new AuthenticationException('Unable to load user from response.');
+        }
+
+        return new EuloginUser($user['serviceResponse']['authenticationSuccess']);
     }
 
     /**
