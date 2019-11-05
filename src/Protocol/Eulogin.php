@@ -74,6 +74,14 @@ final class Eulogin implements CasInterface
     /**
      * {@inheritdoc}
      */
+    public function getProperties(): array
+    {
+        return $this->cas->getProperties();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getUser(ResponseInterface $response): ?array
     {
         return $this->cas->getUser($response);
