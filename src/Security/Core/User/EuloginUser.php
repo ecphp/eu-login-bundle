@@ -188,7 +188,7 @@ final class EuloginUser implements EuloginUserInterface
 
     public function getUser()
     {
-        return $this->user->getAttribute('user');
+        return $this->user->getUsername();
     }
 
     /**
@@ -196,21 +196,7 @@ final class EuloginUser implements EuloginUserInterface
      */
     public function getUsername()
     {
-        return $this->user->getAttribute('user');
-    }
-
-    /**
-     * Get a value.
-     *
-     * @param string $key
-     *   The key.
-     *
-     * @return mixed
-     *   The value.
-     */
-    private function getAttribute($key)
-    {
-        return $this->user->getAttribute($key);
+        return $this->user->getUsername();
     }
 
     /**
@@ -225,7 +211,7 @@ final class EuloginUser implements EuloginUserInterface
     private function normalizeUserData(array $data): array
     {
         $storage = [];
-        $rootAttributes = ['user', 'proxyGrantingTicket'];
+        $rootAttributes = ['user', 'proxyGrantingTicket', 'proxies'];
 
         foreach ($rootAttributes as $rootAttribute) {
             $storage[$rootAttribute] = $data[$rootAttribute] ?? null;
