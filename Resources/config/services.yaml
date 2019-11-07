@@ -3,7 +3,7 @@ services:
     class: drupol\EuloginBundle\Protocol\Eulogin
     arguments:
       $serverRequest: '@cas.psrrequest'
-      $properties: '%cas%'
+      $properties: '@cas.configuration'
       $client: '@psr18.http_client'
       $uriFactory: '@nyholm.psr7.psr17_factory'
       $responseFactory: '@nyholm.psr7.psr17_factory'

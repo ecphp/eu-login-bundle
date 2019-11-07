@@ -6,6 +6,7 @@ namespace drupol\EuloginBundle\Protocol;
 
 use drupol\psrcas\Cas;
 use drupol\psrcas\CasInterface;
+use drupol\psrcas\Configuration\PropertiesInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -46,7 +47,7 @@ final class Eulogin implements CasInterface
      */
     public function __construct(
         ServerRequestInterface $serverRequest,
-        array $properties,
+        PropertiesInterface $properties,
         ClientInterface $client,
         UriFactoryInterface $uriFactory,
         ResponseFactoryInterface $responseFactory,
@@ -81,7 +82,7 @@ final class Eulogin implements CasInterface
     /**
      * {@inheritdoc}
      */
-    public function getProperties(): array
+    public function getProperties(): PropertiesInterface
     {
         return $this->cas->getProperties();
     }
