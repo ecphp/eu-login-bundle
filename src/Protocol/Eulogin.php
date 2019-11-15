@@ -114,7 +114,7 @@ final class Eulogin implements CasInterface
     /**
      * {@inheritdoc}
      */
-    public function requestProxyCallback(
+    public function handleProxyCallback(
         array $parameters = [],
         ?ResponseInterface $response = null
     ): ?ResponseInterface {
@@ -122,7 +122,7 @@ final class Eulogin implements CasInterface
 
         return $this
             ->cas
-            ->requestProxyCallback($parameters, $response)
+            ->handleProxyCallback($parameters, $response)
             ->withBody(
                 $this
                     ->streamFactory
