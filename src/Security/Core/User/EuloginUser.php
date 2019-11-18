@@ -121,9 +121,6 @@ final class EuloginUser implements EuloginUserInterface
     {
     }
 
-    /**
-     *
-     */
     public function getPgt(): ?string
     {
         return $this->user->getPgt();

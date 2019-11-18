@@ -36,7 +36,7 @@ final class Eulogin implements CasInterface
      * Eulogin constructor.
      *
      * @param \Psr\Http\Message\ServerRequestInterface $serverRequest
-     * @param array $properties
+     * @param \drupol\psrcas\Configuration\PropertiesInterface $properties
      * @param \Psr\Http\Client\ClientInterface $client
      * @param \Psr\Http\Message\UriFactoryInterface $uriFactory
      * @param \Psr\Http\Message\ResponseFactoryInterface $responseFactory
@@ -90,9 +90,20 @@ final class Eulogin implements CasInterface
     /**
      * {@inheritdoc}
      */
-    public function getUser(ResponseInterface $response): ?array
-    {
-        return $this->cas->getUser($response);
+    public function handleProxyCallback(
+        array $parameters = [],
+        ?ResponseInterface $response = null
+    ): ?ResponseInterface {
+        $body = '<?xml version="1.0" encoding="utf-8"?><proxySuccess xmlns="http://www.yale.edu/tp/casClient" />';
+
+        return $this
+            ->cas
+            ->handleProxyCallback($parameters, $response)
+            ->withBody(
+                $this
+                    ->streamFactory
+                    ->createStream($body)
+            );
     }
 
     /**
@@ -109,25 +120,6 @@ final class Eulogin implements CasInterface
     public function logout(array $parameters = []): ResponseInterface
     {
         return $this->cas->logout($parameters);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function handleProxyCallback(
-        array $parameters = [],
-        ?ResponseInterface $response = null
-    ): ?ResponseInterface {
-        $body = '<?xml version="1.0" encoding="utf-8"?><proxySuccess xmlns="http://www.yale.edu/tp/casClient" />';
-
-        return $this
-            ->cas
-            ->handleProxyCallback($parameters, $response)
-            ->withBody(
-                $this
-                    ->streamFactory
-                    ->createStream($body)
-            );
     }
 
     /**
