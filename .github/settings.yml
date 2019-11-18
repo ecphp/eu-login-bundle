@@ -39,6 +39,7 @@ repository:
     allow_squash_merge: false
     default_branch: master
     description: "Symfony bundle to authenticate users against EU Login."
+    homepage: https://eulogin-bundle.readthedocs.io
     topics: authentication,cas,psr,single-sign-on
     has_downloads: true
     has_issues: true
