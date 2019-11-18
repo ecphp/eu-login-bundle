@@ -8,7 +8,6 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "drupol/cas-bundle": "dev-master",
-        "nyholm/psr7": "^1",
         "symfony/framework-bundle": "^4",
         "symfony/security-bundle": "^4"
     },
