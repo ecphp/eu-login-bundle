@@ -1,8 +1,9 @@
+.. _installation:
+
 Installation
 ============
 
 This package does not yet have a Symfony Flex recipe. Installation steps must be done manually.
-
 
 Step 1
 ~~~~~~
@@ -16,13 +17,22 @@ The easiest way to install it is through Composer_
 Step 2
 ~~~~~~
 
-Add the line `drupol\\EuloginBundle\\EuloginBundle::class => ['all' => true],` to `config/bundles.php` array.
+Edit the file `config/bundles.php`and add the line `drupol\\EuloginBundle\\EuloginBundle::class => ['all' => true],`.
 
 Step 3
 ~~~~~~
 
-Recursively copy the content of the `Resources` directory in `config/` folder.
+Recursively copy the content of the `Resources/config` folder in `config/` folder.
 
-See more on :ref:`configuration` page.
+.. code-block:: bash
+
+    cp -ar vendor/drupol/eulogin-bundle/Resources/config/* config/
+
+Step 4
+~~~~~~
+
+Edit the configuration file `config/packages/eulogin_cas.yaml` and make the necessary changes to fit your needs.
+
+See more on the dedicated :ref:`configuration` page.
 
 .. _Composer: https://getcomposer.org
