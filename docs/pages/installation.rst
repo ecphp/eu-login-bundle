@@ -17,7 +17,7 @@ The easiest way to install it is through Composer_
 Step 2
 ~~~~~~
 
-Edit the file `config/bundles.php`and add the line `drupol\\EuloginBundle\\EuloginBundle::class => ['all' => true],`.
+Edit the file `config/bundles.php` and add the line `drupol\\EuloginBundle\\EuloginBundle::class => ['all' => true],`.
 
 Step 3
 ~~~~~~
