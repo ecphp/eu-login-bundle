@@ -90,6 +90,9 @@ final class EuloginUser implements EuloginUserInterface
         return $this->user->getAttribute('domainUsername');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getEmail(): ?string
     {
         return $this->user->getAttribute('email');
@@ -111,6 +114,9 @@ final class EuloginUser implements EuloginUserInterface
         return $this->user->getAttribute('employeeType');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFirstName(): ?string
     {
         return $this->user->getAttribute('firstName');
