@@ -29,9 +29,25 @@ final class EuloginUser implements EuloginUserInterface
     /**
      * {@inheritdoc}
      */
+    public function eraseCredentials(): void
+    {
+        // null
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function get(string $key, $default = null)
     {
         return $this->user->get($key, $default);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssuranceLevel(): ?string
+    {
+        return $this->user->getAttribute('assuranceLevel');
     }
 
     /**
@@ -45,80 +61,97 @@ final class EuloginUser implements EuloginUserInterface
     /**
      * {@inheritdoc}
      */
-    public function eraseCredentials(): void
-    {
-        // null
-    }
-
-    public function getAssuranceLevel()
-    {
-        return $this->user->getAttribute('assuranceLevel');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAttributes(): array
     {
         return $this->user->getAttributes();
     }
 
-    public function getDepartmentNumber()
+    /**
+     * {@inheritdoc}
+     */
+    public function getDepartmentNumber(): ?string
     {
         return $this->user->getAttribute('departmentNumber');
     }
 
-    public function getDomain()
+    /**
+     * {@inheritdoc}
+     */
+    public function getDomain(): ?string
     {
         return $this->user->getAttribute('domain');
     }
 
-    public function getDomainUsername()
+    /**
+     * {@inheritdoc}
+     */
+    public function getDomainUsername(): ?string
     {
         return $this->user->getAttribute('domainUsername');
     }
 
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->user->getAttribute('email');
     }
 
-    public function getEmployeeNumber()
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmployeeNumber(): ?string
     {
         return $this->user->getAttribute('employeeNumber');
     }
 
-    public function getEmployeeType()
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmployeeType(): ?string
     {
         return $this->user->getAttribute('employeeType');
     }
 
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->user->getAttribute('firstName');
     }
 
-    public function getGroups()
+    /**
+     * {@inheritdoc}
+     */
+    public function getGroups(): array
     {
-        return $this->user->getAttribute('groups');
+        return $this->user->getAttribute('groups', []);
     }
 
-    public function getLastName()
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastName(): ?string
     {
         return $this->user->getAttribute('lastName');
     }
 
-    public function getLocale()
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocale(): ?string
     {
         return $this->user->getAttribute('locale');
     }
 
-    public function getLoginDate()
+    /**
+     * {@inheritdoc}
+     */
+    public function getLoginDate(): ?string
     {
         return $this->user->getAttribute('loginDate');
     }
 
-    public function getOrgId()
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrgId(): ?string
     {
         return $this->user->getAttribute('orgId');
     }
@@ -161,32 +194,50 @@ final class EuloginUser implements EuloginUserInterface
     {
     }
 
-    public function getSso()
+    /**
+     * {@inheritdoc}
+     */
+    public function getSso(): ?string
     {
         return $this->user->getAttribute('sso');
     }
 
-    public function getStrengths()
+    /**
+     * {@inheritdoc}
+     */
+    public function getStrengths(): array
     {
-        return $this->user->getAttribute('strengths');
+        return $this->user->getAttribute('strengths', []);
     }
 
-    public function getTelephoneNumber()
+    /**
+     * {@inheritdoc}
+     */
+    public function getTelephoneNumber(): ?string
     {
         return $this->user->getAttribute('telephoneNumber');
     }
 
-    public function getTeleworkingPriority()
+    /**
+     * {@inheritdoc}
+     */
+    public function getTeleworkingPriority(): ?string
     {
         return $this->user->getAttribute('teleworkingPriority');
     }
 
-    public function getTicketType()
+    /**
+     * {@inheritdoc}
+     */
+    public function getTicketType(): ?string
     {
         return $this->user->getAttribute('ticketType');
     }
 
-    public function getUid()
+    /**
+     * {@inheritdoc}
+     */
+    public function getUid(): ?string
     {
         return $this->user->getAttribute('uid');
     }

@@ -6,49 +6,103 @@ namespace drupol\EuloginBundle\Security\Core\User;
 
 use drupol\CasBundle\Security\Core\User\CasUserInterface;
 
+/**
+ * Interface EuloginUserInterface.
+ */
 interface EuloginUserInterface extends CasUserInterface
 {
-    public function getAssuranceLevel();
+    /**
+     * @return string|null
+     */
+    public function getAssuranceLevel(): ?string;
 
-    public function getAttributes(): array;
+    /**
+     * @return string|null
+     */
+    public function getDepartmentNumber(): ?string;
 
-    public function getDepartmentNumber();
+    /**
+     * @return string|null
+     */
+    public function getDomain(): ?string;
 
-    public function getDomain();
+    /**
+     * @return string|null
+     */
+    public function getDomainUsername(): ?string;
 
-    public function getDomainUsername();
+    /**
+     * @return string|null
+     */
+    public function getEmail(): ?string;
 
-    public function getEmail();
+    /**
+     * @return string|null
+     */
+    public function getEmployeeNumber(): ?string;
 
-    public function getEmployeeNumber();
+    /**
+     * @return string|null
+     */
+    public function getEmployeeType(): ?string;
 
-    public function getEmployeeType();
+    /**
+     * @return string|null
+     */
+    public function getFirstName(): ?string;
 
-    public function getFirstName();
+    /**
+     * @return array
+     */
+    public function getGroups(): array;
 
-    public function getGroups();
+    /**
+     * @return string|null
+     */
+    public function getLastName(): ?string;
 
-    public function getLastName();
+    /**
+     * @return string|null
+     */
+    public function getLocale(): ?string;
 
-    public function getLocale();
+    /**
+     * @return string|null
+     */
+    public function getLoginDate(): ?string;
 
-    public function getLoginDate();
+    /**
+     * @return string|null
+     */
+    public function getOrgId(): ?string;
 
-    public function getOrgId();
+    /**
+     * @return string|null
+     */
+    public function getSso(): ?string;
 
-    public function getPgt(): ?string;
+    /**
+     * @return array
+     */
+    public function getStrengths(): array;
 
-    public function getSso();
+    /**
+     * @return string|null
+     */
+    public function getTelephoneNumber(): ?string;
 
-    public function getStrengths();
+    /**
+     * @return string|null
+     */
+    public function getTeleworkingPriority(): ?string;
 
-    public function getTelephoneNumber();
+    /**
+     * @return string|null
+     */
+    public function getTicketType(): ?string;
 
-    public function getTeleworkingPriority();
-
-    public function getTicketType();
-
-    public function getUid();
-
-    public function getUser(): string;
+    /**
+     * @return string|null
+     */
+    public function getUid(): ?string;
 }

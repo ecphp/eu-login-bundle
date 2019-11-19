@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace drupol\EuloginBundle\Security\Core\User;
 
 use drupol\CasBundle\Security\Core\User\CasUserInterface;
+use drupol\psrcas\Introspection\Introspector;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use function get_class;
 
+/**
+ * Class EuloginUserProvider.
+ */
 class EuloginUserProvider implements EuloginUserProviderInterface
 {
     /**
@@ -19,11 +22,10 @@ class EuloginUserProvider implements EuloginUserProviderInterface
      */
     public function loadUserByResponse(ResponseInterface $response): CasUserInterface
     {
-        if (false === $user = json_decode((string) $response->getBody(), true)) {
-            throw new AuthenticationException('Unable to load user from response.');
-        }
+        /** @var \drupol\psrcas\Introspection\Contract\ServiceValidate $introspect */
+        $introspect = Introspector::detect($response);
 
-        return new EuloginUser($user['serviceResponse']['authenticationSuccess']);
+        return new EuloginUser($introspect->getParsedResponse()['serviceResponse']['authenticationSuccess']);
     }
 
     /**
