@@ -29,9 +29,17 @@ final class EuloginUser implements EuloginUserInterface
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    public function get(string $key, $default = null)
     {
-        return (string) $this->getUsername();
+        return $this->user->get($key, $default);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttribute(string $key, $default = null)
+    {
+        return $this->user->getAttribute($key, $default);
     }
 
     /**
@@ -57,7 +65,7 @@ final class EuloginUser implements EuloginUserInterface
 
     public function getDepartmentNumber()
     {
-        // TODO: Implement getDepartmentNumber() method.
+        return $this->user->getAttribute('departmentNumber');
     }
 
     public function getDomain()
@@ -112,6 +120,7 @@ final class EuloginUser implements EuloginUserInterface
 
     public function getOrgId()
     {
+        return $this->user->getAttribute('orgId');
     }
 
     /**
@@ -121,17 +130,12 @@ final class EuloginUser implements EuloginUserInterface
     {
     }
 
-    public function getPgt(): ?string
-    {
-        return $this->user->getPgt();
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function getPgtIOU(): ?string
+    public function getPgt(): ?string
     {
-        return $this->user->getAttribute('proxyGrantingTicket');
+        return $this->user->getPgt();
     }
 
     /**
@@ -164,16 +168,17 @@ final class EuloginUser implements EuloginUserInterface
 
     public function getStrengths()
     {
-        return $this->user->getAttribute('strength');
+        return $this->user->getAttribute('strengths');
     }
 
     public function getTelephoneNumber()
     {
-        return $this->user->getAttribute('telephone');
+        return $this->user->getAttribute('telephoneNumber');
     }
 
     public function getTeleworkingPriority()
     {
+        return $this->user->getAttribute('teleworkingPriority');
     }
 
     public function getTicketType()
@@ -186,9 +191,12 @@ final class EuloginUser implements EuloginUserInterface
         return $this->user->getAttribute('uid');
     }
 
-    public function getUser()
+    /**
+     * {@inheritdoc}
+     */
+    public function getUser(): string
     {
-        return $this->user->getUsername();
+        return $this->user->getUser();
     }
 
     /**
@@ -196,7 +204,7 @@ final class EuloginUser implements EuloginUserInterface
      */
     public function getUsername()
     {
-        return $this->user->getUsername();
+        return $this->getUser();
     }
 
     /**

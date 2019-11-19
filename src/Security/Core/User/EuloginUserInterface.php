@@ -38,8 +38,6 @@ interface EuloginUserInterface extends CasUserInterface
 
     public function getPgt(): ?string;
 
-    public function getPgtIOU(): ?string;
-
     public function getSso();
 
     public function getStrengths();
@@ -52,5 +50,5 @@ interface EuloginUserInterface extends CasUserInterface
 
     public function getUid();
 
-    public function getUser();
+    public function getUser(): string;
 }
