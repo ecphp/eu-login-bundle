@@ -28,6 +28,14 @@ Recursively copy the content of the `Resources/config` folder in `config/` folde
 
     cp -ar vendor/drupol/eulogin-bundle/Resources/config/* config/
 
+As this package depends on the package `drupol/cas-bundle`, you will need to copy
+some configuration files from that package as well.
+
+.. code-block:: bash
+
+    cp -ar vendor/drupol/cas-bundle/Resources/config/* config/
+
+
 Step 4
 ~~~~~~
 
