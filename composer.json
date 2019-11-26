@@ -8,8 +8,8 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "drupol/cas-bundle": "dev-master",
-        "symfony/framework-bundle": "^4",
-        "symfony/security-bundle": "^4"
+        "symfony/framework-bundle": "^4 || ^5",
+        "symfony/security-bundle": "^4 || ^5"
     },
     "require-dev": {
         "drupol/php-conventions": "^1"
