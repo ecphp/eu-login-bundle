@@ -175,6 +175,9 @@ final class Eulogin implements CasInterface
      */
     public function withServerRequest(ServerRequestInterface $serverRequest): CasInterface
     {
-        return $this->cas->withServerRequest($serverRequest);
+        $clone = clone $this;
+        $clone->cas = $clone->cas->withServerRequest($serverRequest);
+
+        return $clone;
     }
 }

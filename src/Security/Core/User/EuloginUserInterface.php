@@ -17,6 +17,11 @@ interface EuloginUserInterface extends CasUserInterface
     public function getAssuranceLevel(): ?string;
 
     /**
+     * @return array
+     */
+    public function getAuthenticationFactors(): array;
+
+    /**
      * @return string|null
      */
     public function getDepartmentNumber(): ?string;

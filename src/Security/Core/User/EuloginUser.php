@@ -69,6 +69,14 @@ final class EuloginUser implements EuloginUserInterface
     /**
      * {@inheritdoc}
      */
+    public function getAuthenticationFactors(): array
+    {
+        return $this->user->getAttribute('authenticationFactors', []);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDepartmentNumber(): ?string
     {
         return $this->user->getAttribute('departmentNumber');
