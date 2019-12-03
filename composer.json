@@ -1,7 +1,16 @@
 {
     "name": "drupol/eulogin-bundle",
     "type": "symfony-bundle",
-    "description": "A bundle for Symfony 4 and 5, providing authentication against European Commission authentication service.",
+    "description": "A bundle for Symfony 4 & 5, providing authentication against European Commission authentication service.",
+    "keywords": [
+        "authentication",
+        "cas",
+        "central authentication service",
+        "eulogin",
+        "european commission",
+        "single sign-on",
+        "sso"
+    ],
     "license": "MIT",
     "require": {
         "php": ">= 7.1.3",
@@ -24,5 +33,8 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "grumphp": "./vendor/bin/grumphp run"
+    }
 }
