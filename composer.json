@@ -19,8 +19,10 @@
         "drupol/cas-bundle": "dev-master || 4.4.x-dev"
     },
     "require-dev": {
+        "drupol/php-conventions": "^1.6.8",
         "friends-of-phpspec/phpspec-code-coverage": "^4.3",
-        "phpspec/phpspec": "^6.1"
+        "infection/infection": ">= 0.13.6",
+        "phpspec/phpspec": "^5.1.2 || ^6.1"
     },
     "autoload": {
         "psr-4": {
