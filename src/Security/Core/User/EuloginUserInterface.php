@@ -17,7 +17,7 @@ interface EuloginUserInterface extends CasUserInterface
     public function getAssuranceLevel(): ?string;
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getAuthenticationFactors(): array;
 
@@ -57,7 +57,7 @@ interface EuloginUserInterface extends CasUserInterface
     public function getFirstName(): ?string;
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getGroups(): array;
 
@@ -87,7 +87,7 @@ interface EuloginUserInterface extends CasUserInterface
     public function getSso(): ?string;
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getStrengths(): array;
 

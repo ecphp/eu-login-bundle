@@ -19,7 +19,7 @@ final class EuloginUser implements EuloginUserInterface
     /**
      * EuloginUser constructor.
      *
-     * @param array $data
+     * @param array<mixed> $data
      */
     public function __construct(array $data)
     {
@@ -175,6 +175,7 @@ final class EuloginUser implements EuloginUserInterface
      */
     public function getPassword()
     {
+        return null;
     }
 
     /**
@@ -206,6 +207,7 @@ final class EuloginUser implements EuloginUserInterface
      */
     public function getSalt()
     {
+        return null;
     }
 
     /**
@@ -275,10 +277,10 @@ final class EuloginUser implements EuloginUserInterface
     /**
      * Normalize user data from EU Login to standard CAS user data.
      *
-     * @param array $data
+     * @param array<array|string> $data
      *   The data from EU Login
      *
-     * @return array
+     * @return array<array|string>
      *   The normalized data.
      */
     private function normalizeUserData(array $data): array

@@ -4,53 +4,11 @@ declare(strict_types=1);
 
 namespace spec\drupol\EuloginBundle\Security\Core\User;
 
-use PhpSpec\ObjectBehavior;
 use drupol\EuloginBundle\Security\Core\User\EuloginUser;
+use PhpSpec\ObjectBehavior;
 
 class EuloginUserSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(EuloginUser::class);
-    }
-
-    public function it_can_get_the_attributes_only()
-    {
-        $this
-            ->getAttributes()
-            ->shouldReturn(
-                [
-                    'departmentNumber' => 'departmentNumber',
-                    'email' => 'email',
-                    'employeeNumber' => 'employeeNumber',
-                    'employeeType' => 'employeeType',
-                    'firstName' => 'firstName',
-                    'lastName' => 'lastName',
-                    'domain' => 'domain',
-                    'domainUsername' => 'domainUsername',
-                    'telephoneNumber' => 'telephoneNumber',
-                    'locale' => 'locale',
-                    'assuranceLevel' => 'assuranceLevel',
-                    'uid' => 'uid',
-                    'orgId' => 'orgId',
-                    'teleworkingPriority' => 'teleworkingPriority',
-                    'groups' => [
-                        'foo',
-                    ],
-                    'strengths' => [
-                        'bar',
-                    ],
-                    'authenticationFactors' => [
-                        'foobar',
-                    ],
-                    'loginDate' => 'loginDate',
-                    'sso' => 'sso',
-                    'ticketType' => 'ticketType',
-                    'proxyGrantingProtocol' => 'proxyGrantingProtocol',
-                ]
-            );
-    }
-
     public function it_can_get_specific_attribute()
     {
         $this
@@ -134,7 +92,49 @@ class EuloginUserSpec extends ObjectBehavior
             ->shouldReturn('uid');
     }
 
-    function let()
+    public function it_can_get_the_attributes_only()
+    {
+        $this
+            ->getAttributes()
+            ->shouldReturn(
+                [
+                    'departmentNumber' => 'departmentNumber',
+                    'email' => 'email',
+                    'employeeNumber' => 'employeeNumber',
+                    'employeeType' => 'employeeType',
+                    'firstName' => 'firstName',
+                    'lastName' => 'lastName',
+                    'domain' => 'domain',
+                    'domainUsername' => 'domainUsername',
+                    'telephoneNumber' => 'telephoneNumber',
+                    'locale' => 'locale',
+                    'assuranceLevel' => 'assuranceLevel',
+                    'uid' => 'uid',
+                    'orgId' => 'orgId',
+                    'teleworkingPriority' => 'teleworkingPriority',
+                    'groups' => [
+                        'foo',
+                    ],
+                    'strengths' => [
+                        'bar',
+                    ],
+                    'authenticationFactors' => [
+                        'foobar',
+                    ],
+                    'loginDate' => 'loginDate',
+                    'sso' => 'sso',
+                    'ticketType' => 'ticketType',
+                    'proxyGrantingProtocol' => 'proxyGrantingProtocol',
+                ]
+            );
+    }
+
+    public function it_is_initializable()
+    {
+        $this->shouldHaveType(EuloginUser::class);
+    }
+
+    public function let()
     {
         $data = [
             'user' => 'user',
@@ -153,13 +153,13 @@ class EuloginUserSpec extends ObjectBehavior
             'orgId' => 'orgId',
             'teleworkingPriority' => 'teleworkingPriority',
             'groups' => [
-                'foo'
+                'foo',
             ],
             'strengths' => [
-                'bar'
+                'bar',
             ],
             'authenticationFactors' => [
-                'foobar'
+                'foobar',
             ],
             'loginDate' => 'loginDate',
             'sso' => 'sso',
@@ -167,8 +167,8 @@ class EuloginUserSpec extends ObjectBehavior
             'proxyGrantingProtocol' => 'proxyGrantingProtocol',
             'proxyGrantingTicket' => 'proxyGrantingTicket',
             'proxies' => [
-                'proxy1'
-            ]
+                'proxy1',
+            ],
         ];
 
         $this

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\drupol\EuloginBundle\Protocol;
 
 use Nyholm\Psr7\Factory\Psr17Factory;
@@ -14,7 +16,7 @@ use Symfony\Component\HttpClient\Psr18Client;
 
 class EuloginSpec extends ObjectBehavior
 {
-    function it_is_returning_xml_on_the_proxycallback()
+    public function it_is_returning_xml_on_the_proxycallback()
     {
         $request = new ServerRequest('GET', 'http://local/proxycallback?pgtId=pgtId&pgtIou=pgtIou');
 

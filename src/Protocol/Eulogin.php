@@ -23,7 +23,7 @@ use Psr\Log\LoggerInterface;
 final class Eulogin implements CasInterface
 {
     /**
-     * @var \drupol\psrcas\Cas
+     * @var \drupol\psrcas\CasInterface
      */
     private $cas;
 
