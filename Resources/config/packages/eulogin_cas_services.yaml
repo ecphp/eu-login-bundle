@@ -1,0 +1,3 @@
+services:
+  eulogin.userprovider:
+    class: drupol\EuloginBundle\Security\Core\User\EuloginUserProvider

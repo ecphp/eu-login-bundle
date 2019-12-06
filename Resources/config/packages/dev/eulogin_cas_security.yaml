@@ -1,4 +1,4 @@
 security:
     providers:
         eulogin:
-            id: drupol\EuloginBundle\Security\Core\User\EuloginUserProvider
+            id: eulogin.userprovider
