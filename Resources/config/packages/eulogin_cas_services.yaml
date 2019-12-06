@@ -1,6 +1,6 @@
 services:
   cas:
-    class: drupol\EuloginBundle\Protocol\Eulogin
+    class: drupol\ecas\Ecas
     arguments:
       $serverRequest: '@cas.psrrequest'
       $properties: '@cas.configuration'
