@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace drupol\ecas\DependencyInjection;
+namespace drupol\EuloginBundle\DependencyInjection;
 
 use drupol\ecas\Ecas;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
