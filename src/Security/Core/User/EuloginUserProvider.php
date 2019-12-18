@@ -31,7 +31,7 @@ class EuloginUserProvider implements EuloginUserProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function loadUserByUsername(string $username)
+    public function loadUserByUsername($username)
     {
         throw new UnsupportedUserException(sprintf('Username "%s" does not exist.', $username));
     }
@@ -51,7 +51,7 @@ class EuloginUserProvider implements EuloginUserProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function supportsClass(string $class)
+    public function supportsClass($class)
     {
         return EuloginUser::class === $class;
     }
