@@ -20,11 +20,11 @@
         "drupol/ecas": "dev-master"
     },
     "require-dev": {
-        "drupol/php-conventions": "^1.6.8",
-        "friends-of-phpspec/phpspec-code-coverage": "^4.3",
-        "infection/infection": ">= 0.13.6",
+        "drupol/php-conventions": "^1.6.11",
+        "friends-of-phpspec/phpspec-code-coverage": "^4.3.2",
+        "infection/infection": "^0.13.6",
         "nyholm/psr7-server": "^0.4.1",
-        "phpspec/phpspec": "^5.1.2 || ^6.1"
+        "phpspec/phpspec": "^5.1.2"
     },
     "autoload": {
         "psr-4": {
