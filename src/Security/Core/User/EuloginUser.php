@@ -187,7 +187,7 @@ final class EuloginUser implements EuloginUserInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string[]
      */
     public function getRoles()
     {
