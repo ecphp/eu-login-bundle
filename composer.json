@@ -13,11 +13,12 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">= 7.1.3",
+        "php": ">= 7.2.5",
         "ext-json": "*",
         "ext-simplexml": "*",
         "drupol/cas-bundle": "dev-master || 4.4.x-dev",
-        "drupol/ecas": "dev-master"
+        "drupol/ecas": "dev-master",
+        "symfony/framework-bundle": "^5"
     },
     "require-dev": {
         "drupol/php-conventions": "^1.6.11",
