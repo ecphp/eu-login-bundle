@@ -17,7 +17,8 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "drupol/cas-bundle": "dev-master || 4.4.x-dev",
-        "drupol/ecas": "dev-master"
+        "drupol/ecas": "dev-master",
+        "symfony/framework-bundle": "^4.4"
     },
     "require-dev": {
         "drupol/php-conventions": "^1.6.11",
