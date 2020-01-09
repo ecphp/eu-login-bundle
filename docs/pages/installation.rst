@@ -15,7 +15,7 @@ The easiest way to install it is through Composer_
 
 .. code-block:: bash
 
-    composer require drupol/eulogin-bundle
+    composer require drupol/eulogin-bundle:^4.4
 
 Step 2
 ~~~~~~
