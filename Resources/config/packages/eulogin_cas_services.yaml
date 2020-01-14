@@ -1,15 +1,15 @@
 services:
-  eulogin.userprovider:
-    class: drupol\EuloginBundle\Security\Core\User\EuloginUserProvider
-  cas:
-    class: drupol\ecas\Ecas
-    arguments:
-      $serverRequest: '@cas.psrrequest'
-      $properties: '@cas.configuration'
-      $client: '@psr18.http_client'
-      $uriFactory: '@cas.psr17_factory'
-      $responseFactory: '@cas.psr17_factory'
-      $requestFactory: '@cas.psr17_factory'
-      $streamFactory: '@cas.psr17_factory'
-      $cache: '@cache.app'
-      $logger: '@logger'
+    eulogin.userprovider:
+        class: EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider
+    cas:
+        class: EcPhp\Ecas\Ecas
+        arguments:
+            $serverRequest: '@cas.psrrequest'
+            $properties: '@cas.configuration'
+            $client: '@psr18.http_client'
+            $uriFactory: '@cas.psr17_factory'
+            $responseFactory: '@cas.psr17_factory'
+            $requestFactory: '@cas.psr17_factory'
+            $streamFactory: '@cas.psr17_factory'
+            $cache: '@cache.app'
+            $logger: '@logger'

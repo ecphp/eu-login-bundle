@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace drupol\EuloginBundle\Security\Core\User;
+namespace EcPhp\EuLoginBundle\Security\Core\User;
 
-use drupol\CasBundle\Security\Core\User\CasUserInterface;
-use drupol\psrcas\Introspection\Introspector;
+use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
+use EcPhp\CasLib\Introspection\Introspector;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -13,19 +13,19 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use function get_class;
 
 /**
- * Class EuloginUserProvider.
+ * Class EuLoginUserProvider.
  */
-class EuloginUserProvider implements EuloginUserProviderInterface
+class EuLoginUserProvider implements EuLoginUserProviderInterface
 {
     /**
      * {@inheritdoc}
      */
     public function loadUserByResponse(ResponseInterface $response): CasUserInterface
     {
-        /** @var \drupol\psrcas\Introspection\Contract\ServiceValidate $introspect */
+        /** @var \EcPhp\CasLib\Introspection\Contract\ServiceValidate $introspect */
         $introspect = Introspector::detect($response);
 
-        return new EuloginUser($introspect->getParsedResponse()['serviceResponse']['authenticationSuccess']);
+        return new EuLoginUser($introspect->getParsedResponse()['serviceResponse']['authenticationSuccess']);
     }
 
     /**
@@ -41,7 +41,7 @@ class EuloginUserProvider implements EuloginUserProviderInterface
      */
     public function refreshUser(UserInterface $user)
     {
-        if (!$user instanceof EuloginUserInterface) {
+        if (!$user instanceof EuLoginUserInterface) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
         }
 
@@ -53,6 +53,6 @@ class EuloginUserProvider implements EuloginUserProviderInterface
      */
     public function supportsClass($class)
     {
-        return EuloginUser::class === $class;
+        return EuLoginUser::class === $class;
     }
 }

@@ -1,19 +1,5 @@
 # https://github.com/probot/settings
 
-branches:
-    - name: master
-      protection:
-          enforce_admins: false
-          required_pull_request_reviews:
-              dismiss_stale_reviews: true
-              require_code_owner_reviews: true
-              required_approving_review_count: 1
-          required_status_checks:
-              contexts:
-                  -  "Grumphp"
-              strict: false
-          restrictions: null
-
 labels:
     - name: bug
       color: ee0701
@@ -36,15 +22,19 @@ labels:
 repository:
     allow_merge_commit: true
     allow_rebase_merge: false
-    allow_squash_merge: false
+    allow_squash_merge: true
     default_branch: master
-    description: "Symfony bundle to authenticate users against EU Login."
-    homepage: https://eulogin-bundle.readthedocs.io
-    topics: authentication,cas,psr,single-sign-on
+    description: "EU Login bundle, a standard Symfony bundle to authenticate users against EU Login."
+    homepage: https://ecphp-eu-login-bundle.readthedocs.io
+    topics: authentication,cas,ecas,eulogin,single-sign-on
     has_downloads: true
     has_issues: true
     has_pages: false
     has_projects: false
     has_wiki: false
-    name: eulogin-bundle
+    name: eu-login-bundle
     private: false
+
+teams:
+    - name: core
+      permission: push

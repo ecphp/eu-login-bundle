@@ -1,5 +1,5 @@
 {
-    "name": "drupol/eulogin-bundle",
+    "name": "ecphp/eu-login-bundle",
     "type": "symfony-bundle",
     "description": "A bundle for Symfony 4 & 5, providing authentication against European Commission authentication service.",
     "keywords": [
@@ -11,29 +11,29 @@
         "single sign-on",
         "sso"
     ],
-    "license": "MIT",
+    "license": "BSD-3-Clause",
     "require": {
         "php": ">= 7.1.3",
         "ext-json": "*",
         "ext-simplexml": "*",
-        "drupol/cas-bundle": "dev-master || 4.4.x-dev",
-        "drupol/ecas": "dev-master",
+        "ecphp/cas-bundle": "dev-master || 4.4.x-dev",
+        "ecphp/ecas": "dev-master",
         "symfony/framework-bundle": "^4.4"
     },
     "require-dev": {
-        "drupol/php-conventions": "^1.6.11",
+        "drupol/php-conventions": "^1.6.12",
         "friends-of-phpspec/phpspec-code-coverage": "^4.3.2",
         "infection/infection": "^0.13.6",
-        "phpspec/phpspec": "^5.1.2"
+        "phpspec/phpspec": "^5.1.2 || ^6.1.1"
     },
     "autoload": {
         "psr-4": {
-            "drupol\\EuloginBundle\\": "src/"
+            "EcPhp\\EuLoginBundle\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\drupol\\EuloginBundle\\": "./spec/drupol/EuloginBundle/"
+            "spec\\EcPhp\\EuLoginBundle\\": "spec/EcPhp/EuLoginBundle/"
         }
     },
     "minimum-stability": "dev",
