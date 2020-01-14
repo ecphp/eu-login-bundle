@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace drupol\EuloginBundle\Security\Core\User;
+namespace EcPhp\EuLoginBundle\Security\Core\User;
 
-use drupol\CasBundle\Security\Core\User\CasUser;
+use EcPhp\CasBundle\Security\Core\User\CasUser;
 
 /**
- * Class EuloginUser.
+ * Class EuLoginUser.
  */
-final class EuloginUser implements EuloginUserInterface
+final class EuLoginUser implements EuLoginUserInterface
 {
     /**
-     * @var \drupol\CasBundle\Security\Core\User\CasUser
+     * @var \EcPhp\CasBundle\Security\Core\User\CasUser
      */
     private $user;
 
     /**
-     * EuloginUser constructor.
+     * EuLoginUser constructor.
      *
      * @param array<mixed> $data
      */

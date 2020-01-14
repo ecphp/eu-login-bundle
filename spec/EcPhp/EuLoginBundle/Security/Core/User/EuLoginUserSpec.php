@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spec\drupol\EuloginBundle\Security\Core\User;
+namespace spec\EcPhp\EuLoginBundle\Security\Core\User;
 
-use drupol\EuloginBundle\Security\Core\User\EuloginUser;
+use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUser;
 use PhpSpec\ObjectBehavior;
 
-class EuloginUserSpec extends ObjectBehavior
+class EuLoginUserSpec extends ObjectBehavior
 {
     public function it_can_get_specific_attribute()
     {
@@ -131,7 +131,7 @@ class EuloginUserSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(EuloginUser::class);
+        $this->shouldHaveType(EuLoginUser::class);
     }
 
     public function let()

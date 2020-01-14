@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace drupol\EuloginBundle;
+namespace EcPhp\EuLoginBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class EuloginBundle.
+ * Class EuLoginBundle.
  */
-class EuloginBundle extends Bundle
+class EuLoginBundle extends Bundle
 {
 }

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace drupol\EuloginBundle\Security\Core\User;
+namespace EcPhp\EuLoginBundle\Security\Core\User;
 
-use drupol\CasBundle\Security\Core\User\CasUserInterface;
+use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
 
 /**
- * Interface EuloginUserInterface.
+ * Interface EuLoginUserInterface.
  */
-interface EuloginUserInterface extends CasUserInterface
+interface EuLoginUserInterface extends CasUserInterface
 {
     /**
      * @return string|null

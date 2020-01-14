@@ -15,7 +15,7 @@ The easiest way to install it is through Composer_
 
 .. code-block:: bash
 
-    composer require drupol/eulogin-bundle
+    composer require ecphp/eu-login-bundle
 
 Step 2
 ~~~~~~
@@ -26,23 +26,23 @@ You should see a line that looks like the following:
 
 .. code-block:: php
 
-    drupol\\EuloginBundle\\EuloginBundle::class => ['all' => true],
+    EcPhp\\EuLoginBundle\\EuLoginBundle::class => ['all' => true],
 
 Step 3
 ~~~~~~
 
-As this package depends on the package `drupol/cas-bundle`, you will need to copy
+As this package depends on the package `ecphp/cas-bundle`, you will need to copy
 some configuration files from that package first.
 
 .. code-block:: bash
 
-    cp -ar vendor/drupol/cas-bundle/Resources/config/* config/
+    cp -ar vendor/ecphp/cas-bundle/Resources/config/* config/
 
-Then, copy the configuration files from the bundle `drupol/eulogin-bundle` in your application
+Then, copy the configuration files from the bundle `ecphp/eu-login-bundle` in your application
 
 .. code-block:: bash
 
-    cp -ar vendor/drupol/eulogin-bundle/Resources/config/* config/
+    cp -ar vendor/ecphp/eu-login-bundle/Resources/config/* config/
 
 .. warning:: It is important to play those commands in the proper order.
 
