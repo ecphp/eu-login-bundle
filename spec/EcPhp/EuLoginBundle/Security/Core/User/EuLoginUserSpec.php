@@ -9,6 +9,48 @@ use PhpSpec\ObjectBehavior;
 
 class EuLoginUserSpec extends ObjectBehavior
 {
+    public function it_can_get_groups_when_no_groups_are_available()
+    {
+        $data = [
+            'user' => 'user',
+            'departmentNumber' => 'departmentNumber',
+            'email' => 'email',
+            'employeeNumber' => 'employeeNumber',
+            'employeeType' => 'employeeType',
+            'firstName' => 'firstName',
+            'lastName' => 'lastName',
+            'domain' => 'domain',
+            'domainUsername' => 'domainUsername',
+            'telephoneNumber' => 'telephoneNumber',
+            'locale' => 'locale',
+            'assuranceLevel' => 'assuranceLevel',
+            'uid' => 'uid',
+            'orgId' => 'orgId',
+            'teleworkingPriority' => 'teleworkingPriority',
+            'strengths' => [
+                'bar',
+            ],
+            'authenticationFactors' => [
+                'foobar',
+            ],
+            'loginDate' => 'loginDate',
+            'sso' => 'sso',
+            'ticketType' => 'ticketType',
+            'proxyGrantingProtocol' => 'proxyGrantingProtocol',
+            'proxyGrantingTicket' => 'proxyGrantingTicket',
+            'proxies' => [
+                'proxy1',
+            ],
+        ];
+
+        $this
+            ->beConstructedWith($data);
+
+        $this
+            ->getGroups()
+            ->shouldReturn([]);
+    }
+
     public function it_can_get_specific_attribute()
     {
         $this
