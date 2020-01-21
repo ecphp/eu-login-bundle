@@ -6,6 +6,9 @@ namespace EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUser;
 
+use function array_key_exists;
+use function is_array;
+
 /**
  * Class EuLoginUser.
  */
@@ -194,7 +197,7 @@ final class EuLoginUser implements EuLoginUserInterface
         $default = ['ROLE_CAS_AUTHENTICATED'];
 
         if ([] !== $roles = $this->getGroups()) {
-            if (isset($roles['group'])) {
+            if (true === array_key_exists('group', $roles) && true === is_array($roles['group'])) {
                 return array_merge($roles['group'], $default);
             }
         }
