@@ -48,5 +48,8 @@ jobs:
                   STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
 
             - name: Scrutinizer
-              run: vendor/bin/ocular code-coverage:upload --format=php-clover build/logs/clover.xml
+              run: |
+                  wget https://scrutinizer-ci.com/ocular.phar
+                  php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
               continue-on-error: true
+
