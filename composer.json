@@ -21,10 +21,11 @@
         "symfony/framework-bundle": "^4.4"
     },
     "require-dev": {
-        "drupol/php-conventions": "^1.6.12",
+        "drupol/php-conventions": "^1.6.14",
         "friends-of-phpspec/phpspec-code-coverage": "^4.3.2",
         "infection/infection": "^0.13.6",
-        "phpspec/phpspec": "^5.1.2 || ^6.1.1"
+        "phpspec/phpspec": "^5.1.2 || ^6.1.1",
+        "scrutinizer/ocular": "^1.6"
     },
     "autoload": {
         "psr-4": {
