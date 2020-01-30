@@ -17,5 +17,17 @@ yet to disable this for testing purposes.
 
 If you prefer to use your local machine, there are already `some documentation on Github`_.
 
+Maintainers
+-----------
+
+See the `MAINTAINERS.txt`_ file.
+
+Contributors
+------------
+
+See the `Github insights page`_.
+
 .. _crpeck/cas-overlay-docker: https://github.com/crpeck/cas-overlay-docker
 .. _some documentation on Github: https://apereo.github.io/cas/developer/Build-Process.html
+.. _MAINTAINERS.txt: https://github.com/ecphp/eu-login-bundle/blob/master/MAINTAINERS.txt
+.. _Github insights page: https://github.com/ecphp/eu-login-bundle/graphs/contributors
