@@ -15,7 +15,7 @@ The easiest way to install it is through Composer_
 
 .. code-block:: bash
 
-    composer require ecphp/eu-login-bundle:^4.4
+    composer require ecphp/eu-login-bundle:^1
 
 Step 2
 ~~~~~~

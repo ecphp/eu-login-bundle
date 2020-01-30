@@ -16,7 +16,7 @@
         "php": ">= 7.1.3",
         "ext-json": "*",
         "ext-simplexml": "*",
-        "ecphp/cas-bundle": "dev-master || 4.4.x-dev",
+        "ecphp/cas-bundle": "dev-master || 1.0.x-dev",
         "ecphp/ecas": "dev-master",
         "symfony/framework-bundle": "^4.4"
     },
