@@ -16,8 +16,8 @@
         "php": ">= 7.2.5",
         "ext-json": "*",
         "ext-simplexml": "*",
-        "ecphp/cas-bundle": "dev-master || 4.4.x-dev",
-        "ecphp/ecas": "dev-master",
+        "ecphp/cas-bundle": "^2",
+        "ecphp/ecas": "^1",
         "symfony/framework-bundle": "^5"
     },
     "require-dev": {
@@ -36,8 +36,6 @@
             "spec\\EcPhp\\EuLoginBundle\\": "spec/EcPhp/EuLoginBundle/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "scripts": {
         "grumphp": "./vendor/bin/grumphp run"
     }
