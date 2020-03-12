@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace spec\EcPhp\EuLoginBundle\Security\Core\User;
 
+use EcPhp\CasBundle\Security\Core\User\CasUser;
+use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUser;
 use PhpSpec\ObjectBehavior;
 
@@ -11,40 +13,20 @@ class EuLoginUserSpec extends ObjectBehavior
 {
     public function it_can_get_groups_when_no_groups_are_available()
     {
+        $attributes = $this->getAttributesData();
+        unset($attributes['groups']);
+
         $data = [
             'user' => 'user',
-            'departmentNumber' => 'departmentNumber',
-            'email' => 'email',
-            'employeeNumber' => 'employeeNumber',
-            'employeeType' => 'employeeType',
-            'firstName' => 'firstName',
-            'lastName' => 'lastName',
-            'domain' => 'domain',
-            'domainUsername' => 'domainUsername',
-            'telephoneNumber' => 'telephoneNumber',
-            'locale' => 'locale',
-            'assuranceLevel' => 'assuranceLevel',
-            'uid' => 'uid',
-            'orgId' => 'orgId',
-            'teleworkingPriority' => 'teleworkingPriority',
-            'strengths' => [
-                'bar',
-            ],
-            'authenticationFactors' => [
-                'foobar',
-            ],
-            'loginDate' => 'loginDate',
-            'sso' => 'sso',
-            'ticketType' => 'ticketType',
-            'proxyGrantingProtocol' => 'proxyGrantingProtocol',
             'proxyGrantingTicket' => 'proxyGrantingTicket',
             'proxies' => [
                 'proxy1',
             ],
+            'attributes' => $attributes,
         ];
 
         $this
-            ->beConstructedWith($data);
+            ->beConstructedWith(new CasUser($data));
 
         $this
             ->getGroups()
@@ -134,41 +116,29 @@ class EuLoginUserSpec extends ObjectBehavior
             ->shouldReturn('uid');
     }
 
-    public function it_can_get_the_attributes_only()
+    public function it_can_get_the_attributes_only(CasUserInterface $user)
     {
+        $data = [
+            'user' => 'user',
+            'proxyGrantingTicket' => 'proxyGrantingTicket',
+            'proxies' => [
+                'proxy1',
+            ],
+            'attributes' => $this->getAttributesData(),
+        ];
+
+        $user
+            ->getAttributes()
+            ->willReturn($this->getAttributesData());
+
+        $user
+            ->beConstructedWith($data);
+        $this
+            ->beConstructedWith($user);
+
         $this
             ->getAttributes()
-            ->shouldReturn(
-                [
-                    'departmentNumber' => 'departmentNumber',
-                    'email' => 'email',
-                    'employeeNumber' => 'employeeNumber',
-                    'employeeType' => 'employeeType',
-                    'firstName' => 'firstName',
-                    'lastName' => 'lastName',
-                    'domain' => 'domain',
-                    'domainUsername' => 'domainUsername',
-                    'telephoneNumber' => 'telephoneNumber',
-                    'locale' => 'locale',
-                    'assuranceLevel' => 'assuranceLevel',
-                    'uid' => 'uid',
-                    'orgId' => 'orgId',
-                    'teleworkingPriority' => 'teleworkingPriority',
-                    'groups' => [
-                        'foo',
-                    ],
-                    'strengths' => [
-                        'bar',
-                    ],
-                    'authenticationFactors' => [
-                        'foobar',
-                    ],
-                    'loginDate' => 'loginDate',
-                    'sso' => 'sso',
-                    'ticketType' => 'ticketType',
-                    'proxyGrantingProtocol' => 'proxyGrantingProtocol',
-                ]
-            );
+            ->shouldReturn($this->getAttributesData());
     }
 
     public function it_is_initializable()
@@ -176,10 +146,113 @@ class EuLoginUserSpec extends ObjectBehavior
         $this->shouldHaveType(EuLoginUser::class);
     }
 
-    public function let()
+    public function let(CasUserInterface $user)
     {
         $data = [
             'user' => 'user',
+            'proxyGrantingTicket' => 'proxyGrantingTicket',
+            'proxies' => [
+                'proxy1',
+            ],
+            'attributes' => $this->getAttributesData(),
+        ];
+
+        $user
+            ->beConstructedWith($data);
+
+        $user
+            ->getAttribute('assuranceLevel')
+            ->willReturn('assuranceLevel');
+
+        $user
+            ->getAttribute('authenticationFactors', [])
+            ->willReturn([
+                'foobar',
+            ]);
+
+        $user
+            ->getAttribute('departmentNumber')
+            ->willReturn('departmentNumber');
+
+        $user
+            ->getAttribute('domain')
+            ->willReturn('domain');
+
+        $user
+            ->getAttribute('domainUsername')
+            ->willReturn('domainUsername');
+
+        $user
+            ->getAttribute('email')
+            ->willReturn('email');
+
+        $user
+            ->getAttribute('employeeNumber')
+            ->willReturn('employeeNumber');
+
+        $user
+            ->getAttribute('employeeType')
+            ->willReturn('employeeType');
+
+        $user
+            ->getAttribute('firstName')
+            ->willReturn('firstName');
+
+        $user
+            ->getAttribute('groups', [])
+            ->willReturn([
+                'foo',
+            ]);
+
+        $user
+            ->getAttribute('lastName')
+            ->willReturn('lastName');
+
+        $user
+            ->getAttribute('locale')
+            ->willReturn('locale');
+
+        $user
+            ->getAttribute('loginDate')
+            ->willReturn('loginDate');
+
+        $user
+            ->getAttribute('orgId')
+            ->willReturn('orgId');
+
+        $user
+            ->getAttribute('sso')
+            ->willReturn('sso');
+
+        $user
+            ->getAttribute('strengths', [])
+            ->willReturn([
+                'bar',
+            ]);
+
+        $user
+            ->getAttribute('telephoneNumber')
+            ->willReturn('telephoneNumber');
+
+        $user
+            ->getAttribute('teleworkingPriority')
+            ->willReturn('teleworkingPriority');
+
+        $user
+            ->getAttribute('ticketType')
+            ->willReturn('ticketType');
+
+        $user
+            ->getAttribute('uid')
+            ->willReturn('uid');
+
+        $this
+            ->beConstructedWith($user);
+    }
+
+    private function getAttributesData(): array
+    {
+        return [
             'departmentNumber' => 'departmentNumber',
             'email' => 'email',
             'employeeNumber' => 'employeeNumber',
@@ -207,13 +280,6 @@ class EuLoginUserSpec extends ObjectBehavior
             'sso' => 'sso',
             'ticketType' => 'ticketType',
             'proxyGrantingProtocol' => 'proxyGrantingProtocol',
-            'proxyGrantingTicket' => 'proxyGrantingTicket',
-            'proxies' => [
-                'proxy1',
-            ],
         ];
-
-        $this
-            ->beConstructedWith($data);
     }
 }
