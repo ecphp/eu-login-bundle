@@ -31,11 +31,6 @@
             "EcPhp\\EuLoginBundle\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "spec\\EcPhp\\EuLoginBundle\\": "spec/EcPhp/EuLoginBundle/"
-        }
-    },
     "scripts": {
         "grumphp": "./vendor/bin/grumphp run"
     }
