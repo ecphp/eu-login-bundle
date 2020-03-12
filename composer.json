@@ -23,17 +23,12 @@
     "require-dev": {
         "drupol/php-conventions": "^1.6.14",
         "friends-of-phpspec/phpspec-code-coverage": "^4.3.2",
-        "infection/infection": "^0.15.0",
+        "infection/infection": "^0.15.3",
         "phpspec/phpspec": "^6.1.1"
     },
     "autoload": {
         "psr-4": {
             "EcPhp\\EuLoginBundle\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "spec\\EcPhp\\EuLoginBundle\\": "spec/EcPhp/EuLoginBundle/"
         }
     },
     "scripts": {
