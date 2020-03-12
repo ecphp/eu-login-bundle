@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace EcPhp\EuLoginBundle\Security\Core\User;
 
-use EcPhp\CasBundle\Security\Core\User\CasUser;
+use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
 
 use function array_key_exists;
 use function is_array;
@@ -15,18 +15,18 @@ use function is_array;
 final class EuLoginUser implements EuLoginUserInterface
 {
     /**
-     * @var \EcPhp\CasBundle\Security\Core\User\CasUser
+     * @var CasUserInterface
      */
     private $user;
 
     /**
      * EuLoginUser constructor.
      *
-     * @param array<mixed> $data
+     * @param \EcPhp\CasBundle\Security\Core\User\CasUserInterface $user
      */
-    public function __construct(array $data)
+    public function __construct(CasUserInterface $user)
     {
-        $this->user = new CasUser($this->normalizeUserData($data));
+        $this->user = $user;
     }
 
     /**
@@ -196,10 +196,8 @@ final class EuLoginUser implements EuLoginUserInterface
     {
         $default = ['ROLE_CAS_AUTHENTICATED'];
 
-        if ([] !== $roles = $this->getGroups()) {
-            if (true === array_key_exists('group', $roles) && true === is_array($roles['group'])) {
-                return array_merge($roles['group'], $default);
-            }
+        if (([] !== $roles = $this->getGroups()) && (array_key_exists('group', $roles) && is_array($roles['group']))) {
+            return array_merge($roles['group'], $default);
         }
 
         return $default;
@@ -275,27 +273,5 @@ final class EuLoginUser implements EuLoginUserInterface
     public function getUsername()
     {
         return $this->getUser();
-    }
-
-    /**
-     * Normalize user data from EU Login to standard CAS user data.
-     *
-     * @param array<array|string> $data
-     *   The data from EU Login
-     *
-     * @return array<array|string>
-     *   The normalized data.
-     */
-    private function normalizeUserData(array $data): array
-    {
-        $storage = [];
-        $rootAttributes = ['user', 'proxyGrantingTicket', 'proxies'];
-
-        foreach ($rootAttributes as $rootAttribute) {
-            $storage[$rootAttribute] = $data[$rootAttribute] ?? null;
-        }
-        $storage['attributes'] = array_diff_key($data, array_flip($rootAttributes));
-
-        return array_filter($storage) + ['attributes' => []];
     }
 }
