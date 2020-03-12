@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace EcPhp\EuLoginBundle\Security\Core\User;
 
+use EcPhp\CasBundle\Security\Core\User\CasUser;
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
 use EcPhp\CasLib\Introspection\Introspector;
 use Psr\Http\Message\ResponseInterface;
@@ -25,7 +26,13 @@ class EuLoginUserProvider implements EuLoginUserProviderInterface
         /** @var \EcPhp\CasLib\Introspection\Contract\ServiceValidate $introspect */
         $introspect = Introspector::detect($response);
 
-        return new EuLoginUser($introspect->getParsedResponse()['serviceResponse']['authenticationSuccess']);
+        return new EuLoginUser(
+            new CasUser(
+                $this->normalizeUserData(
+                    $introspect->getParsedResponse()['serviceResponse']['authenticationSuccess']
+                )
+            )
+        );
     }
 
     /**
@@ -54,5 +61,27 @@ class EuLoginUserProvider implements EuLoginUserProviderInterface
     public function supportsClass(string $class)
     {
         return EuLoginUser::class === $class;
+    }
+
+    /**
+     * Normalize user data from EU Login to standard CAS user data.
+     *
+     * @param array<array|string> $data
+     *   The data from EU Login
+     *
+     * @return array<array|string>
+     *   The normalized data.
+     */
+    private function normalizeUserData(array $data): array
+    {
+        $storage = [];
+        $rootAttributes = ['user', 'proxyGrantingTicket', 'proxies'];
+
+        foreach ($rootAttributes as $rootAttribute) {
+            $storage[$rootAttribute] = $data[$rootAttribute] ?? null;
+        }
+        $storage['attributes'] = array_diff_key($data, array_flip($rootAttributes));
+
+        return array_filter($storage) + ['attributes' => []];
     }
 }
