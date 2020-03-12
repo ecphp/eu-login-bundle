@@ -196,10 +196,8 @@ final class EuLoginUser implements EuLoginUserInterface
     {
         $default = ['ROLE_CAS_AUTHENTICATED'];
 
-        if ([] !== $roles = $this->getGroups()) {
-            if (true === array_key_exists('group', $roles) && true === is_array($roles['group'])) {
-                return array_merge($roles['group'], $default);
-            }
+        if (([] !== $roles = $this->getGroups()) && (array_key_exists('group', $roles) && is_array($roles['group']))) {
+            return array_merge($roles['group'], $default);
         }
 
         return $default;

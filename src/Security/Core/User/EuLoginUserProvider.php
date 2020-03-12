@@ -6,6 +6,7 @@ namespace EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUser;
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
+use EcPhp\CasLib\Introspection\Contract\ServiceValidate;
 use EcPhp\CasLib\Introspection\Introspector;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -23,7 +24,7 @@ class EuLoginUserProvider implements EuLoginUserProviderInterface
      */
     public function loadUserByResponse(ResponseInterface $response): CasUserInterface
     {
-        /** @var \EcPhp\CasLib\Introspection\Contract\ServiceValidate $introspect */
+        /** @var ServiceValidate $introspect */
         $introspect = Introspector::detect($response);
 
         return new EuLoginUser(

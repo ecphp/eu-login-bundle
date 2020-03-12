@@ -14,9 +14,9 @@ use Psr\Http\Message\ResponseInterface;
 interface EuLoginUserProviderInterface extends CasUserProviderInterface
 {
     /**
-     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param ResponseInterface $response
      *
-     * @return \EcPhp\CasBundle\Security\Core\User\CasUserInterface|\EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserInterface
+     * @return CasUserInterface|EuLoginUserInterface
      */
     public function loadUserByResponse(ResponseInterface $response): CasUserInterface;
 }
