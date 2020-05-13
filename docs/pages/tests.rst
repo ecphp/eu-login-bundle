@@ -1,8 +1,7 @@
 Tests, code quality and code style
 ==================================
 
-Every time changes are introduced into the library, `Travis CI`_ and `Github Actions`_
-run the tests written with `PHPSpec`_.
+Every time changes are introduced into the library, `Github Actions`_ run the tests written with `PHPSpec`_.
 
 `PHPInfection`_ is also triggered used to ensure that your code is properly
 tested.

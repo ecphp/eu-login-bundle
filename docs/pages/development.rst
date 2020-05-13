@@ -17,6 +17,11 @@ yet to disable this for testing purposes.
 
 If you prefer to use your local machine, there are already `some documentation on Github`_.
 
+If you want to test against `EU Login`_, make sure that your application respond on the ``localhost`` hostname, it's the
+only domain for which it will work.
+However, only basic authentication will work and it will not be possible to enable authentication with proxy because
+the hostname ``localhost`` will not be accessible from the Internet.
+
 Maintainers
 -----------
 
@@ -31,3 +36,4 @@ See the `Github insights page`_.
 .. _some documentation on Github: https://apereo.github.io/cas/developer/Build-Process.html
 .. _MAINTAINERS.txt: https://github.com/ecphp/eu-login-bundle/blob/master/MAINTAINERS.txt
 .. _Github insights page: https://github.com/ecphp/eu-login-bundle/graphs/contributors
+.. _EU Login: https://ecas.ec.europa.eu/cas/
