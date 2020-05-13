@@ -53,4 +53,11 @@ Edit the configuration file `config/packages/dev/cas_bundle.yaml` and make the n
 
 See more on the dedicated :ref:`configuration` page.
 
+Step 5
+~~~~~~
+
+Read the `ecphp/cas-bundle documentation`_ to have more information on how to enable a firewall and protect your
+application.
+
 .. _Composer: https://getcomposer.org
+.. _ecphp/cas-bundle documentation: https://cas-bundle.readthedocs.io/en/latest/pages/installation.html
