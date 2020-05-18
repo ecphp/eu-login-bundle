@@ -53,4 +53,32 @@ Edit the configuration file `config/packages/dev/cas_bundle.yaml` and make the n
 
 See more on the dedicated :ref:`configuration` page.
 
+Step 5
+~~~~~~
+
+This is the crucial part of your application's security configuration.
+
+Edit the security settings of your application by edition the file `config/packages/security.yaml`.
+
+.. code-block:: yaml
+
+    security:
+        firewalls:
+            main:
+                anonymous: ~
+                guard:
+                    provider: eulogin
+                    authenticators:
+                        - cas.guardauthenticator
+
+        access_control:
+            - { path: ^/api, role: ROLE_CAS_AUTHENTICATED }
+            - { path: ^/admin, role: ROLE_CAS_AUTHENTICATED }
+
+This configuration example will trigger the authentication on paths starting
+with `/api` or `/admin`, therefore make sure that at least such paths exists.
+
+Feel free to change these configuration to fits your need. Have a look at
+`the Symfony documentation about security and Guard authentication`_.
+
 .. _Composer: https://getcomposer.org
