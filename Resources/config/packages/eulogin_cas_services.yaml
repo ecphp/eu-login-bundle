@@ -1,15 +1,13 @@
 services:
     eulogin.userprovider:
         class: EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider
-    cas:
+
+    ecas.configuration:
+        class: EcPhp\Ecas\EcasProperties
+        decorates: 'cas.configuration'
+        arguments: ['@ecas.configuration.inner', '@request_stack']
+
+    ecas:
         class: EcPhp\Ecas\Ecas
-        arguments:
-            $serverRequest: '@cas.psrrequest'
-            $properties: '@cas.configuration'
-            $client: '@psr18.http_client'
-            $uriFactory: '@cas.psr17_factory'
-            $responseFactory: '@cas.psr17_factory'
-            $requestFactory: '@cas.psr17_factory'
-            $streamFactory: '@cas.psr17_factory'
-            $cache: '@cache.app'
-            $logger: '@logger'
+        decorates: 'cas'
+        arguments: ['@ecas.inner', '@nyholm.psr7.psr17_factory']
