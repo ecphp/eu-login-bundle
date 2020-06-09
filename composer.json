@@ -17,11 +17,11 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "ecphp/cas-bundle": "^1",
-        "ecphp/ecas": "^1",
+        "ecphp/ecas": "^2",
         "symfony/framework-bundle": "^4.4"
     },
     "require-dev": {
-        "drupol/php-conventions": "^1.7.0",
+        "drupol/php-conventions": "^1.7.1",
         "friends-of-phpspec/phpspec-code-coverage": "^4.3.2",
         "infection/infection": "^0.13.6",
         "phpspec/phpspec": "^5.1.2 || ^6.1.1"
