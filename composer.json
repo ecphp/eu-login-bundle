@@ -24,7 +24,7 @@
         "drupol/php-conventions": "^1.7.1",
         "friends-of-phpspec/phpspec-code-coverage": "^4.3.2",
         "infection/infection": "^0.13.6",
-        "phpspec/phpspec": "^5.1.2 || ^6.1.1"
+        "phpspec/phpspec": "^5.1.2 || ^6.2"
     },
     "autoload": {
         "psr-4": {
