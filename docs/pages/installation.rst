@@ -79,6 +79,8 @@ This configuration example will trigger the authentication on paths starting
 with `/api` or `/admin`, therefore make sure that at least such paths exists.
 
 Feel free to change these configuration to fits your need. Have a look at
-`the Symfony documentation about security and Guard authentication`_.
+`the Symfony documentation about security and Guard authentication`_ and `the configuration reference`_.
 
 .. _Composer: https://getcomposer.org
+.. _the Symfony documentation about security and Guard authentication: https://symfony.com/doc/current/security/guard_authentication.html
+.. _the configuration reference: https://symfony.com/doc/current/reference/configuration/security.html
