@@ -18,6 +18,7 @@
         "ext-simplexml": "*",
         "ecphp/cas-bundle": "^1",
         "ecphp/ecas": "^2",
+        "symfony/dependency-injection": "^4.4",
         "symfony/framework-bundle": "^4.4"
     },
     "require-dev": {
