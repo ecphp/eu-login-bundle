@@ -26,32 +26,11 @@ See more on the dedicated :ref:`configuration` page.
 Step 3
 ~~~~~~
 
-This is the crucial part of your application's security configuration.
-
-Edit the security settings of your application by edition the file `config/packages/security.yaml`.
-
-.. code-block:: yaml
-
-    security:
-        firewalls:
-            main:
-                anonymous: ~
-                guard:
-                    provider: eulogin
-                    authenticators:
-                        - cas.guardauthenticator
-
-        access_control:
-            - { path: ^/api, role: ROLE_CAS_AUTHENTICATED }
-            - { path: ^/admin, role: ROLE_CAS_AUTHENTICATED }
-
-This configuration example will trigger the authentication on paths starting
-with `/api` or `/admin`, therefore make sure that at least such paths exists.
-
-Feel free to change these configuration to fits your need. Have a look at
-`the Symfony documentation about security and Guard authentication`_ and `the configuration reference`_.
+Read the `ecphp/cas-bundle documentation`_ to have more information on how to enable a firewall and protect your
+application.
 
 .. _a Symfony Flex recipe: https://github.com/symfony/recipes-contrib/blob/master/ecphp/eu-login-bundle/2.0/manifest.json
 .. _Composer: https://getcomposer.org
+.. _ecphp/cas-bundle documentation: https://cas-bundle.readthedocs.io/en/latest/pages/installation.html
 .. _the Symfony documentation about security and Guard authentication: https://symfony.com/doc/current/security/guard_authentication.html
 .. _the configuration reference: https://symfony.com/doc/current/reference/configuration/security.html
