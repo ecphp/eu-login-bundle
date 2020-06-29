@@ -27,7 +27,7 @@ return static function (ContainerConfigurator $container) {
         ->set('ecas', Ecas::class)
         ->decorate('cas')
         ->args([
-            service('cas.inner'),
+            service('ecas.inner'),
             service('nyholm.psr7.psr17_factory'),
         ]);
 };
