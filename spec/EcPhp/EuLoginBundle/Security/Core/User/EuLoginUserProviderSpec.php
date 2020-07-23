@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace spec\EcPhp\EuLoginBundle\Security\Core\User;
 
+use EcPhp\CasBundle\Security\Core\User\CasUserProvider;
+use EcPhp\CasLib\Introspection\Introspector;
+use EcPhp\Ecas\Introspection\EcasIntrospector;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUser;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserInterface;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider;
@@ -112,5 +115,11 @@ EOF;
     public function it_is_initializable()
     {
         $this->shouldHaveType(EuLoginUserProvider::class);
+    }
+
+    public function let()
+    {
+        $this
+            ->beConstructedWith(new CasUserProvider(new EcasIntrospector(new Introspector())));
     }
 }
