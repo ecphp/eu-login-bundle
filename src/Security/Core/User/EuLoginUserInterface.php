@@ -11,9 +11,6 @@ use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
  */
 interface EuLoginUserInterface extends CasUserInterface
 {
-    /**
-     * @return string|null
-     */
     public function getAssuranceLevel(): ?string;
 
     /**
@@ -21,39 +18,18 @@ interface EuLoginUserInterface extends CasUserInterface
      */
     public function getAuthenticationFactors(): array;
 
-    /**
-     * @return string|null
-     */
     public function getDepartmentNumber(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getDomain(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getDomainUsername(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getEmployeeNumber(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getEmployeeType(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getFirstName(): ?string;
 
     /**
@@ -61,29 +37,14 @@ interface EuLoginUserInterface extends CasUserInterface
      */
     public function getGroups(): array;
 
-    /**
-     * @return string|null
-     */
     public function getLastName(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getLocale(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getLoginDate(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getOrgId(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getSso(): ?string;
 
     /**
@@ -91,23 +52,11 @@ interface EuLoginUserInterface extends CasUserInterface
      */
     public function getStrengths(): array;
 
-    /**
-     * @return string|null
-     */
     public function getTelephoneNumber(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getTeleworkingPriority(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getTicketType(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getUid(): ?string;
 }

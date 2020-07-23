@@ -14,8 +14,6 @@ use Psr\Http\Message\ResponseInterface;
 interface EuLoginUserProviderInterface extends CasUserProviderInterface
 {
     /**
-     * @param ResponseInterface $response
-     *
      * @return CasUserInterface|EuLoginUserInterface
      */
     public function loadUserByResponse(ResponseInterface $response): CasUserInterface;

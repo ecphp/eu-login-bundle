@@ -21,8 +21,6 @@ final class EuLoginUser implements EuLoginUserInterface
 
     /**
      * EuLoginUser constructor.
-     *
-     * @param \EcPhp\CasBundle\Security\Core\User\CasUserInterface $user
      */
     public function __construct(CasUserInterface $user)
     {
@@ -264,7 +262,14 @@ final class EuLoginUser implements EuLoginUserInterface
      */
     public function getUser(): string
     {
-        return $this->user->getUser();
+        trigger_deprecation(
+            'ecphp/eu-login-bundle',
+            '2.2.3',
+            'The method "%s::getUser()" is deprecated, use %s::getUsername() instead.',
+            EuLoginUser::class
+        );
+
+        return $this->user->getUsername();
     }
 
     /**
@@ -272,6 +277,6 @@ final class EuLoginUser implements EuLoginUserInterface
      */
     public function getUsername()
     {
-        return $this->getUser();
+        return $this->user->getUsername();
     }
 }
