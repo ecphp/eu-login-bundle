@@ -39,7 +39,7 @@ return static function (ContainerConfigurator $container) {
         ->set('ecas', Ecas::class)
         ->decorate('cas')
         ->args([
-            ref('cas.inner'),
+            ref('ecas.inner'),
             ref('nyholm.psr7.psr17_factory'),
         ]);
 };
