@@ -6,9 +6,6 @@ namespace EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
 
-/**
- * Interface EuLoginUserInterface.
- */
 interface EuLoginUserInterface extends CasUserInterface
 {
     public function getAssuranceLevel(): ?string;

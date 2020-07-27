@@ -9,9 +9,6 @@ use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
 use function array_key_exists;
 use function is_array;
 
-/**
- * Class EuLoginUser.
- */
 final class EuLoginUser implements EuLoginUserInterface
 {
     /**
