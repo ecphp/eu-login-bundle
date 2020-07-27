@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
-use EcPhp\CasBundle\Security\Core\User\CasUserProvider;
+use EcPhp\CasBundle\Security\Core\User\CasUserProviderInterface;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use function get_class;
 
-final class EuLoginUserProvider implements EuLoginUserProviderInterface
+final class EuLoginUserProvider implements CasUserProviderInterface
 {
     /**
-     * @var CasUserProvider
+     * @var CasUserProviderInterface
      */
     private $casUserProvider;
 
-    public function __construct(CasUserProvider $casUserProvider)
+    public function __construct(CasUserProviderInterface $casUserProvider)
     {
         $this->casUserProvider = $casUserProvider;
     }
@@ -29,9 +29,7 @@ final class EuLoginUserProvider implements EuLoginUserProviderInterface
      */
     public function loadUserByResponse(ResponseInterface $response): CasUserInterface
     {
-        return new EuLoginUser(
-            $this->casUserProvider->loadUserByResponse($response)
-        );
+        return new EuLoginUser($this->casUserProvider->loadUserByResponse($response));
     }
 
     /**
