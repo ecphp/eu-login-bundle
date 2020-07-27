@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 use function get_class;
 
-class EuLoginUserProvider implements EuLoginUserProviderInterface
+final class EuLoginUserProvider implements EuLoginUserProviderInterface
 {
     /**
      * @var CasUserProvider
