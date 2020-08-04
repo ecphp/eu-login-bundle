@@ -153,6 +153,34 @@ EOF;
     public function it_is_initializable()
     {
         $this->shouldHaveType(EuLoginUser::class);
+
+        $this
+            ->getPassword()
+            ->shouldBeNull();
+
+        $this
+            ->getPgt()
+            ->shouldReturn('proxyGrantingTicket');
+
+        $this
+            ->getSalt()
+            ->shouldBeNull();
+
+        $this
+            ->getAttribute('user')
+            ->shouldReturn('username');
+
+        $this
+            ->getUser()
+            ->shouldReturn('username');
+
+        $this
+            ->get('foo', 'bar')
+            ->shouldReturn('bar');
+
+        $this
+            ->eraseCredentials()
+            ->shouldBeNull();
     }
 
     public function let(CasUserInterface $user)
@@ -165,6 +193,9 @@ EOF;
   <cas:proxies>
     <cas:proxy>foo</cas:proxy>
   </cas:proxies>
+  <cas:proxyGrantingTicket>
+    proxyGrantingTicket
+  </cas:proxyGrantingTicket>
   <cas:attributes>
       <cas:authenticationFactors>
         <cas:moniker number="1">
@@ -206,6 +237,22 @@ EOF;
                     ],
                 ],
             ]);
+
+        $user
+            ->get('foo', 'bar')
+            ->willReturn('bar');
+
+        $user
+            ->getUsername()
+            ->willReturn('username');
+
+        $user
+            ->getAttribute('user', null)
+            ->willReturn('username');
+
+        $user
+            ->getPgt()
+            ->willReturn('proxyGrantingTicket');
 
         $user
             ->getAttribute('assuranceLevel')
