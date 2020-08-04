@@ -54,6 +54,12 @@ class EuLoginUserProviderSpec extends ObjectBehavior
     <cas:group>group1</cas:group>
     <cas:group>group2</cas:group>
   </cas:groups>
+  <cas:extendedAttributes>
+    <cas:extendedAttribute name="http://stork.eu/motherInLawDogName">
+        <cas:attributeValue>rex</cas:attributeValue>
+        <cas:attributeValue>snoopy</cas:attributeValue>
+    </cas:extendedAttribute>
+ </cas:extendedAttributes>
  </cas:authenticationSuccess>
 </cas:serviceResponse>
 EOF;
@@ -77,11 +83,17 @@ EOF;
                         'group2',
                     ],
                 ],
+                'extendedAttributes' => [
+                    'http://stork.eu/motherInLawDogName' => [
+                        'rex',
+                        'snoopy',
+                    ],
+                ],
             ]);
 
         $this
             ->loadUserByResponse($response)
-            ->getUser()
+            ->getUsername()
             ->shouldReturn('username');
 
         $this
@@ -92,6 +104,17 @@ EOF;
                 'group2',
                 'ROLE_CAS_AUTHENTICATED',
             ]);
+
+        $this->loadUserByResponse($response)
+            ->getExtendedAttributes()
+            ->shouldReturn(
+                [
+                    'http://stork.eu/motherInLawDogName' => [
+                        'rex',
+                        'snoopy',
+                    ],
+                ]
+            );
     }
 
     public function it_can_refresh_a_user(EuLoginUserInterface $user)
