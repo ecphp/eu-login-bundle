@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
-use loophp\collection\Collection;
 
 final class EuLoginUser implements EuLoginUserInterface
 {
@@ -120,14 +119,15 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function getExtendedAttributes(): array
     {
-        return Collection::fromIterable($this->user->getAttribute('extendedAttributes', []))
-            ->map(
-                static function (array $item): array {
-                    return [$item['@attributes']['name'] => $item['attributeValue']];
-                }
-            )
-            ->unwrap()
-            ->all();
+        return array_reduce(
+            $this->user->getAttribute('extendedAttributes', []),
+            static function (array $carry, array $item): array {
+                $carry[$item['@attributes']['name']] = $item['attributeValue'];
+
+                return $carry;
+            },
+            []
+        );
     }
 
     /**
