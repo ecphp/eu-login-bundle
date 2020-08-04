@@ -18,6 +18,7 @@
         "ext-simplexml": "*",
         "ecphp/cas-bundle": "2.2.*",
         "ecphp/ecas": "2.1.*",
+        "loophp/collection": "^2.0",
         "symfony/framework-bundle": "^5.1"
     },
     "require-dev": {
