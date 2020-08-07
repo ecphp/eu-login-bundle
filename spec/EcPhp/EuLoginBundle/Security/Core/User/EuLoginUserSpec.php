@@ -6,27 +6,47 @@ namespace spec\EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUser;
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
+use EcPhp\CasLib\Introspection\Introspector;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUser;
+use Nyholm\Psr7\Response;
 use PhpSpec\ObjectBehavior;
 
 class EuLoginUserSpec extends ObjectBehavior
 {
     public function it_can_get_groups_when_no_groups_are_available()
     {
-        $attributes = $this->getAttributesData();
-        unset($attributes['groups']);
+        $body = <<<'EOF'
+<cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas">
+ <cas:authenticationSuccess>
+  <cas:user>username</cas:user>
+  <cas:foo>bar</cas:foo>
+  <cas:proxies>
+    <cas:proxy>foo</cas:proxy>
+  </cas:proxies>
+  <cas:attributes>
+      <cas:groups number="10">
+        <cas:group>group1</cas:group>
+        <cas:group>group2</cas:group>
+      </cas:groups>
+      <cas:extendedAttributes>
+        <cas:extendedAttribute name="http://stork.eu/motherInLawDogName">
+            <cas:attributeValue>rex</cas:attributeValue>
+            <cas:attributeValue>snoopy</cas:attributeValue>
+        </cas:extendedAttribute>
+      </cas:extendedAttributes>
+  </cas:attributes>
+ </cas:authenticationSuccess>
+</cas:serviceResponse>
+EOF;
 
-        $data = [
-            'user' => 'user',
-            'proxyGrantingTicket' => 'proxyGrantingTicket',
-            'proxies' => [
-                'proxy1',
-            ],
-            'attributes' => $attributes,
-        ];
+        $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
+        $data = (new Introspector())->parse($response)['serviceResponse']['authenticationSuccess'];
+        unset($data['attributes']['groups']);
+
+        $casUser = new CasUser($data);
 
         $this
-            ->beConstructedWith(new CasUser($data));
+            ->beConstructedWith($casUser);
 
         $this
             ->getGroups()
@@ -37,11 +57,11 @@ class EuLoginUserSpec extends ObjectBehavior
     {
         $this
             ->getAssuranceLevel()
-            ->shouldReturn('assuranceLevel');
+            ->shouldReturn('40');
 
         $this
             ->getAuthenticationFactors()
-            ->shouldReturn(['foobar']);
+            ->shouldReturn(['ecphp@ec.europa.eu']);
 
         $this
             ->getDepartmentNumber()
@@ -73,7 +93,10 @@ class EuLoginUserSpec extends ObjectBehavior
 
         $this
             ->getGroups()
-            ->shouldReturn(['foo']);
+            ->shouldReturn([
+                'group1',
+                'group2',
+            ]);
 
         $this
             ->getLastName()
@@ -114,28 +137,14 @@ class EuLoginUserSpec extends ObjectBehavior
         $this
             ->getUid()
             ->shouldReturn('uid');
+
+        $this
+            ->getAttributes()
+            ->shouldReturn($this->getAttributesData());
     }
 
     public function it_can_get_the_attributes_only(CasUserInterface $user)
     {
-        $data = [
-            'user' => 'user',
-            'proxyGrantingTicket' => 'proxyGrantingTicket',
-            'proxies' => [
-                'proxy1',
-            ],
-            'attributes' => $this->getAttributesData(),
-        ];
-
-        $user
-            ->getAttributes()
-            ->willReturn($this->getAttributesData());
-
-        $user
-            ->beConstructedWith($data);
-        $this
-            ->beConstructedWith($user);
-
         $this
             ->getAttributes()
             ->shouldReturn($this->getAttributesData());
@@ -144,30 +153,115 @@ class EuLoginUserSpec extends ObjectBehavior
     public function it_is_initializable()
     {
         $this->shouldHaveType(EuLoginUser::class);
+
+        $this
+            ->getPassword()
+            ->shouldBeNull();
+
+        $this
+            ->getPgt()
+            ->shouldReturn('proxyGrantingTicket');
+
+        $this
+            ->getSalt()
+            ->shouldBeNull();
+
+        $this
+            ->getAttribute('user')
+            ->shouldReturn('username');
+
+        $this
+            ->getUser()
+            ->shouldReturn('username');
+
+        $this
+            ->get('foo', 'bar')
+            ->shouldReturn('bar');
+
+        $this
+            ->eraseCredentials()
+            ->shouldBeNull();
     }
 
     public function let(CasUserInterface $user)
     {
-        $data = [
-            'user' => 'user',
-            'proxyGrantingTicket' => 'proxyGrantingTicket',
-            'proxies' => [
-                'proxy1',
-            ],
-            'attributes' => $this->getAttributesData(),
-        ];
+        $body = <<<'EOF'
+<cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas">
+ <cas:authenticationSuccess>
+  <cas:user>username</cas:user>
+  <cas:foo>bar</cas:foo>
+  <cas:proxies>
+    <cas:proxy>foo</cas:proxy>
+  </cas:proxies>
+  <cas:proxyGrantingTicket>
+    proxyGrantingTicket
+  </cas:proxyGrantingTicket>
+  <cas:attributes>
+      <cas:authenticationFactors>
+        <cas:moniker number="1">
+            ecphp@ec.europa.eu
+        </cas:moniker>
+      </cas:authenticationFactors>
+      <cas:assuranceLevel>40</cas:assuranceLevel>
+      <cas:groups number="10">
+        <cas:group>group1</cas:group>
+        <cas:group>group2</cas:group>
+      </cas:groups>
+      <cas:extendedAttributes>
+        <cas:extendedAttribute name="http://stork.eu/motherInLawDogName">
+            <cas:attributeValue>rex</cas:attributeValue>
+            <cas:attributeValue>snoopy</cas:attributeValue>
+        </cas:extendedAttribute>
+      </cas:extendedAttributes>
+  </cas:attributes>
+ </cas:authenticationSuccess>
+</cas:serviceResponse>
+EOF;
+
+        $response = new Response(200, ['Content-Type' => 'application/json'], $body);
+        $data = (new Introspector())->parse($response)['serviceResponse']['authenticationSuccess'];
 
         $user
             ->beConstructedWith($data);
 
         $user
+            ->getAttribute('extendedAttributes', [])
+            ->willReturn([
+                'extendedAttribute' => [
+                    'attributeValue' => [
+                        'value1',
+                        'value2',
+                    ],
+                    '@attributes' => [
+                        'name' => 'attr1',
+                    ],
+                ],
+            ]);
+
+        $user
+            ->get('foo', 'bar')
+            ->willReturn('bar');
+
+        $user
+            ->getUsername()
+            ->willReturn('username');
+
+        $user
+            ->getAttribute('user', null)
+            ->willReturn('username');
+
+        $user
+            ->getPgt()
+            ->willReturn('proxyGrantingTicket');
+
+        $user
             ->getAttribute('assuranceLevel')
-            ->willReturn('assuranceLevel');
+            ->willReturn($data['attributes']['assuranceLevel']);
 
         $user
             ->getAttribute('authenticationFactors', [])
             ->willReturn([
-                'foobar',
+                'ecphp@ec.europa.eu',
             ]);
 
         $user
@@ -199,9 +293,15 @@ class EuLoginUserSpec extends ObjectBehavior
             ->willReturn('firstName');
 
         $user
-            ->getAttribute('groups', [])
+            ->getAttribute('groups', ['group' => []])
             ->willReturn([
-                'foo',
+                'group' => [
+                    'group1',
+                    'group2',
+                ],
+                '@attributes' => [
+                    'number' => 2,
+                ],
             ]);
 
         $user
@@ -246,6 +346,10 @@ class EuLoginUserSpec extends ObjectBehavior
             ->getAttribute('uid')
             ->willReturn('uid');
 
+        $user
+            ->getAttributes()
+            ->willReturn($this->getAttributesData());
+
         $this
             ->beConstructedWith($user);
     }
@@ -257,24 +361,31 @@ class EuLoginUserSpec extends ObjectBehavior
             'email' => 'email',
             'employeeNumber' => 'employeeNumber',
             'employeeType' => 'employeeType',
+            'extendedAttributes' => [
+                'attr1' => [
+                    'value1',
+                    'value2',
+                ],
+            ],
             'firstName' => 'firstName',
             'lastName' => 'lastName',
             'domain' => 'domain',
             'domainUsername' => 'domainUsername',
             'telephoneNumber' => 'telephoneNumber',
             'locale' => 'locale',
-            'assuranceLevel' => 'assuranceLevel',
+            'assuranceLevel' => '40',
             'uid' => 'uid',
             'orgId' => 'orgId',
             'teleworkingPriority' => 'teleworkingPriority',
             'groups' => [
-                'foo',
+                'group1',
+                'group2',
             ],
             'strengths' => [
                 'bar',
             ],
             'authenticationFactors' => [
-                'foobar',
+                'ecphp@ec.europa.eu',
             ],
             'loginDate' => 'loginDate',
             'sso' => 'sso',

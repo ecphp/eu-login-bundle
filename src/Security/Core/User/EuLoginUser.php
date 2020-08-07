@@ -6,9 +6,6 @@ namespace EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
 
-use function array_key_exists;
-use function is_array;
-
 final class EuLoginUser implements EuLoginUserInterface
 {
     /**
@@ -16,9 +13,6 @@ final class EuLoginUser implements EuLoginUserInterface
      */
     private $user;
 
-    /**
-     * EuLoginUser constructor.
-     */
     public function __construct(CasUserInterface $user)
     {
         $this->user = $user;
@@ -61,7 +55,10 @@ final class EuLoginUser implements EuLoginUserInterface
      */
     public function getAttributes(): array
     {
-        return $this->user->getAttributes();
+        $attributes = $this->user->getAttributes();
+        $attributes['extendedAttributes'] = $this->getExtendedAttributes();
+
+        return $attributes;
     }
 
     /**
@@ -120,6 +117,19 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('employeeType');
     }
 
+    public function getExtendedAttributes(): array
+    {
+        return array_reduce(
+            $this->user->getAttribute('extendedAttributes', []),
+            static function (array $carry, array $item): array {
+                $carry[$item['@attributes']['name']] = $item['attributeValue'];
+
+                return $carry;
+            },
+            []
+        );
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -133,7 +143,7 @@ final class EuLoginUser implements EuLoginUserInterface
      */
     public function getGroups(): array
     {
-        return $this->user->getAttribute('groups', []);
+        return $this->user->getAttribute('groups', ['group' => []])['group'];
     }
 
     /**
@@ -191,11 +201,7 @@ final class EuLoginUser implements EuLoginUserInterface
     {
         $default = ['ROLE_CAS_AUTHENTICATED'];
 
-        if (([] !== $roles = $this->getGroups()) && (array_key_exists('group', $roles) && is_array($roles['group']))) {
-            return array_merge($roles['group'], $default);
-        }
-
-        return $default;
+        return array_merge($this->getGroups(), $default);
     }
 
     /**

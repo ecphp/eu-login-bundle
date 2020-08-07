@@ -27,6 +27,8 @@ interface EuLoginUserInterface extends CasUserInterface
 
     public function getEmployeeType(): ?string;
 
+    public function getExtendedAttributes(): array;
+
     public function getFirstName(): ?string;
 
     /**
