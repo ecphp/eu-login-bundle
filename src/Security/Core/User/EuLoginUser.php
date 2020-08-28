@@ -143,7 +143,7 @@ final class EuLoginUser implements EuLoginUserInterface
      */
     public function getGroups(): array
     {
-        return $this->user->getAttribute('groups', ['group' => []])['group'];
+        return $this->user->getAttribute('group', ['group' => []])['group'];
     }
 
     /**
