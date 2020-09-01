@@ -59,6 +59,7 @@ final class EuLoginUser implements EuLoginUserInterface
     {
         $attributes = $this->user->getAttributes();
 
+        // @Todo Ugly. Refactor this when JSON format will be available.
         $propertyToMangle = [
             ['extendedAttributes', 'extendedAttribute'],
             ['groups', 'group'],
