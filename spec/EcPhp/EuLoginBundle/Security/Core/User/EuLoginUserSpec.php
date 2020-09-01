@@ -24,10 +24,7 @@ class EuLoginUserSpec extends ObjectBehavior
     <cas:proxy>foo</cas:proxy>
   </cas:proxies>
   <cas:attributes>
-      <cas:groups number="10">
-        <cas:group>group1</cas:group>
-        <cas:group>group2</cas:group>
-      </cas:groups>
+      <cas:groups number="0"/>
       <cas:extendedAttributes>
         <cas:extendedAttribute name="http://stork.eu/motherInLawDogName">
             <cas:attributeValue>rex</cas:attributeValue>
@@ -41,7 +38,6 @@ EOF;
 
         $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
         $data = (new Introspector())->parse($response)['serviceResponse']['authenticationSuccess'];
-        unset($data['attributes']['groups']);
 
         $casUser = new CasUser($data);
 
@@ -203,7 +199,7 @@ EOF;
         </cas:moniker>
       </cas:authenticationFactors>
       <cas:assuranceLevel>40</cas:assuranceLevel>
-      <cas:groups number="10">
+      <cas:groups number="2">
         <cas:group>group1</cas:group>
         <cas:group>group2</cas:group>
       </cas:groups>
@@ -218,7 +214,7 @@ EOF;
 </cas:serviceResponse>
 EOF;
 
-        $response = new Response(200, ['Content-Type' => 'application/json'], $body);
+        $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
         $data = (new Introspector())->parse($response)['serviceResponse']['authenticationSuccess'];
 
         $user
@@ -362,9 +358,13 @@ EOF;
             'employeeNumber' => 'employeeNumber',
             'employeeType' => 'employeeType',
             'extendedAttributes' => [
-                'attr1' => [
-                    'value1',
-                    'value2',
+                'extendedAttribute' => [
+                    [
+                        'attr1' => [
+                            'value1',
+                            'value2',
+                        ],
+                    ],
                 ],
             ],
             'firstName' => 'firstName',
@@ -378,11 +378,15 @@ EOF;
             'orgId' => 'orgId',
             'teleworkingPriority' => 'teleworkingPriority',
             'groups' => [
-                'group1',
-                'group2',
+                'group' => [
+                    'group1',
+                    'group2',
+                ],
             ],
             'strengths' => [
-                'bar',
+                'strength' => [
+                    'bar',
+                ],
             ],
             'authenticationFactors' => [
                 'ecphp@ec.europa.eu',
