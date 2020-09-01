@@ -59,7 +59,7 @@ final class EuLoginUser implements EuLoginUserInterface
     {
         $attributes = $this->user->getAttributes();
 
-        // @Todo Ugly. Refactor this when JSON format will be available.
+        /** @Todo Ugly. Refactor this when JSON format will be available. */
         $propertyToMangle = [
             ['extendedAttributes', 'extendedAttribute'],
             ['groups', 'group'],
@@ -67,22 +67,22 @@ final class EuLoginUser implements EuLoginUserInterface
             ['authenticationFactors', 'authenticationFactor'],
         ];
 
-        foreach ($propertyToMangle as $properties) {
-            if (!array_key_exists($properties[0], $attributes)) {
+        foreach ($propertyToMangle as [$parent, $child]) {
+            if (!array_key_exists($parent, $attributes)) {
                 continue;
             }
 
-            if (!array_key_exists($properties[1], $attributes[$properties[0]])) {
+            if (!array_key_exists($child, $attributes[$parent])) {
                 continue;
             }
 
-            $attributes[$properties[0]][$properties[1]] = (array) $attributes[$properties[0]][$properties[1]];
+            $attributes[$parent][$child] = (array) $attributes[$parent][$child];
 
-            if (array_key_exists(0, $attributes[$properties[0]][$properties[1]])) {
+            if (array_key_exists(0, $attributes[$parent][$child])) {
                 continue;
             }
 
-            $attributes[$properties[0]][$properties[1]] = [$attributes[$properties[0]][$properties[1]]];
+            $attributes[$parent][$child] = [$attributes[$parent][$child]];
         }
 
         return $attributes;
