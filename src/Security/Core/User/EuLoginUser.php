@@ -247,6 +247,11 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getPgt();
     }
 
+    public function getProxyGrantingProtocol(): ?string
+    {
+        return $this->user->getAttribute('proxyGrantingProtocol');
+    }
+
     /**
      * @return string[]
      */
@@ -317,6 +322,11 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('ticketType');
     }
 
+    public function getTimeZone(): ?string
+    {
+        return $this->user->getAttribute('timeZone');
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -338,6 +348,11 @@ final class EuLoginUser implements EuLoginUserInterface
         );
 
         return $this->user->getUsername();
+    }
+
+    public function getUserManager(): ?string
+    {
+        return $this->user->getAttribute('userManager');
     }
 
     /**
