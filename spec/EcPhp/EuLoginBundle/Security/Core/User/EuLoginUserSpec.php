@@ -57,7 +57,14 @@ EOF;
 
         $this
             ->getAuthenticationFactors()
-            ->shouldReturn(['ecphp@ec.europa.eu']);
+            ->shouldReturn([
+                'moniker' => [
+                    '@value' => 'ecphp@ec.europa.eu',
+                    '@attributes' => [
+                        'number' => '1',
+                    ],
+                ],
+            ]);
 
         $this
             ->getDepartmentNumber()
@@ -116,7 +123,7 @@ EOF;
 
         $this
             ->getStrengths()
-            ->shouldReturn(['bar']);
+            ->shouldReturn(['strength1']);
 
         $this
             ->getTelephoneNumber()
@@ -137,6 +144,18 @@ EOF;
         $this
             ->getAttributes()
             ->shouldReturn($this->getAttributesData());
+
+        $this
+            ->getUserManager()
+            ->shouldReturn('userManager');
+
+        $this
+            ->getTimeZone()
+            ->shouldReturn('timeZone');
+
+        $this
+            ->getProxyGrantingProtocol()
+            ->shouldReturn('proxyGrantingProtocol');
     }
 
     public function it_can_get_the_attributes_only(CasUserInterface $user)
@@ -163,10 +182,6 @@ EOF;
             ->shouldBeNull();
 
         $this
-            ->getAttribute('user')
-            ->shouldReturn('username');
-
-        $this
             ->getUser()
             ->shouldReturn('username');
 
@@ -179,7 +194,7 @@ EOF;
             ->shouldBeNull();
     }
 
-    public function let(CasUserInterface $user)
+    public function let()
     {
         $body = <<<'EOF'
 <cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas">
@@ -193,12 +208,72 @@ EOF;
     proxyGrantingTicket
   </cas:proxyGrantingTicket>
   <cas:attributes>
+      <cas:departmentNumber>
+          departmentNumber
+      </cas:departmentNumber>
+      <cas:domain>
+          domain
+      </cas:domain>
+      <cas:domainUsername>
+          domainUsername
+      </cas:domainUsername>
+      <cas:email>
+          email
+      </cas:email>
+      <cas:employeeNumber>
+          employeeNumber
+      </cas:employeeNumber>
+      <cas:employeeType>
+          employeeType
+      </cas:employeeType>
+      <cas:firstName>
+          firstName
+      </cas:firstName>
+      <cas:lastName>
+          lastName
+      </cas:lastName>
+      <cas:locale>
+          locale
+      </cas:locale>
+      <cas:loginDate>
+          loginDate
+      </cas:loginDate>
+      <cas:orgId>
+          orgId
+      </cas:orgId>
+      <cas:sso>
+        sso
+      </cas:sso>
+      <cas:strengths number="1">
+        <cas:strength>strength1</cas:strength>
+      </cas:strengths>
+      <cas:telephoneNumber>
+          telephoneNumber
+      </cas:telephoneNumber>
+      <cas:teleworkingPriority>
+          teleworkingPriority
+      </cas:teleworkingPriority>
+      <cas:ticketType>
+          ticketType
+      </cas:ticketType>
+      <cas:uid>
+          uid
+      </cas:uid>
       <cas:authenticationFactors>
         <cas:moniker number="1">
             ecphp@ec.europa.eu
         </cas:moniker>
       </cas:authenticationFactors>
       <cas:assuranceLevel>40</cas:assuranceLevel>
+      <cas:proxyGrantingProtocol>
+        proxyGrantingProtocol
+      </cas:proxyGrantingProtocol>
+      <cas:userManager>
+          userManager
+      </cas:userManager>
+      <cas:timeZone>
+          timeZone
+      </cas:timeZone>
       <cas:groups number="2">
         <cas:group>group1</cas:group>
         <cas:group>group2</cas:group>
@@ -217,134 +292,7 @@ EOF;
         $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
         $data = (new Introspector())->parse($response)['serviceResponse']['authenticationSuccess'];
 
-        $user
-            ->beConstructedWith($data);
-
-        $user
-            ->getAttribute('extendedAttributes', [])
-            ->willReturn([
-                'extendedAttribute' => [
-                    'attributeValue' => [
-                        'value1',
-                        'value2',
-                    ],
-                    '@attributes' => [
-                        'name' => 'attr1',
-                    ],
-                ],
-            ]);
-
-        $user
-            ->get('foo', 'bar')
-            ->willReturn('bar');
-
-        $user
-            ->getUsername()
-            ->willReturn('username');
-
-        $user
-            ->getAttribute('user', null)
-            ->willReturn('username');
-
-        $user
-            ->getPgt()
-            ->willReturn('proxyGrantingTicket');
-
-        $user
-            ->getAttribute('assuranceLevel')
-            ->willReturn($data['attributes']['assuranceLevel']);
-
-        $user
-            ->getAttribute('authenticationFactors', [])
-            ->willReturn([
-                'ecphp@ec.europa.eu',
-            ]);
-
-        $user
-            ->getAttribute('departmentNumber')
-            ->willReturn('departmentNumber');
-
-        $user
-            ->getAttribute('domain')
-            ->willReturn('domain');
-
-        $user
-            ->getAttribute('domainUsername')
-            ->willReturn('domainUsername');
-
-        $user
-            ->getAttribute('email')
-            ->willReturn('email');
-
-        $user
-            ->getAttribute('employeeNumber')
-            ->willReturn('employeeNumber');
-
-        $user
-            ->getAttribute('employeeType')
-            ->willReturn('employeeType');
-
-        $user
-            ->getAttribute('firstName')
-            ->willReturn('firstName');
-
-        $user
-            ->getAttribute('groups', ['group' => []])
-            ->willReturn([
-                'group' => [
-                    'group1',
-                    'group2',
-                ],
-                '@attributes' => [
-                    'number' => 2,
-                ],
-            ]);
-
-        $user
-            ->getAttribute('lastName')
-            ->willReturn('lastName');
-
-        $user
-            ->getAttribute('locale')
-            ->willReturn('locale');
-
-        $user
-            ->getAttribute('loginDate')
-            ->willReturn('loginDate');
-
-        $user
-            ->getAttribute('orgId')
-            ->willReturn('orgId');
-
-        $user
-            ->getAttribute('sso')
-            ->willReturn('sso');
-
-        $user
-            ->getAttribute('strengths', [])
-            ->willReturn([
-                'bar',
-            ]);
-
-        $user
-            ->getAttribute('telephoneNumber')
-            ->willReturn('telephoneNumber');
-
-        $user
-            ->getAttribute('teleworkingPriority')
-            ->willReturn('teleworkingPriority');
-
-        $user
-            ->getAttribute('ticketType')
-            ->willReturn('ticketType');
-
-        $user
-            ->getAttribute('uid')
-            ->willReturn('uid');
-
-        $user
-            ->getAttributes()
-            ->willReturn($this->getAttributesData());
+        $user = new CasUser($data);
 
         $this
             ->beConstructedWith($user);
@@ -354,26 +302,47 @@ EOF;
     {
         return [
             'departmentNumber' => 'departmentNumber',
+            'domain' => 'domain',
+            'domainUsername' => 'domainUsername',
             'email' => 'email',
             'employeeNumber' => 'employeeNumber',
             'employeeType' => 'employeeType',
-            'extendedAttributes' => [
-                'extendedAttribute' => [
-                    [
-                        'attr1' => [
-                            'value1',
-                            'value2',
-                        ],
+            'firstName' => 'firstName',
+            'lastName' => 'lastName',
+            'locale' => 'locale',
+            'loginDate' => 'loginDate',
+            'orgId' => 'orgId',
+            'sso' => 'sso',
+            'strengths' => [
+                'strength' => [
+                    'strength1',
+                ],
+                '@attributes' => [
+                    'number' => '1',
+                ],
+            ],
+            'telephoneNumber' => 'telephoneNumber',
+            'teleworkingPriority' => 'teleworkingPriority',
+            'ticketType' => 'ticketType',
+            'uid' => 'uid',
+            'authenticationFactors' => [
+                'moniker' => [
+                    '@value' => 'ecphp@ec.europa.eu',
+                    '@attributes' => [
+                        'number' => '1',
                     ],
                 ],
             ],
+            'assuranceLevel' => '40',
+            'proxyGrantingProtocol' => 'proxyGrantingProcotol',
+            'userManager' => 'userManager',
+            'timeZone' => 'timeZone',
             'firstName' => 'firstName',
             'lastName' => 'lastName',
             'domain' => 'domain',
             'domainUsername' => 'domainUsername',
             'telephoneNumber' => 'telephoneNumber',
             'locale' => 'locale',
-            'assuranceLevel' => '40',
             'uid' => 'uid',
             'orgId' => 'orgId',
             'teleworkingPriority' => 'teleworkingPriority',
@@ -382,19 +351,29 @@ EOF;
                     'group1',
                     'group2',
                 ],
-            ],
-            'strengths' => [
-                'strength' => [
-                    'bar',
+                '@attributes' => [
+                    'number' => '2',
                 ],
             ],
-            'authenticationFactors' => [
-                'ecphp@ec.europa.eu',
+            'extendedAttributes' => [
+                'extendedAttribute' => [
+                    [
+                        'attributeValue' => [
+                            'rex',
+                            'snoopy',
+                        ],
+                        '@attributes' => [
+                            'name' => 'http://stork.eu/motherInLawDogName',
+                        ],
+                    ],
+                ],
             ],
-            'loginDate' => 'loginDate',
             'sso' => 'sso',
             'ticketType' => 'ticketType',
+            'assuranceLevel' => '40',
             'proxyGrantingProtocol' => 'proxyGrantingProtocol',
+            'timeZone' => 'timeZone',
+            'userManager' => 'userManager',
         ];
     }
 }
