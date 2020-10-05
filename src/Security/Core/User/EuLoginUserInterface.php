@@ -44,6 +44,8 @@ interface EuLoginUserInterface extends CasUserInterface
 
     public function getOrgId(): ?string;
 
+    public function getProxyGrantingProtocol(): ?string;
+
     public function getSso(): ?string;
 
     /**
@@ -57,5 +59,9 @@ interface EuLoginUserInterface extends CasUserInterface
 
     public function getTicketType(): ?string;
 
+    public function getTimeZone(): ?string;
+
     public function getUid(): ?string;
+
+    public function getUserManager(): ?string;
 }
