@@ -31,6 +31,6 @@ application.
 
 .. _a Symfony Flex recipe: https://github.com/symfony/recipes-contrib/blob/master/ecphp/eu-login-bundle/2.0/manifest.json
 .. _Composer: https://getcomposer.org
-.. _ecphp/cas-bundle documentation: https://cas-bundle.readthedocs.io/en/latest/pages/installation.html
+.. _ecphp/cas-bundle documentation: https://ecphp-cas-bundle.readthedocs.io/
 .. _the Symfony documentation about security and Guard authentication: https://symfony.com/doc/current/security/guard_authentication.html
 .. _the configuration reference: https://symfony.com/doc/current/reference/configuration/security.html
