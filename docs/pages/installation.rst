@@ -14,7 +14,7 @@ The easiest way to install it is through Composer_
 
 .. code-block:: bash
 
-    composer require ecphp/eu-login-bundle:^1
+    composer require ecphp/eu-login-bundle:^2
 
 Step 2
 ~~~~~~
@@ -31,4 +31,4 @@ application.
 
 .. _a Symfony Flex recipe: https://github.com/symfony/recipes-contrib/blob/master/ecphp/eu-login-bundle/1.0/manifest.json
 .. _Composer: https://getcomposer.org
-.. _ecphp/cas-bundle documentation: https://cas-bundle.readthedocs.io/en/latest/pages/installation.html
+.. _ecphp/cas-bundle documentation: https://ecphp-cas-bundle.readthedocs.io/
