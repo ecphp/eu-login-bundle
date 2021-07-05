@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/ecphp
+ */
+
 declare(strict_types=1);
 
 namespace EcPhp\EuLoginBundle\Security\Core\User;
@@ -24,25 +31,16 @@ final class EuLoginUserProvider implements CasUserProviderInterface
         $this->casUserProvider = $casUserProvider;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function loadUserByResponse(ResponseInterface $response): CasUserInterface
     {
         return new EuLoginUser($this->casUserProvider->loadUserByResponse($response));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function loadUserByUsername(string $username)
     {
         throw new UnsupportedUserException(sprintf('Username "%s" does not exist.', $username));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function refreshUser(UserInterface $user)
     {
         if (!$user instanceof EuLoginUserInterface) {
@@ -52,9 +50,6 @@ final class EuLoginUserProvider implements CasUserProviderInterface
         return $user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supportsClass(string $class)
     {
         return EuLoginUser::class === $class;

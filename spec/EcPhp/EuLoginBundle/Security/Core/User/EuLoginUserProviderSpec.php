@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/ecphp
+ */
+
 declare(strict_types=1);
 
 namespace spec\EcPhp\EuLoginBundle\Security\Core\User;
@@ -256,106 +263,106 @@ class EuLoginUserProviderSpec extends ObjectBehavior
     private function getTestBody1()
     {
         return <<< 'EOF'
-<?xml version="1.0" encoding="utf-8"?>
-<cas:serviceResponse xmlns:cas="https://ecas.ec.europa.eu/cas/schemas/" date="" version="">
-    <cas:authenticationSuccess>
-        <cas:user>username</cas:user>
-        <cas:departmentNumber>departmentNumber</cas:departmentNumber>
-        <cas:email>email</cas:email>
-        <cas:employeeNumber>employeeNumber</cas:employeeNumber>
-        <cas:employeeType>employeeType</cas:employeeType>
-        <cas:firstName>firstName</cas:firstName>
-        <cas:lastName>lastName</cas:lastName>
-        <cas:domain>domain</cas:domain>
-        <cas:domainUsername>domainUsername</cas:domainUsername>
-        <cas:telephoneNumber>telephoneNumber</cas:telephoneNumber>
-        <cas:userManager>userManager</cas:userManager>
-        <cas:timeZone>timeZone</cas:timeZone>
-        <cas:locale>locale</cas:locale>
-        <cas:assuranceLevel>assuranceLevel</cas:assuranceLevel>
-        <cas:uid>uid</cas:uid>
-        <cas:orgId>orgId</cas:orgId>
-        <cas:teleworkingPriority>teleworkingPriority</cas:teleworkingPriority>
-        <cas:extendedAttributes>
-            <cas:extendedAttribute name="extendedAttribute1">
-                <cas:attributeValue>value1</cas:attributeValue>
-                <cas:attributeValue>value2</cas:attributeValue>
-            </cas:extendedAttribute>
-            <cas:extendedAttribute name="extendedAttribute2">
-                <cas:attributeValue>value3</cas:attributeValue>
-                <cas:attributeValue>value4</cas:attributeValue>
-            </cas:extendedAttribute>
-        </cas:extendedAttributes>
-        <cas:groups number="2">
-            <cas:group>group1</cas:group>
-            <cas:group>group2</cas:group>
-        </cas:groups>
-        <cas:strengths number="2">
-            <cas:strength>strength1</cas:strength>
-            <cas:strength>strength2</cas:strength>
-        </cas:strengths>
-        <cas:authenticationFactors number="1">
-            <cas:moniker>moniker1</cas:moniker>
-        </cas:authenticationFactors>
-        <cas:loginDate></cas:loginDate>
-        <cas:sso>sso</cas:sso>
-        <cas:ticketType>ticketType</cas:ticketType>
-        <cas:proxyGrantingProtocol>proxyGrantingProtocol</cas:proxyGrantingProtocol>
-        <cas:proxies>
-            <cas:proxy>proxy1</cas:proxy>
-        </cas:proxies>
-    </cas:authenticationSuccess>
-</cas:serviceResponse>
-EOF;
+            <?xml version="1.0" encoding="utf-8"?>
+            <cas:serviceResponse xmlns:cas="https://ecas.ec.europa.eu/cas/schemas/" date="" version="">
+                <cas:authenticationSuccess>
+                    <cas:user>username</cas:user>
+                    <cas:departmentNumber>departmentNumber</cas:departmentNumber>
+                    <cas:email>email</cas:email>
+                    <cas:employeeNumber>employeeNumber</cas:employeeNumber>
+                    <cas:employeeType>employeeType</cas:employeeType>
+                    <cas:firstName>firstName</cas:firstName>
+                    <cas:lastName>lastName</cas:lastName>
+                    <cas:domain>domain</cas:domain>
+                    <cas:domainUsername>domainUsername</cas:domainUsername>
+                    <cas:telephoneNumber>telephoneNumber</cas:telephoneNumber>
+                    <cas:userManager>userManager</cas:userManager>
+                    <cas:timeZone>timeZone</cas:timeZone>
+                    <cas:locale>locale</cas:locale>
+                    <cas:assuranceLevel>assuranceLevel</cas:assuranceLevel>
+                    <cas:uid>uid</cas:uid>
+                    <cas:orgId>orgId</cas:orgId>
+                    <cas:teleworkingPriority>teleworkingPriority</cas:teleworkingPriority>
+                    <cas:extendedAttributes>
+                        <cas:extendedAttribute name="extendedAttribute1">
+                            <cas:attributeValue>value1</cas:attributeValue>
+                            <cas:attributeValue>value2</cas:attributeValue>
+                        </cas:extendedAttribute>
+                        <cas:extendedAttribute name="extendedAttribute2">
+                            <cas:attributeValue>value3</cas:attributeValue>
+                            <cas:attributeValue>value4</cas:attributeValue>
+                        </cas:extendedAttribute>
+                    </cas:extendedAttributes>
+                    <cas:groups number="2">
+                        <cas:group>group1</cas:group>
+                        <cas:group>group2</cas:group>
+                    </cas:groups>
+                    <cas:strengths number="2">
+                        <cas:strength>strength1</cas:strength>
+                        <cas:strength>strength2</cas:strength>
+                    </cas:strengths>
+                    <cas:authenticationFactors number="1">
+                        <cas:moniker>moniker1</cas:moniker>
+                    </cas:authenticationFactors>
+                    <cas:loginDate></cas:loginDate>
+                    <cas:sso>sso</cas:sso>
+                    <cas:ticketType>ticketType</cas:ticketType>
+                    <cas:proxyGrantingProtocol>proxyGrantingProtocol</cas:proxyGrantingProtocol>
+                    <cas:proxies>
+                        <cas:proxy>proxy1</cas:proxy>
+                    </cas:proxies>
+                </cas:authenticationSuccess>
+            </cas:serviceResponse>
+            EOF;
     }
 
     private function getTestBody2()
     {
         return <<< 'EOF'
-<?xml version="1.0" encoding="utf-8"?>
-<cas:serviceResponse xmlns:cas="https://ecas.ec.europa.eu/cas/schemas/" date="" version="">
-    <cas:authenticationSuccess>
-        <cas:user>username</cas:user>
-        <cas:departmentNumber>departmentNumber</cas:departmentNumber>
-        <cas:email>email</cas:email>
-        <cas:employeeNumber>employeeNumber</cas:employeeNumber>
-        <cas:employeeType>employeeType</cas:employeeType>
-        <cas:firstName>firstName</cas:firstName>
-        <cas:lastName>lastName</cas:lastName>
-        <cas:domain>domain</cas:domain>
-        <cas:domainUsername>domainUsername</cas:domainUsername>
-        <cas:telephoneNumber>telephoneNumber</cas:telephoneNumber>
-        <cas:userManager>userManager</cas:userManager>
-        <cas:timeZone>timeZone</cas:timeZone>
-        <cas:locale>locale</cas:locale>
-        <cas:assuranceLevel>assuranceLevel</cas:assuranceLevel>
-        <cas:uid>uid</cas:uid>
-        <cas:orgId>orgId</cas:orgId>
-        <cas:teleworkingPriority>teleworkingPriority</cas:teleworkingPriority>
-        <cas:extendedAttributes>
-            <cas:extendedAttribute name="extendedAttribute1">
-                <cas:attributeValue>value1</cas:attributeValue>
-                <cas:attributeValue>value2</cas:attributeValue>
-            </cas:extendedAttribute>
-        </cas:extendedAttributes>
-        <cas:groups number="1">
-            <cas:group>group1</cas:group>
-        </cas:groups>
-        <cas:strengths number="1">
-            <cas:strength>strength1</cas:strength>
-        </cas:strengths>
-        <cas:authenticationFactors number="1">
-            <cas:moniker>moniker1</cas:moniker>
-        </cas:authenticationFactors>
-        <cas:loginDate></cas:loginDate>
-        <cas:sso>sso</cas:sso>
-        <cas:ticketType>ticketType</cas:ticketType>
-        <cas:proxyGrantingProtocol>proxyGrantingProtocol</cas:proxyGrantingProtocol>
-        <cas:proxies>
-            <cas:proxy>proxy1</cas:proxy>
-        </cas:proxies>
-    </cas:authenticationSuccess>
-</cas:serviceResponse>
-EOF;
+            <?xml version="1.0" encoding="utf-8"?>
+            <cas:serviceResponse xmlns:cas="https://ecas.ec.europa.eu/cas/schemas/" date="" version="">
+                <cas:authenticationSuccess>
+                    <cas:user>username</cas:user>
+                    <cas:departmentNumber>departmentNumber</cas:departmentNumber>
+                    <cas:email>email</cas:email>
+                    <cas:employeeNumber>employeeNumber</cas:employeeNumber>
+                    <cas:employeeType>employeeType</cas:employeeType>
+                    <cas:firstName>firstName</cas:firstName>
+                    <cas:lastName>lastName</cas:lastName>
+                    <cas:domain>domain</cas:domain>
+                    <cas:domainUsername>domainUsername</cas:domainUsername>
+                    <cas:telephoneNumber>telephoneNumber</cas:telephoneNumber>
+                    <cas:userManager>userManager</cas:userManager>
+                    <cas:timeZone>timeZone</cas:timeZone>
+                    <cas:locale>locale</cas:locale>
+                    <cas:assuranceLevel>assuranceLevel</cas:assuranceLevel>
+                    <cas:uid>uid</cas:uid>
+                    <cas:orgId>orgId</cas:orgId>
+                    <cas:teleworkingPriority>teleworkingPriority</cas:teleworkingPriority>
+                    <cas:extendedAttributes>
+                        <cas:extendedAttribute name="extendedAttribute1">
+                            <cas:attributeValue>value1</cas:attributeValue>
+                            <cas:attributeValue>value2</cas:attributeValue>
+                        </cas:extendedAttribute>
+                    </cas:extendedAttributes>
+                    <cas:groups number="1">
+                        <cas:group>group1</cas:group>
+                    </cas:groups>
+                    <cas:strengths number="1">
+                        <cas:strength>strength1</cas:strength>
+                    </cas:strengths>
+                    <cas:authenticationFactors number="1">
+                        <cas:moniker>moniker1</cas:moniker>
+                    </cas:authenticationFactors>
+                    <cas:loginDate></cas:loginDate>
+                    <cas:sso>sso</cas:sso>
+                    <cas:ticketType>ticketType</cas:ticketType>
+                    <cas:proxyGrantingProtocol>proxyGrantingProtocol</cas:proxyGrantingProtocol>
+                    <cas:proxies>
+                        <cas:proxy>proxy1</cas:proxy>
+                    </cas:proxies>
+                </cas:authenticationSuccess>
+            </cas:serviceResponse>
+            EOF;
     }
 }

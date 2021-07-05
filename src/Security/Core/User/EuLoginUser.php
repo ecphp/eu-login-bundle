@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/ecphp
+ */
+
 declare(strict_types=1);
 
 namespace EcPhp\EuLoginBundle\Security\Core\User;
@@ -20,41 +27,26 @@ final class EuLoginUser implements EuLoginUserInterface
         $this->user = $user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function eraseCredentials(): void
     {
         // null
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function get(string $key, $default = null)
     {
         return $this->user->get($key, $default);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAssuranceLevel(): ?string
     {
         return $this->user->getAttribute('assuranceLevel');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAttribute(string $key, $default = null)
     {
         return $this->user->getAttribute($key, $default);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAttributes(): array
     {
         $attributes = $this->user->getAttributes();
@@ -88,57 +80,36 @@ final class EuLoginUser implements EuLoginUserInterface
         return $attributes;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAuthenticationFactors(): array
     {
         return $this->user->getAttribute('authenticationFactors', []);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDepartmentNumber(): ?string
     {
         return $this->user->getAttribute('departmentNumber');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDomain(): ?string
     {
         return $this->user->getAttribute('domain');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDomainUsername(): ?string
     {
         return $this->user->getAttribute('domainUsername');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEmail(): ?string
     {
         return $this->user->getAttribute('email');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEmployeeNumber(): ?string
     {
         return $this->user->getAttribute('employeeNumber');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEmployeeType(): ?string
     {
         return $this->user->getAttribute('employeeType');
@@ -171,17 +142,11 @@ final class EuLoginUser implements EuLoginUserInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFirstName(): ?string
     {
         return $this->user->getAttribute('firstName');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getGroups(): array
     {
         $attributes = $this->getAttributes();
@@ -199,49 +164,31 @@ final class EuLoginUser implements EuLoginUserInterface
         return $groups['group'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLastName(): ?string
     {
         return $this->user->getAttribute('lastName');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocale(): ?string
     {
         return $this->user->getAttribute('locale');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLoginDate(): ?string
     {
         return $this->user->getAttribute('loginDate');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrgId(): ?string
     {
         return $this->user->getAttribute('orgId');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPassword()
     {
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPgt(): ?string
     {
         return $this->user->getPgt();
@@ -252,9 +199,6 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('proxyGrantingProtocol');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRoles()
     {
         $default = ['ROLE_CAS_AUTHENTICATED'];
@@ -262,25 +206,16 @@ final class EuLoginUser implements EuLoginUserInterface
         return array_merge($this->getGroups(), $default);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSalt()
     {
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSso(): ?string
     {
         return $this->user->getAttribute('sso');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStrengths(): array
     {
         $attributes = $this->getAttributes();
@@ -298,25 +233,16 @@ final class EuLoginUser implements EuLoginUserInterface
         return (array) $strengths['strength'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTelephoneNumber(): ?string
     {
         return $this->user->getAttribute('telephoneNumber');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTeleworkingPriority(): ?string
     {
         return $this->user->getAttribute('teleworkingPriority');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTicketType(): ?string
     {
         return $this->user->getAttribute('ticketType');
@@ -327,17 +253,11 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('timeZone');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUid(): ?string
     {
         return $this->user->getAttribute('uid');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUser(): string
     {
         trigger_deprecation(
@@ -355,9 +275,6 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('userManager');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUsername()
     {
         return $this->user->getUsername();

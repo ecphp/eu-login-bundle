@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/ecphp
+ */
+
 declare(strict_types=1);
 
 namespace spec\EcPhp\EuLoginBundle\Security\Core\User;
@@ -16,25 +23,25 @@ class EuLoginUserSpec extends ObjectBehavior
     public function it_can_get_groups_when_no_groups_are_available()
     {
         $body = <<<'EOF'
-<cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas">
- <cas:authenticationSuccess>
-  <cas:user>username</cas:user>
-  <cas:foo>bar</cas:foo>
-  <cas:proxies>
-    <cas:proxy>foo</cas:proxy>
-  </cas:proxies>
-  <cas:attributes>
-      <cas:groups number="0"/>
-      <cas:extendedAttributes>
-        <cas:extendedAttribute name="http://stork.eu/motherInLawDogName">
-            <cas:attributeValue>rex</cas:attributeValue>
-            <cas:attributeValue>snoopy</cas:attributeValue>
-        </cas:extendedAttribute>
-      </cas:extendedAttributes>
-  </cas:attributes>
- </cas:authenticationSuccess>
-</cas:serviceResponse>
-EOF;
+            <cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas">
+             <cas:authenticationSuccess>
+              <cas:user>username</cas:user>
+              <cas:foo>bar</cas:foo>
+              <cas:proxies>
+                <cas:proxy>foo</cas:proxy>
+              </cas:proxies>
+              <cas:attributes>
+                  <cas:groups number="0"/>
+                  <cas:extendedAttributes>
+                    <cas:extendedAttribute name="http://stork.eu/motherInLawDogName">
+                        <cas:attributeValue>rex</cas:attributeValue>
+                        <cas:attributeValue>snoopy</cas:attributeValue>
+                    </cas:extendedAttribute>
+                  </cas:extendedAttributes>
+              </cas:attributes>
+             </cas:authenticationSuccess>
+            </cas:serviceResponse>
+            EOF;
 
         $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
         $data = (new Introspector())->parse($response)['serviceResponse']['authenticationSuccess'];
@@ -197,97 +204,97 @@ EOF;
     public function let()
     {
         $body = <<<'EOF'
-<cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas">
- <cas:authenticationSuccess>
-  <cas:user>username</cas:user>
-  <cas:foo>bar</cas:foo>
-  <cas:proxies>
-    <cas:proxy>foo</cas:proxy>
-  </cas:proxies>
-  <cas:proxyGrantingTicket>
-    proxyGrantingTicket
-  </cas:proxyGrantingTicket>
-  <cas:attributes>
-      <cas:departmentNumber>
-          departmentNumber
-      </cas:departmentNumber>
-      <cas:domain>
-          domain
-      </cas:domain>
-      <cas:domainUsername>
-          domainUsername
-      </cas:domainUsername>
-      <cas:email>
-          email
-      </cas:email>
-      <cas:employeeNumber>
-          employeeNumber
-      </cas:employeeNumber>
-      <cas:employeeType>
-          employeeType
-      </cas:employeeType>
-      <cas:firstName>
-          firstName
-      </cas:firstName>
-      <cas:lastName>
-          lastName
-      </cas:lastName>
-      <cas:locale>
-          locale
-      </cas:locale>
-      <cas:loginDate>
-          loginDate
-      </cas:loginDate>
-      <cas:orgId>
-          orgId
-      </cas:orgId>
-      <cas:sso>
-        sso
-      </cas:sso>
-      <cas:strengths number="1">
-        <cas:strength>strength1</cas:strength>
-      </cas:strengths>
-      <cas:telephoneNumber>
-          telephoneNumber
-      </cas:telephoneNumber>
-      <cas:teleworkingPriority>
-          teleworkingPriority
-      </cas:teleworkingPriority>
-      <cas:ticketType>
-          ticketType
-      </cas:ticketType>
-      <cas:uid>
-          uid
-      </cas:uid>
-      <cas:authenticationFactors>
-        <cas:moniker number="1">
-            ecphp@ec.europa.eu
-        </cas:moniker>
-      </cas:authenticationFactors>
-      <cas:assuranceLevel>40</cas:assuranceLevel>
-      <cas:proxyGrantingProtocol>
-        proxyGrantingProtocol
-      </cas:proxyGrantingProtocol>
-      <cas:userManager>
-          userManager
-      </cas:userManager>
-      <cas:timeZone>
-          timeZone
-      </cas:timeZone>
-      <cas:groups number="2">
-        <cas:group>group1</cas:group>
-        <cas:group>group2</cas:group>
-      </cas:groups>
-      <cas:extendedAttributes>
-        <cas:extendedAttribute name="http://stork.eu/motherInLawDogName">
-            <cas:attributeValue>rex</cas:attributeValue>
-            <cas:attributeValue>snoopy</cas:attributeValue>
-        </cas:extendedAttribute>
-      </cas:extendedAttributes>
-  </cas:attributes>
- </cas:authenticationSuccess>
-</cas:serviceResponse>
-EOF;
+            <cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas">
+             <cas:authenticationSuccess>
+              <cas:user>username</cas:user>
+              <cas:foo>bar</cas:foo>
+              <cas:proxies>
+                <cas:proxy>foo</cas:proxy>
+              </cas:proxies>
+              <cas:proxyGrantingTicket>
+                proxyGrantingTicket
+              </cas:proxyGrantingTicket>
+              <cas:attributes>
+                  <cas:departmentNumber>
+                      departmentNumber
+                  </cas:departmentNumber>
+                  <cas:domain>
+                      domain
+                  </cas:domain>
+                  <cas:domainUsername>
+                      domainUsername
+                  </cas:domainUsername>
+                  <cas:email>
+                      email
+                  </cas:email>
+                  <cas:employeeNumber>
+                      employeeNumber
+                  </cas:employeeNumber>
+                  <cas:employeeType>
+                      employeeType
+                  </cas:employeeType>
+                  <cas:firstName>
+                      firstName
+                  </cas:firstName>
+                  <cas:lastName>
+                      lastName
+                  </cas:lastName>
+                  <cas:locale>
+                      locale
+                  </cas:locale>
+                  <cas:loginDate>
+                      loginDate
+                  </cas:loginDate>
+                  <cas:orgId>
+                      orgId
+                  </cas:orgId>
+                  <cas:sso>
+                    sso
+                  </cas:sso>
+                  <cas:strengths number="1">
+                    <cas:strength>strength1</cas:strength>
+                  </cas:strengths>
+                  <cas:telephoneNumber>
+                      telephoneNumber
+                  </cas:telephoneNumber>
+                  <cas:teleworkingPriority>
+                      teleworkingPriority
+                  </cas:teleworkingPriority>
+                  <cas:ticketType>
+                      ticketType
+                  </cas:ticketType>
+                  <cas:uid>
+                      uid
+                  </cas:uid>
+                  <cas:authenticationFactors>
+                    <cas:moniker number="1">
+                        ecphp@ec.europa.eu
+                    </cas:moniker>
+                  </cas:authenticationFactors>
+                  <cas:assuranceLevel>40</cas:assuranceLevel>
+                  <cas:proxyGrantingProtocol>
+                    proxyGrantingProtocol
+                  </cas:proxyGrantingProtocol>
+                  <cas:userManager>
+                      userManager
+                  </cas:userManager>
+                  <cas:timeZone>
+                      timeZone
+                  </cas:timeZone>
+                  <cas:groups number="2">
+                    <cas:group>group1</cas:group>
+                    <cas:group>group2</cas:group>
+                  </cas:groups>
+                  <cas:extendedAttributes>
+                    <cas:extendedAttribute name="http://stork.eu/motherInLawDogName">
+                        <cas:attributeValue>rex</cas:attributeValue>
+                        <cas:attributeValue>snoopy</cas:attributeValue>
+                    </cas:extendedAttribute>
+                  </cas:extendedAttributes>
+              </cas:attributes>
+             </cas:authenticationSuccess>
+            </cas:serviceResponse>
+            EOF;
 
         $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
         $data = (new Introspector())->parse($response)['serviceResponse']['authenticationSuccess'];
