@@ -22,7 +22,7 @@
     },
     "require-dev": {
         "ecphp/php-conventions": "^1",
-        "friends-of-phpspec/phpspec-code-coverage": "^5.0.0",
+        "friends-of-phpspec/phpspec-code-coverage": "^6.1.0",
         "infection/infection": "^0.24.0",
         "infection/phpspec-adapter": "^0.1.2",
         "phpspec/phpspec": "^7"
