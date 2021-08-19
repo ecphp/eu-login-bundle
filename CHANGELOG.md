@@ -5,7 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.3.6](https://github.com/ecphp/eu-login-bundle/compare/2.3.5...2.3.6)
+## [2.3.7](https://github.com/ecphp/eu-login-bundle/compare/2.3.6...2.3.7)
+
+### Merged
+
+- Update friends-of-phpspec/phpspec-code-coverage requirement from ^5.0.0 to ^6.1.0 [`#36`](https://github.com/ecphp/eu-login-bundle/pull/36)
+- Update infection/infection requirement from ^0.15.3 || ^0.23 to ^0.24.0 [`#35`](https://github.com/ecphp/eu-login-bundle/pull/35)
+- Bump actions/cache from 2.1.5 to 2.1.6 [`#34`](https://github.com/ecphp/eu-login-bundle/pull/34)
+
+### Commits
+
+- refactor: Update Symfony services definitions. [`6d068e4`](https://github.com/ecphp/eu-login-bundle/commit/6d068e4e510fb338da90a481ae46f4fd51937086)
+- Update friends-of-phpspec/phpspec-code-coverage requirement [`df090ff`](https://github.com/ecphp/eu-login-bundle/commit/df090ff18c88ad2a51ada6ec683356e79b39e087)
+- ci: Enable builds only with PHP 7.4. [`1e14ac6`](https://github.com/ecphp/eu-login-bundle/commit/1e14ac65b742d89872264acae0e884edf899e1b5)
+- Revert "ci: Disable builds on macOS until phpspec/phpspec#1380 is fixed." [`afac2a8`](https://github.com/ecphp/eu-login-bundle/commit/afac2a8a3e380a18ab8c82d53b689d9436713cd6)
+
+## [2.3.6](https://github.com/ecphp/eu-login-bundle/compare/2.3.5...2.3.6) - 2021-07-05
 
 ### Merged
 
@@ -16,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Commits
 
-- docs: Add/update CHANGELOG. [`8a054fe`](https://github.com/ecphp/eu-login-bundle/commit/8a054fe9f3dd1543a3e7daf3b23bbe82d9e8ade3)
+- docs: Add/update CHANGELOG. [`4996a5f`](https://github.com/ecphp/eu-login-bundle/commit/4996a5f3eb157c6b7c008f8151944f13c40991ac)
 - chore: Normalize composer.json. [`83b2f9d`](https://github.com/ecphp/eu-login-bundle/commit/83b2f9d99c89f4765662d9c96d74ad032c71dbdc)
 - refactor: Autofix code style. [`63812a0`](https://github.com/ecphp/eu-login-bundle/commit/63812a020a010a80e465f7af5d81234b42b40cd1)
 - ci: Disable builds on macOS until phpspec/phpspec#1380 is fixed. [`c4ffa75`](https://github.com/ecphp/eu-login-bundle/commit/c4ffa75e5c5b82e7958e9049f03da59cc3a696ea)
