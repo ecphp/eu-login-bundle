@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.3.7](https://github.com/ecphp/eu-login-bundle/compare/2.3.6...2.3.7)
+## [2.3.8](https://github.com/ecphp/eu-login-bundle/compare/2.3.7...2.3.8)
+
+### Commits
+
+- Update `composer.json` to support new `ecphp/cas-bundle` [`a3b70f3`](https://github.com/ecphp/eu-login-bundle/commit/a3b70f33f86b1774df093dc1a07a5869d89323c4)
+
+## [2.3.7](https://github.com/ecphp/eu-login-bundle/compare/2.3.6...2.3.7) - 2021-08-19
 
 ### Merged
 
@@ -15,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Commits
 
+- docs: Add/update CHANGELOG. [`20db369`](https://github.com/ecphp/eu-login-bundle/commit/20db3696010a96da0056a43fb39d8098ddb5abbc)
 - refactor: Update Symfony services definitions. [`6d068e4`](https://github.com/ecphp/eu-login-bundle/commit/6d068e4e510fb338da90a481ae46f4fd51937086)
 - Update friends-of-phpspec/phpspec-code-coverage requirement [`df090ff`](https://github.com/ecphp/eu-login-bundle/commit/df090ff18c88ad2a51ada6ec683356e79b39e087)
 - ci: Enable builds only with PHP 7.4. [`1e14ac6`](https://github.com/ecphp/eu-login-bundle/commit/1e14ac65b742d89872264acae0e884edf899e1b5)
