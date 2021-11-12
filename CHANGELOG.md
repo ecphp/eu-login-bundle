@@ -5,10 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.3.8](https://github.com/ecphp/eu-login-bundle/compare/2.3.7...2.3.8)
+## [2.3.9](https://github.com/ecphp/eu-login-bundle/compare/2.3.8...2.3.9)
 
 ### Commits
 
+- fix: Add missing methods. [`09d24cb`](https://github.com/ecphp/eu-login-bundle/commit/09d24cb5f15e45ade4522015d30ddce2333f3b82)
+- chore: Add missing dev package. [`11ba629`](https://github.com/ecphp/eu-login-bundle/commit/11ba6291cdfc493742c4287360c43f5ef21e3741)
+
+## [2.3.8](https://github.com/ecphp/eu-login-bundle/compare/2.3.7...2.3.8) - 2021-11-10
+
+### Commits
+
+- docs: Add/update CHANGELOG. [`8b9aab8`](https://github.com/ecphp/eu-login-bundle/commit/8b9aab86ce78d630e814e09e90a4d863c62766fe)
 - Update `composer.json` to support new `ecphp/cas-bundle` [`a3b70f3`](https://github.com/ecphp/eu-login-bundle/commit/a3b70f33f86b1774df093dc1a07a5869d89323c4)
 
 ## [2.3.7](https://github.com/ecphp/eu-login-bundle/compare/2.3.6...2.3.7) - 2021-08-19
