@@ -25,7 +25,8 @@
         "friends-of-phpspec/phpspec-code-coverage": "^6.1.0",
         "infection/infection": "^0.24.0",
         "infection/phpspec-adapter": "^0.1.2",
-        "phpspec/phpspec": "^7"
+        "phpspec/phpspec": "^7",
+        "symfony/security-core": "^5.3"
     },
     "autoload": {
         "psr-4": {
