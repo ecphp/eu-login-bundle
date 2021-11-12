@@ -12,15 +12,13 @@ declare(strict_types=1);
 namespace EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 use function array_key_exists;
 
 final class EuLoginUser implements EuLoginUserInterface
 {
-    /**
-     * @var CasUserInterface
-     */
-    private $user;
+    private CasUserInterface $user;
 
     public function __construct(CasUserInterface $user)
     {
@@ -258,16 +256,24 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('uid');
     }
 
+    /**
+     * @deprecated use getUserIdentifier() instead
+     */
     public function getUser(): string
     {
         trigger_deprecation(
             'ecphp/eu-login-bundle',
             '2.2.3',
-            'The method "%s::getUser()" is deprecated, use %s::getUsername() instead.',
+            'The method "%s::getUser()" is deprecated, use %s::getUserIdentifier() instead.',
             EuLoginUser::class
         );
 
         return $this->user->getUsername();
+    }
+
+    public function getUserIdentifier()
+    {
+        return $this->user->getUserIdentifier();
     }
 
     public function getUserManager(): ?string
@@ -275,8 +281,23 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('userManager');
     }
 
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier() instead
+     */
     public function getUsername()
     {
+        trigger_deprecation(
+            'ecphp/eu-login-bundle',
+            '2.3.8',
+            'The method "%s::getUsername()" is deprecated, use %s::getUserIdentifier() instead.',
+            EuLoginUser::class
+        );
+
         return $this->user->getUsername();
+    }
+
+    public function isEqualTo(UserInterface $user)
+    {
+        return $this->user->isEqualTo($user);
     }
 }
