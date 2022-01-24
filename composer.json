@@ -1,7 +1,8 @@
 {
     "name": "ecphp/eu-login-bundle",
-    "type": "symfony-bundle",
     "description": "A bundle for Symfony 4 & 5, providing authentication against European Commission authentication service.",
+    "license": "BSD-3-Clause",
+    "type": "symfony-bundle",
     "keywords": [
         "authentication",
         "cas",
@@ -11,7 +12,6 @@
         "single sign-on",
         "sso"
     ],
-    "license": "BSD-3-Clause",
     "require": {
         "php": ">= 7.2.5",
         "ext-json": "*",
@@ -31,6 +31,15 @@
     "autoload": {
         "psr-4": {
             "EcPhp\\EuLoginBundle\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "ergebnis/composer-normalize": true,
+            "infection/extension-installer": true,
+            "phpro/grumphp": true,
+            "phpstan/extension-installer": true
         }
     },
     "scripts": {
