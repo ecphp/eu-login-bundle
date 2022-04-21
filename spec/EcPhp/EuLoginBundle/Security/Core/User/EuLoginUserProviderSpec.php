@@ -12,11 +12,17 @@ declare(strict_types=1);
 namespace spec\EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUserProvider;
-use EcPhp\CasLib\Introspection\Introspector;
-use EcPhp\Ecas\Introspection\EcasIntrospector;
+use EcPhp\CasLib\Response\CasResponseBuilder;
+use EcPhp\CasLib\Response\Factory\AuthenticationFailureFactory;
+use EcPhp\CasLib\Response\Factory\ProxyFactory;
+use EcPhp\CasLib\Response\Factory\ProxyFailureFactory;
+use EcPhp\CasLib\Response\Factory\ServiceValidateFactory as FactoryServiceValidateFactory;
+use EcPhp\Ecas\Response\Factory\ServiceValidateFactory;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUser;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserInterface;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider;
+use loophp\psr17\Psr17;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7\Response;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -40,7 +46,19 @@ class EuLoginUserProviderSpec extends ObjectBehavior
         // TestBody1
         $response = new Response(200, ['content-type' => 'application/xml'], $this->getTestBody1());
 
-        $user = $this->loadUserByResponse($response);
+        $psr17f = new Psr17Factory;
+        $psr17 = new Psr17($psr17f, $psr17f, $psr17f, $psr17f, $psr17f, $psr17f);
+        $responseBuilder = new CasResponseBuilder(
+            new AuthenticationFailureFactory,
+            new ProxyFactory,
+            new ProxyFailureFactory,
+            new ServiceValidateFactory(new FactoryServiceValidateFactory, $psr17)
+        );
+
+        $user = $this
+            ->loadUserByResponse(
+                $responseBuilder->fromResponse($response)
+            );
 
         $user
             ->getAttributes()
@@ -143,9 +161,16 @@ class EuLoginUserProviderSpec extends ObjectBehavior
             ]);
 
         // TestBody2
-        $response = new Response(200, ['content-type' => 'application/xml'], $this->getTestBody2());
+        $response = new Response(
+            200,
+            ['content-type' => 'application/xml'],
+            $this->getTestBody2()
+        );
 
-        $user = $this->loadUserByResponse($response);
+        $user = $this
+            ->loadUserByResponse(
+                $responseBuilder->fromResponse($response)
+            );
 
         $user
             ->getAttributes()
@@ -257,7 +282,7 @@ class EuLoginUserProviderSpec extends ObjectBehavior
     public function let()
     {
         $this
-            ->beConstructedWith(new CasUserProvider(new EcasIntrospector(new Introspector())));
+            ->beConstructedWith(new CasUserProvider());
     }
 
     private function getTestBody1()

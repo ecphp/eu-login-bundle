@@ -13,21 +13,26 @@
         "sso"
     ],
     "require": {
-        "php": ">= 7.2.5",
+        "php": ">= 7.4",
         "ext-json": "*",
         "ext-simplexml": "*",
-        "ecphp/cas-bundle": "2.2.* || ^2.3",
-        "ecphp/ecas": "2.1.*",
-        "symfony/framework-bundle": "^5.1"
+        "ecphp/cas-bundle": "dev-refactor/symfony-gte-54",
+        "ecphp/ecas": "dev-refactor/version-3",
+        "symfony/framework-bundle": "^5.4"
     },
     "require-dev": {
+        "ext-xdebug": "*",
         "ecphp/php-conventions": "^1",
-        "friends-of-phpspec/phpspec-code-coverage": "^6.1.0",
+        "friends-of-phpspec/phpspec-code-coverage": "^6",
         "infection/infection": "^0.24.0",
         "infection/phpspec-adapter": "^0.1.2",
         "phpspec/phpspec": "^7",
-        "symfony/security-core": "^5.3"
+        "symfony/http-client": "^6.0",
+        "symfony/security-core": "^5.4",
+        "nyholm/psr7": "^1.5"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "EcPhp\\EuLoginBundle\\": "src/"
