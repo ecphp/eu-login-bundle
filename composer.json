@@ -26,10 +26,10 @@
         "friends-of-phpspec/phpspec-code-coverage": "^6",
         "infection/infection": "^0.24.0",
         "infection/phpspec-adapter": "^0.1.2",
+        "nyholm/psr7": "^1.5",
         "phpspec/phpspec": "^7",
-        "symfony/http-client": "^6.0",
-        "symfony/security-core": "^5.4",
-        "nyholm/psr7": "^1.5"
+        "symfony/http-client": "^5.4",
+        "symfony/security-core": "^5.4"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

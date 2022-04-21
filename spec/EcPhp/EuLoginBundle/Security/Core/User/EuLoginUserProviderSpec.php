@@ -46,13 +46,13 @@ class EuLoginUserProviderSpec extends ObjectBehavior
         // TestBody1
         $response = new Response(200, ['content-type' => 'application/xml'], $this->getTestBody1());
 
-        $psr17f = new Psr17Factory;
+        $psr17f = new Psr17Factory();
         $psr17 = new Psr17($psr17f, $psr17f, $psr17f, $psr17f, $psr17f, $psr17f);
         $responseBuilder = new CasResponseBuilder(
-            new AuthenticationFailureFactory,
-            new ProxyFactory,
-            new ProxyFailureFactory,
-            new ServiceValidateFactory(new FactoryServiceValidateFactory, $psr17)
+            new AuthenticationFailureFactory(),
+            new ProxyFactory(),
+            new ProxyFailureFactory(),
+            new ServiceValidateFactory(new FactoryServiceValidateFactory(), $psr17)
         );
 
         $user = $this

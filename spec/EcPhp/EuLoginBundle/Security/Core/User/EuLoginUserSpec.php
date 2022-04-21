@@ -18,7 +18,6 @@ use EcPhp\CasLib\Response\Factory\AuthenticationFailureFactory;
 use EcPhp\CasLib\Response\Factory\ProxyFactory;
 use EcPhp\CasLib\Response\Factory\ProxyFailureFactory;
 use EcPhp\CasLib\Response\Factory\ServiceValidateFactory as FactoryServiceValidateFactory;
-use EcPhp\Ecas\Response\EcasResponseBuilder;
 use EcPhp\Ecas\Response\Factory\ServiceValidateFactory;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUser;
 use loophp\psr17\Psr17;
@@ -51,14 +50,14 @@ class EuLoginUserSpec extends ObjectBehavior
             </cas:serviceResponse>
             EOF;
 
-        $psr17f = new Psr17Factory;
+        $psr17f = new Psr17Factory();
         $psr17 = new Psr17($psr17f, $psr17f, $psr17f, $psr17f, $psr17f, $psr17f);
         $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
         $responseBuilder = new CasResponseBuilder(
-            new AuthenticationFailureFactory,
-            new ProxyFactory,
-            new ProxyFailureFactory,
-            new ServiceValidateFactory(new FactoryServiceValidateFactory, $psr17)
+            new AuthenticationFailureFactory(),
+            new ProxyFactory(),
+            new ProxyFailureFactory(),
+            new ServiceValidateFactory(new FactoryServiceValidateFactory(), $psr17)
         );
         $data = $responseBuilder
             ->fromResponse($response)
@@ -314,14 +313,14 @@ class EuLoginUserSpec extends ObjectBehavior
             </cas:serviceResponse>
             EOF;
 
-        $psr17f = new Psr17Factory;
+        $psr17f = new Psr17Factory();
         $psr17 = new Psr17($psr17f, $psr17f, $psr17f, $psr17f, $psr17f, $psr17f);
         $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
         $responseBuilder = new CasResponseBuilder(
-            new AuthenticationFailureFactory,
-            new ProxyFactory,
-            new ProxyFailureFactory,
-            new ServiceValidateFactory(new FactoryServiceValidateFactory, $psr17)
+            new AuthenticationFailureFactory(),
+            new ProxyFactory(),
+            new ProxyFailureFactory(),
+            new ServiceValidateFactory(new FactoryServiceValidateFactory(), $psr17)
         );
 
         $data = $responseBuilder
