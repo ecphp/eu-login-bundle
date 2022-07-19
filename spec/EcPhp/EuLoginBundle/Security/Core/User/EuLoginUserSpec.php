@@ -189,7 +189,7 @@ class EuLoginUserSpec extends ObjectBehavior
             ->shouldBeNull();
 
         $this
-            ->getUser()
+            ->getUserIdentifier()
             ->shouldReturn('username');
 
         $this
@@ -299,10 +299,7 @@ class EuLoginUserSpec extends ObjectBehavior
         $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
         $data = (new Introspector())->parse($response)['serviceResponse']['authenticationSuccess'];
 
-        $user = new CasUser($data);
-
-        $this
-            ->beConstructedWith($user);
+        $this->beConstructedWith(new CasUser($data));
     }
 
     private function getAttributesData(): array

@@ -20,7 +20,7 @@ use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider;
 use Nyholm\Psr7\Response;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\User\User;
+use Symfony\Component\Security\Core\User\InMemoryUser;
 
 class EuLoginUserProviderSpec extends ObjectBehavior
 {
@@ -31,7 +31,7 @@ class EuLoginUserProviderSpec extends ObjectBehavior
             ->shouldReturn(true);
 
         $this
-            ->supportsClass(User::class)
+            ->supportsClass(InMemoryUser::class)
             ->shouldReturn(false);
     }
 
@@ -235,7 +235,7 @@ class EuLoginUserProviderSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(UnsupportedUserException::class)
-            ->during('refreshUser', [new User('foo', 'bar')]);
+            ->during('refreshUser', [new InMemoryUser('foo', 'bar')]);
 
         $this
             ->refreshUser($user)

@@ -256,21 +256,6 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('uid');
     }
 
-    /**
-     * @deprecated use getUserIdentifier() instead
-     */
-    public function getUser(): string
-    {
-        trigger_deprecation(
-            'ecphp/eu-login-bundle',
-            '2.2.3',
-            'The method "%s::getUser()" is deprecated, use %s::getUserIdentifier() instead.',
-            EuLoginUser::class
-        );
-
-        return $this->user->getUsername();
-    }
-
     public function getUserIdentifier()
     {
         return $this->user->getUserIdentifier();
