@@ -18,7 +18,7 @@
         "ext-simplexml": "*",
         "ecphp/cas-bundle": "dev-master",
         "ecphp/ecas": "^2",
-        "symfony/framework-bundle": "^5.4"
+        "symfony/framework-bundle": "^5.4 || ^6"
     },
     "require-dev": {
         "ext-xdebug": "*",
@@ -28,8 +28,8 @@
         "infection/phpspec-adapter": "^0.1.2",
         "nyholm/psr7": "^1.5",
         "phpspec/phpspec": "^7",
-        "symfony/http-client": "^5.4",
-        "symfony/security-core": "^5.4"
+        "symfony/http-client": "^5.4 || ^6",
+        "symfony/security-core": "^5.4 || ^6"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
