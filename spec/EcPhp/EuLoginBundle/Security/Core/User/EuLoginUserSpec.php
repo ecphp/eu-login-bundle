@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace spec\EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUser;
-use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
 use EcPhp\CasLib\Introspection\Introspector;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUser;
 use Nyholm\Psr7\Response;
@@ -165,7 +164,7 @@ class EuLoginUserSpec extends ObjectBehavior
             ->shouldReturn('proxyGrantingProtocol');
     }
 
-    public function it_can_get_the_attributes_only(CasUserInterface $user)
+    public function it_can_get_the_attributes_only()
     {
         $this
             ->getAttributes()
