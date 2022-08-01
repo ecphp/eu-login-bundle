@@ -11,13 +11,9 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use EcPhp\CasBundle\Security\Core\User\CasUserProvider;
-use EcPhp\CasLib\Contract\CasInterface;
-use EcPhp\CasLib\Contract\Configuration\PropertiesInterface;
-use EcPhp\CasLib\Contract\Response\Factory\ServiceValidateFactory as FactoryServiceValidateFactory;
 use EcPhp\Ecas\Ecas;
 use EcPhp\Ecas\EcasProperties;
-use EcPhp\Ecas\Response\Factory\ServiceValidateFactory;
+use EcPhp\Ecas\Introspection\EcasIntrospector;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider;
 
 return static function (ContainerConfigurator $container) {
@@ -29,21 +25,21 @@ return static function (ContainerConfigurator $container) {
         ->autowire(true);
 
     $services
-        ->set(EuLoginUserProvider::class)
-        ->arg('$casUserProvider', service(CasUserProvider::class));
+        ->set('ecas.introspector', EcasIntrospector::class)
+        ->decorate('cas.introspector')
+        ->arg('$introspector', service('ecas.introspector.inner'));
 
     $services
-        ->set(EcasProperties::class)
-        ->decorate(PropertiesInterface::class)
-        ->arg('$casProperties', service('.inner'));
+        ->set('eulogin.userprovider', EuLoginUserProvider::class)
+        ->arg('$casUserProvider', service('cas.userprovider'));
 
     $services
-        ->set(ServiceValidateFactory::class)
-        ->decorate(FactoryServiceValidateFactory::class)
-        ->arg('$serviceValidateFactory', service('.inner'));
+        ->set('ecas.configuration', EcasProperties::class)
+        ->decorate('cas.configuration')
+        ->arg('$casProperties', service('ecas.configuration.inner'));
 
     $services
-        ->set(Ecas::class)
-        ->decorate(CasInterface::class)
-        ->arg('$cas', service('.inner'));
+        ->set('ecas', Ecas::class)
+        ->decorate('cas')
+        ->arg('$cas', service('ecas.inner'));
 };

@@ -12,16 +12,8 @@ declare(strict_types=1);
 namespace spec\EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUser;
-use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
-use EcPhp\CasLib\Response\CasResponseBuilder;
-use EcPhp\CasLib\Response\Factory\AuthenticationFailureFactory;
-use EcPhp\CasLib\Response\Factory\ProxyFactory;
-use EcPhp\CasLib\Response\Factory\ProxyFailureFactory;
-use EcPhp\CasLib\Response\Factory\ServiceValidateFactory as FactoryServiceValidateFactory;
-use EcPhp\Ecas\Response\Factory\ServiceValidateFactory;
+use EcPhp\CasLib\Introspection\Introspector;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUser;
-use loophp\psr17\Psr17;
-use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7\Response;
 use PhpSpec\ObjectBehavior;
 
@@ -50,18 +42,8 @@ class EuLoginUserSpec extends ObjectBehavior
             </cas:serviceResponse>
             EOF;
 
-        $psr17f = new Psr17Factory();
-        $psr17 = new Psr17($psr17f, $psr17f, $psr17f, $psr17f, $psr17f, $psr17f);
         $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
-        $responseBuilder = new CasResponseBuilder(
-            new AuthenticationFailureFactory(),
-            new ProxyFactory(),
-            new ProxyFailureFactory(),
-            new ServiceValidateFactory(new FactoryServiceValidateFactory(), $psr17)
-        );
-        $data = $responseBuilder
-            ->fromResponse($response)
-            ->toArray()['serviceResponse']['authenticationSuccess'];
+        $data = (new Introspector())->parse($response)['serviceResponse']['authenticationSuccess'];
 
         $casUser = new CasUser($data);
 
@@ -182,7 +164,7 @@ class EuLoginUserSpec extends ObjectBehavior
             ->shouldReturn('proxyGrantingProtocol');
     }
 
-    public function it_can_get_the_attributes_only(CasUserInterface $user)
+    public function it_can_get_the_attributes_only()
     {
         $this
             ->getAttributes()
@@ -313,22 +295,10 @@ class EuLoginUserSpec extends ObjectBehavior
             </cas:serviceResponse>
             EOF;
 
-        $psr17f = new Psr17Factory();
-        $psr17 = new Psr17($psr17f, $psr17f, $psr17f, $psr17f, $psr17f, $psr17f);
         $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
-        $responseBuilder = new CasResponseBuilder(
-            new AuthenticationFailureFactory(),
-            new ProxyFactory(),
-            new ProxyFailureFactory(),
-            new ServiceValidateFactory(new FactoryServiceValidateFactory(), $psr17)
-        );
+        $data = (new Introspector())->parse($response)['serviceResponse']['authenticationSuccess'];
 
-        $data = $responseBuilder
-            ->fromResponse($response)
-            ->getCredentials();
-
-        $this
-            ->beConstructedWith(new CasUser($data));
+        $this->beConstructedWith(new CasUser($data));
     }
 
     private function getAttributesData(): array
@@ -407,7 +377,6 @@ class EuLoginUserSpec extends ObjectBehavior
             'proxyGrantingProtocol' => 'proxyGrantingProtocol',
             'timeZone' => 'timeZone',
             'userManager' => 'userManager',
-            'foo' => 'bar',
         ];
     }
 }

@@ -18,9 +18,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class EuLoginExtension extends Extension
 {
-    /**
-     * @param array<string> $configs
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         // Load EU Login services.
