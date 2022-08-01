@@ -16,8 +16,8 @@
         "php": ">= 7.4",
         "ext-json": "*",
         "ext-simplexml": "*",
-        "ecphp/cas-bundle": "dev-refactor/symfony-gte-54",
-        "ecphp/ecas": "dev-refactor/version-3",
+        "ecphp/cas-bundle": "dev-master",
+        "ecphp/ecas": "^2",
         "symfony/framework-bundle": "^5.4"
     },
     "require-dev": {
