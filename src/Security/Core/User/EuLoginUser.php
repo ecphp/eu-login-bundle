@@ -344,6 +344,7 @@ final class EuLoginUser implements EuLoginUserInterface
             'ecphp/eu-login-bundle',
             '2.2.3',
             'The method "%s::getUser()" is deprecated, use %s::getUsername() instead.',
+            EuLoginUser::class,
             EuLoginUser::class
         );
 
