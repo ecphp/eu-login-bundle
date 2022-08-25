@@ -21,14 +21,16 @@ use function get_class;
 
 final class EuLoginUserProvider implements CasUserProviderInterface
 {
-    /**
-     * @var CasUserProviderInterface
-     */
-    private $casUserProvider;
+    private CasUserProviderInterface $casUserProvider;
 
     public function __construct(CasUserProviderInterface $casUserProvider)
     {
         $this->casUserProvider = $casUserProvider;
+    }
+
+    public function loadUserByIdentifier($identifier)
+    {
+        throw new UnsupportedUserException('Unsupported operation.');
     }
 
     public function loadUserByResponse(ResponseInterface $response): CasUserInterface

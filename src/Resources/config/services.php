@@ -16,7 +16,7 @@ use EcPhp\Ecas\EcasProperties;
 use EcPhp\Ecas\Introspection\EcasIntrospector;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $services = $container->services();
 
     $services
@@ -32,6 +32,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('eulogin.userprovider', EuLoginUserProvider::class)
         ->arg('$casUserProvider', service('cas.userprovider'));
+    $services->alias(EuLoginUserProvider::class, 'eulogin.userprovider');
 
     $services
         ->set('ecas.configuration', EcasProperties::class)
