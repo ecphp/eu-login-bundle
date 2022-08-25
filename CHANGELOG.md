@@ -5,10 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.3.9](https://github.com/ecphp/eu-login-bundle/compare/2.3.8...2.3.9)
+## [2.4.0](https://github.com/ecphp/eu-login-bundle/compare/2.3.9...2.4.0)
+
+### Merged
+
+- Bump actions/cache from 2.1.7 to 3 [`#39`](https://github.com/ecphp/eu-login-bundle/pull/39)
+- Bump actions/cache from 2.1.6 to 2.1.7 [`#38`](https://github.com/ecphp/eu-login-bundle/pull/38)
 
 ### Commits
 
+- ci: Update workflows. [`109d0eb`](https://github.com/ecphp/eu-login-bundle/commit/109d0ebbcf498c664e80db32bc9a399bc1ef2682)
+- refactor: Update minor things. [`14bdb91`](https://github.com/ecphp/eu-login-bundle/commit/14bdb9165c3d2ac60a92008828114729f74dda05)
+- chore: Align static files. [`06bf12c`](https://github.com/ecphp/eu-login-bundle/commit/06bf12c822597a0c9b74f251b2057afd219e5001)
+- docs: Update documentation. [`0ecd91e`](https://github.com/ecphp/eu-login-bundle/commit/0ecd91e68cda920132488c1780b95eb2c15f0845)
+- refactor: Update for Symfony &gt;= 5.4. [`fa5b2dc`](https://github.com/ecphp/eu-login-bundle/commit/fa5b2dc59a9c9cf5a0d3abeb5212645f2463666a)
+- chore: Remove docker stuff, replace with `.envrc`. [`2eb1f48`](https://github.com/ecphp/eu-login-bundle/commit/2eb1f48d852475ac8188c253154b515a02ceb988)
+- chore: Update licence holder. [`99130b7`](https://github.com/ecphp/eu-login-bundle/commit/99130b7d116e5002bbb95460c9bce389d0dcdc28)
+- chore: Normalize `composer.json`. [`f93945f`](https://github.com/ecphp/eu-login-bundle/commit/f93945f5b3b2419f567db34a6817138f1cd2766a)
+
+## [2.3.9](https://github.com/ecphp/eu-login-bundle/compare/2.3.8...2.3.9) - 2021-11-12
+
+### Commits
+
+- docs: Add/update CHANGELOG. [`076c736`](https://github.com/ecphp/eu-login-bundle/commit/076c73638d0b5b91e4b2665b0a59e665d10e5145)
 - fix: Add missing methods. [`09d24cb`](https://github.com/ecphp/eu-login-bundle/commit/09d24cb5f15e45ade4522015d30ddce2333f3b82)
 - chore: Add missing dev package. [`11ba629`](https://github.com/ecphp/eu-login-bundle/commit/11ba6291cdfc493742c4287360c43f5ef21e3741)
 
@@ -184,7 +203,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use decorator pattern. [`314975a`](https://github.com/ecphp/eu-login-bundle/commit/314975a5e603a0bbaf23d4a0de6c0343a7c9041a)
 - Update composer.json. [`d6d12ff`](https://github.com/ecphp/eu-login-bundle/commit/d6d12ffc1413bbe88ddc46e930d08a7488ff1d5a)
 
-## [2.0.0](https://github.com/ecphp/eu-login-bundle/compare/1.3.6...2.0.0) - 2020-01-31
+## [2.0.0](https://github.com/ecphp/eu-login-bundle/compare/1.3.7...2.0.0) - 2020-01-31
 
 ### Merged
 
@@ -205,6 +224,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update composer.json file. [`4cfcbf3`](https://github.com/ecphp/eu-login-bundle/commit/4cfcbf3b88f3a026065230026fcaa42eb0add7a0)
 - Remove obsolete tests. [`5291260`](https://github.com/ecphp/eu-login-bundle/commit/52912606035e542c32bf2e1a5862fbb5edae6056)
 - Remove Travis, use Github actions. [`f5448d2`](https://github.com/ecphp/eu-login-bundle/commit/f5448d24ee5c0e4ef4a9d41c09b4050f0be40fee)
+
+## [1.3.7](https://github.com/ecphp/eu-login-bundle/compare/1.3.6...1.3.7) - 2022-08-22
+
+### Merged
+
+- fix: add missing arg to trigger_deprecation call [`#41`](https://github.com/ecphp/eu-login-bundle/pull/41)
+
+### Commits
+
+- chore: Update `composer.json`. [`7caa3dd`](https://github.com/ecphp/eu-login-bundle/commit/7caa3dd78e63b041e684b95e49e6dc579cb49f77)
+- docs: Update link to ecphp/cas-bundle documentation. [`804b995`](https://github.com/ecphp/eu-login-bundle/commit/804b99536621418483ebb802fb46418f4682f0a2)
 
 ## [1.3.6](https://github.com/ecphp/eu-login-bundle/compare/1.3.5...1.3.6) - 2020-10-05
 
