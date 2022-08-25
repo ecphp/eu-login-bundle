@@ -1,6 +1,6 @@
 {
     "name": "ecphp/eu-login-bundle",
-    "description": "A bundle for Symfony 4 & 5, providing authentication against European Commission authentication service.",
+    "description": "A bundle for Symfony 5 & 6, providing authentication against European Commission authentication service.",
     "license": "BSD-3-Clause",
     "type": "symfony-bundle",
     "keywords": [
@@ -13,20 +13,22 @@
         "sso"
     ],
     "require": {
-        "php": ">= 7.2.5",
+        "php": ">= 7.4",
         "ext-json": "*",
         "ext-simplexml": "*",
-        "ecphp/cas-bundle": "2.2.* || ^2.3",
-        "ecphp/ecas": "2.1.*",
-        "symfony/framework-bundle": "^5.1"
+        "ecphp/cas-bundle": "2.4.*",
+        "ecphp/ecas": "2.2.*",
+        "symfony/framework-bundle": "^5.4"
     },
     "require-dev": {
+        "ext-pcov": "*",
         "ecphp/php-conventions": "^1",
-        "friends-of-phpspec/phpspec-code-coverage": "^6.1.0",
-        "infection/infection": "^0.24.0",
-        "infection/phpspec-adapter": "^0.1.2",
+        "friends-of-phpspec/phpspec-code-coverage": "^6",
+        "infection/infection": "^0.24",
+        "infection/phpspec-adapter": "^0.1",
+        "nyholm/psr7": "^1.5",
         "phpspec/phpspec": "^7",
-        "symfony/security-core": "^5.3"
+        "symfony/security-core": "^5.4"
     },
     "autoload": {
         "psr-4": {
@@ -43,8 +45,8 @@
         }
     },
     "scripts": {
-        "changelog-unreleased": "auto_changelog -c .auto-changelog -u",
-        "changelog-version": "auto_changelog -c .auto-changelog -v",
+        "changelog-unreleased": "auto-changelog -c .auto-changelog -u",
+        "changelog-version": "auto-changelog -c .auto-changelog -v",
         "grumphp": "./vendor/bin/grumphp run"
     }
 }

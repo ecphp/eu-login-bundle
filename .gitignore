@@ -4,3 +4,5 @@
 /vendor/
 /.php_cs.cache
 /composer.lock
+/phpspec.yml
+
