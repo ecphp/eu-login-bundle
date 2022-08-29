@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.4.0](https://github.com/ecphp/eu-login-bundle/compare/2.3.9...2.4.0)
+## [2.5.0](https://github.com/ecphp/eu-login-bundle/compare/2.4.0...2.5.0)
+
+### Commits
+
+- chore: Prettify codebase. [`518f195`](https://github.com/ecphp/eu-login-bundle/commit/518f195491e0130a023bfdbb3c7802c516479f68)
+- refactor: Update codebase for PHP 8 and Symfony 6. [`a0e10f6`](https://github.com/ecphp/eu-login-bundle/commit/a0e10f6608e8ac34e06290cbbd83a1689c0df658)
+- ci: Add `prettier` workflow. [`9de0a39`](https://github.com/ecphp/eu-login-bundle/commit/9de0a394739e8649d8ecae76f16ec76b9c3bf1d1)
+
+## [2.4.0](https://github.com/ecphp/eu-login-bundle/compare/2.3.9...2.4.0) - 2022-08-25
 
 ### Merged
 
@@ -14,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Commits
 
+- docs: Add changelog. [`0f408cc`](https://github.com/ecphp/eu-login-bundle/commit/0f408ccb0e394084851199fbfbe73662b0f8cdf1)
 - ci: Update workflows. [`109d0eb`](https://github.com/ecphp/eu-login-bundle/commit/109d0ebbcf498c664e80db32bc9a399bc1ef2682)
 - refactor: Update minor things. [`14bdb91`](https://github.com/ecphp/eu-login-bundle/commit/14bdb9165c3d2ac60a92008828114729f74dda05)
 - chore: Align static files. [`06bf12c`](https://github.com/ecphp/eu-login-bundle/commit/06bf12c822597a0c9b74f251b2057afd219e5001)
