@@ -10,6 +10,6 @@
 
 # EU Login bundle
 
-EU Login bundle for Symfony 4 & 5.
+EU Login bundle for Symfony.
 
 Read more on the dedicated documentation site: https://ecphp-eu-login-bundle.readthedocs.io/

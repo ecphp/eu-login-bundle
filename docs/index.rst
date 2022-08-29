@@ -1,7 +1,7 @@
 EU Login Bundle
 ===============
 
-A Central Authentication Service bundle for Symfony 4.
+A Central Authentication Service bundle for Symfony.
 
 The Central Authentication Service (CAS) is an Open-Source single sign-on protocol for the web.
 Its purpose is to permit a user to access multiple applications while providing their credentials only once.
