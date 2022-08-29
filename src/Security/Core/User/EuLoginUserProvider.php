@@ -28,7 +28,7 @@ final class EuLoginUserProvider implements CasUserProviderInterface
         $this->casUserProvider = $casUserProvider;
     }
 
-    public function loadUserByIdentifier($identifier)
+    public function loadUserByIdentifier($identifier): UserInterface
     {
         throw new UnsupportedUserException('Unsupported operation.');
     }

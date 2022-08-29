@@ -197,7 +197,7 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('proxyGrantingProtocol');
     }
 
-    public function getRoles()
+    public function getRoles(): array
     {
         $default = ['ROLE_CAS_AUTHENTICATED'];
 
@@ -256,7 +256,7 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('uid');
     }
 
-    public function getUserIdentifier()
+    public function getUserIdentifier(): string
     {
         return $this->user->getUserIdentifier();
     }
@@ -266,22 +266,7 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('userManager');
     }
 
-    /**
-     * @deprecated since Symfony 5.3, use getUserIdentifier() instead
-     */
-    public function getUsername()
-    {
-        trigger_deprecation(
-            'ecphp/eu-login-bundle',
-            '2.3.8',
-            'The method "%s::getUsername()" is deprecated, use %s::getUserIdentifier() instead.',
-            EuLoginUser::class
-        );
-
-        return $this->user->getUsername();
-    }
-
-    public function isEqualTo(UserInterface $user)
+    public function isEqualTo(UserInterface $user): bool
     {
         return $this->user->isEqualTo($user);
     }
