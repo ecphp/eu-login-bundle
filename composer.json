@@ -1,6 +1,6 @@
 {
     "name": "ecphp/eu-login-bundle",
-    "description": "A bundle for Symfony 4 & 5, providing authentication against European Commission authentication service.",
+    "description": "A bundle for Symfony, providing authentication against European Commission authentication service.",
     "license": "BSD-3-Clause",
     "type": "symfony-bundle",
     "keywords": [
@@ -21,7 +21,7 @@
         "symfony/framework-bundle": "^5.4 || ^6"
     },
     "require-dev": {
-        "ext-xdebug": "*",
+        "ext-pcov": "*",
         "ecphp/php-conventions": "^1",
         "friends-of-phpspec/phpspec-code-coverage": "^6",
         "infection/infection": "^0.24.0",
