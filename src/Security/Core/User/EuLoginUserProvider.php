@@ -13,7 +13,7 @@ namespace EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
 use EcPhp\CasBundle\Security\Core\User\CasUserProviderInterface;
-use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -21,13 +21,11 @@ use function get_class;
 
 final class EuLoginUserProvider implements CasUserProviderInterface
 {
-    /**
-     * @var CasUserProviderInterface
-     */
-    private $casUserProvider;
+    private CasUserProviderInterface $casUserProvider;
 
-    public function __construct(CasUserProviderInterface $casUserProvider)
-    {
+    public function __construct(
+        CasUserProviderInterface $casUserProvider
+    ) {
         $this->casUserProvider = $casUserProvider;
     }
 
@@ -36,7 +34,7 @@ final class EuLoginUserProvider implements CasUserProviderInterface
         throw new UnsupportedUserException('Unsupported operation.');
     }
 
-    public function loadUserByResponse(ResponseInterface $response): CasUserInterface
+    public function loadUserByResponse(Response $response): CasUserInterface
     {
         return new EuLoginUser($this->casUserProvider->loadUserByResponse($response));
     }

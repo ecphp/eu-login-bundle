@@ -11,9 +11,11 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use EcPhp\CasBundle\Cas\SymfonyCasInterface;
+use EcPhp\CasBundle\Security\Core\User\CasUserProviderInterface;
+use EcPhp\CasLib\Contract\Configuration\PropertiesInterface;
 use EcPhp\Ecas\Ecas;
 use EcPhp\Ecas\EcasProperties;
-use EcPhp\Ecas\Introspection\EcasIntrospector;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider;
 
 return static function (ContainerConfigurator $container) {
@@ -25,21 +27,17 @@ return static function (ContainerConfigurator $container) {
         ->autowire(true);
 
     $services
-        ->set('ecas.introspector', EcasIntrospector::class)
-        ->decorate('cas.introspector')
-        ->arg('$introspector', service('ecas.introspector.inner'));
+        ->set(EuLoginUserProvider::class)
+        ->decorate(CasUserProviderInterface::class)
+        ->arg('$casUserProvider', service('.inner'));
 
     $services
-        ->set('eulogin.userprovider', EuLoginUserProvider::class)
-        ->arg('$casUserProvider', service('cas.userprovider'));
+        ->set(EcasProperties::class)
+        ->decorate(PropertiesInterface::class)
+        ->arg('$casProperties', service('.inner'));
 
     $services
-        ->set('ecas.configuration', EcasProperties::class)
-        ->decorate('cas.configuration')
-        ->arg('$casProperties', service('ecas.configuration.inner'));
-
-    $services
-        ->set('ecas', Ecas::class)
-        ->decorate('cas')
-        ->arg('$cas', service('ecas.inner'));
+        ->set(Ecas::class)
+        ->decorate(SymfonyCasInterface::class)
+        ->arg('$cas', service('.inner'));
 };

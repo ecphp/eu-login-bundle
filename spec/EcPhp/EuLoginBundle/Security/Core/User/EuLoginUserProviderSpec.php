@@ -11,14 +11,22 @@ declare(strict_types=1);
 
 namespace spec\EcPhp\EuLoginBundle\Security\Core\User;
 
+use EcPhp\CasBundle\Cas\SymfonyCasResponseBuilder;
 use EcPhp\CasBundle\Security\Core\User\CasUserProvider;
-use EcPhp\CasLib\Introspection\Introspector;
-use EcPhp\Ecas\Introspection\EcasIntrospector;
+use EcPhp\CasLib\Response\CasResponseBuilder;
+use EcPhp\CasLib\Response\Factory\AuthenticationFailureFactory;
+use EcPhp\CasLib\Response\Factory\ProxyFactory;
+use EcPhp\CasLib\Response\Factory\ProxyFailureFactory;
+use EcPhp\CasLib\Response\Factory\ServiceValidateFactory as FactoryServiceValidateFactory;
+use EcPhp\Ecas\Response\Factory\ServiceValidateFactory;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUser;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserInterface;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider;
-use Nyholm\Psr7\Response;
+use loophp\psr17\Psr17;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use PhpSpec\ObjectBehavior;
+use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\InMemoryUser;
 
@@ -38,7 +46,7 @@ class EuLoginUserProviderSpec extends ObjectBehavior
     public function it_can_load_a_user_from_a_response(): void
     {
         // TestBody1
-        $response = new Response(200, ['content-type' => 'application/xml'], $this->getTestBody1());
+        $response = new Response($this->getTestBody1(), 200, ['content-type' => 'application/xml']);
 
         $user = $this->loadUserByResponse($response);
 
@@ -143,7 +151,7 @@ class EuLoginUserProviderSpec extends ObjectBehavior
             ]);
 
         // TestBody2
-        $response = new Response(200, ['content-type' => 'application/xml'], $this->getTestBody2());
+        $response = new Response($this->getTestBody2(), 200, ['content-type' => 'application/xml']);
 
         $user = $this->loadUserByResponse($response);
 
@@ -256,8 +264,29 @@ class EuLoginUserProviderSpec extends ObjectBehavior
 
     public function let()
     {
+        $psr17Factory = new Psr17Factory();
+
+        $psr17 = new Psr17($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
+
+        $casResponseBuilder = new CasResponseBuilder(
+            new AuthenticationFailureFactory(),
+            new ProxyFactory(),
+            new ProxyFailureFactory(),
+            new ServiceValidateFactory(new FactoryServiceValidateFactory(), $psr17)
+        );
+
+        $psrHttpFactory = new PsrHttpFactory(
+            $psr17Factory,
+            $psr17Factory,
+            $psr17Factory,
+            $psr17Factory
+        );
+
         $this
-            ->beConstructedWith(new CasUserProvider(new EcasIntrospector(new Introspector())));
+            ->beConstructedWith(
+                new CasUserProvider($casResponseBuilder, $psrHttpFactory),
+                new SymfonyCasResponseBuilder($casResponseBuilder, $psrHttpFactory)
+            );
     }
 
     private function getTestBody1()

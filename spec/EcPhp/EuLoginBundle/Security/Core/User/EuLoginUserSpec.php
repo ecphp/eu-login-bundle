@@ -11,39 +11,49 @@ declare(strict_types=1);
 
 namespace spec\EcPhp\EuLoginBundle\Security\Core\User;
 
+use EcPhp\CasBundle\Cas\SymfonyCasResponseBuilder;
 use EcPhp\CasBundle\Security\Core\User\CasUser;
-use EcPhp\CasLib\Introspection\Introspector;
+use EcPhp\CasLib\Response\CasResponseBuilder;
+use EcPhp\CasLib\Response\Factory\AuthenticationFailureFactory;
+use EcPhp\CasLib\Response\Factory\ProxyFactory;
+use EcPhp\CasLib\Response\Factory\ProxyFailureFactory;
+use EcPhp\CasLib\Response\Factory\ServiceValidateFactory;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUser;
-use Nyholm\Psr7\Response;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use PhpSpec\ObjectBehavior;
+use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
+use Symfony\Component\HttpFoundation\Response;
 
 class EuLoginUserSpec extends ObjectBehavior
 {
     public function it_can_get_groups_when_no_groups_are_available()
     {
-        $body = <<<'EOF'
-            <cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas">
-             <cas:authenticationSuccess>
-              <cas:user>username</cas:user>
-              <cas:foo>bar</cas:foo>
-              <cas:proxies>
-                <cas:proxy>foo</cas:proxy>
-              </cas:proxies>
-              <cas:attributes>
-                  <cas:groups number="0"/>
-                  <cas:extendedAttributes>
-                    <cas:extendedAttribute name="http://stork.eu/motherInLawDogName">
-                        <cas:attributeValue>rex</cas:attributeValue>
-                        <cas:attributeValue>snoopy</cas:attributeValue>
-                    </cas:extendedAttribute>
-                  </cas:extendedAttributes>
-              </cas:attributes>
-             </cas:authenticationSuccess>
-            </cas:serviceResponse>
-            EOF;
-
-        $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
-        $data = (new Introspector())->parse($response)['serviceResponse']['authenticationSuccess'];
+        $data = [
+            'user' => 'username',
+            'foo' => 'bar',
+            'proxies' => [
+                'proxy' => 'foo',
+            ],
+            'attributes' => [
+                'groups' => [
+                    '@value' => '',
+                    '@attributes' => [
+                        'number' => '0',
+                    ],
+                ],
+                'extendedAttributes' => [
+                    'extendedAttribute' => [
+                        'attributeValue' => [
+                            0 => 'rex',
+                            1 => 'snoopy',
+                        ],
+                        '@attributes' => [
+                            'name' => 'http://stork.eu/motherInLawDogName',
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $casUser = new CasUser($data);
 
@@ -53,6 +63,9 @@ class EuLoginUserSpec extends ObjectBehavior
         $this
             ->getGroups()
             ->shouldReturn([]);
+        $this
+            ->getUserIdentifier()
+            ->shouldReturn('username');
     }
 
     public function it_can_get_specific_attribute()
@@ -295,10 +308,32 @@ class EuLoginUserSpec extends ObjectBehavior
             </cas:serviceResponse>
             EOF;
 
-        $response = new Response(200, ['Content-Type' => 'application/xml'], $body);
-        $data = (new Introspector())->parse($response)['serviceResponse']['authenticationSuccess'];
+        $response = new Response($body, 200, ['Content-Type' => 'application/xml']);
 
-        $this->beConstructedWith(new CasUser($data));
+        $psr17Factory = new Psr17Factory();
+
+        $casResponseBuilder = new CasResponseBuilder(
+            new AuthenticationFailureFactory(),
+            new ProxyFactory(),
+            new ProxyFailureFactory(),
+            new ServiceValidateFactory()
+        );
+
+        $psrHttpFactory = new PsrHttpFactory(
+            $psr17Factory,
+            $psr17Factory,
+            $psr17Factory,
+            $psr17Factory
+        );
+
+        $symfonyCasResponseBuilder = new SymfonyCasResponseBuilder(
+            $casResponseBuilder,
+            $psrHttpFactory
+        );
+
+        $responseArray = $symfonyCasResponseBuilder->fromResponse($response)->toArray();
+
+        $this->beConstructedWith(new CasUser($responseArray['serviceResponse']['authenticationSuccess']));
     }
 
     private function getAttributesData(): array
