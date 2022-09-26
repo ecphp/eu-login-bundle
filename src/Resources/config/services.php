@@ -14,8 +14,8 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use EcPhp\CasBundle\Cas\SymfonyCasInterface;
 use EcPhp\CasBundle\Security\Core\User\CasUserProviderInterface;
 use EcPhp\CasLib\Contract\Configuration\PropertiesInterface;
-use EcPhp\Ecas\Ecas;
 use EcPhp\Ecas\EcasProperties;
+use EcPhp\EuLoginBundle\Cas\SymfonyECas;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider;
 
 return static function (ContainerConfigurator $container) {
@@ -37,7 +37,7 @@ return static function (ContainerConfigurator $container) {
         ->arg('$casProperties', service('.inner'));
 
     $services
-        ->set(Ecas::class)
+        ->set(SymfonyECas::class)
         ->decorate(SymfonyCasInterface::class)
         ->arg('$cas', service('.inner'));
 };
