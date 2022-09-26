@@ -23,9 +23,8 @@ final class EuLoginUserProvider implements CasUserProviderInterface
 {
     private CasUserProviderInterface $casUserProvider;
 
-    public function __construct(
-        CasUserProviderInterface $casUserProvider
-    ) {
+    public function __construct(CasUserProviderInterface $casUserProvider)
+    {
         $this->casUserProvider = $casUserProvider;
     }
 
@@ -37,11 +36,6 @@ final class EuLoginUserProvider implements CasUserProviderInterface
     public function loadUserByResponse(Response $response): CasUserInterface
     {
         return new EuLoginUser($this->casUserProvider->loadUserByResponse($response));
-    }
-
-    public function loadUserByUsername(string $username)
-    {
-        throw new UnsupportedUserException(sprintf('Username "%s" does not exist.', $username));
     }
 
     public function refreshUser(UserInterface $user)

@@ -23,6 +23,7 @@ use Nyholm\Psr7\Factory\Psr17Factory;
 use PhpSpec\ObjectBehavior;
 use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 class EuLoginUserSpec extends ObjectBehavior
 {
@@ -189,16 +190,8 @@ class EuLoginUserSpec extends ObjectBehavior
         $this->shouldHaveType(EuLoginUser::class);
 
         $this
-            ->getPassword()
-            ->shouldBeNull();
-
-        $this
             ->getPgt()
             ->shouldReturn('proxyGrantingTicket');
-
-        $this
-            ->getSalt()
-            ->shouldBeNull();
 
         $this
             ->getUserIdentifier()
@@ -209,8 +202,8 @@ class EuLoginUserSpec extends ObjectBehavior
             ->shouldReturn('bar');
 
         $this
-            ->eraseCredentials()
-            ->shouldBeNull();
+            ->shouldThrow(UnsupportedUserException::class)
+            ->during('eraseCredentials');
     }
 
     public function let()

@@ -250,11 +250,11 @@ class EuLoginUserProviderSpec extends ObjectBehavior
             ->shouldReturn($user);
     }
 
-    public function it_cannot_load_a_user_by_username()
+    public function it_cannot_load_a_user_by_identifier()
     {
         $this
             ->shouldThrow(UnsupportedUserException::class)
-            ->during('loadUserByUsername', ['foo']);
+            ->during('loadUserByIdentifier', ['foo']);
     }
 
     public function it_is_initializable()
