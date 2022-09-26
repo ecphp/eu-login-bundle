@@ -30,7 +30,7 @@ final class EuLoginUserProvider implements CasUserProviderInterface
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        throw new UnsupportedUserException('Unsupported operation.');
+        return $this->casUserProvider->loadUserByIdentifier($identifier);
     }
 
     public function loadUserByResponse(Response $response): CasUserInterface
@@ -44,7 +44,7 @@ final class EuLoginUserProvider implements CasUserProviderInterface
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
         }
 
-        return $user;
+        return $this->casUserProvider->refreshUser($user);
     }
 
     public function supportsClass(string $class)
