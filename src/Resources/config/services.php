@@ -14,7 +14,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use EcPhp\CasBundle\Cas\SymfonyCasInterface;
 use EcPhp\CasBundle\Security\Core\User\CasUserProviderInterface;
 use EcPhp\CasLib\Contract\Configuration\PropertiesInterface;
+use EcPhp\CasLib\Contract\Response\Factory\ServiceValidateFactory as FactoryServiceValidateFactory;
 use EcPhp\Ecas\EcasProperties;
+use EcPhp\Ecas\Response\Factory\ServiceValidateFactory;
 use EcPhp\EuLoginBundle\Cas\SymfonyECas;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -46,4 +48,9 @@ return static function (ContainerConfigurator $container) {
         ->set(SymfonyECas::class)
         ->decorate(SymfonyCasInterface::class)
         ->arg('$cas', service('.inner'));
+
+    $services
+        ->set(ServiceValidateFactory::class)
+        ->decorate(FactoryServiceValidateFactory::class)
+        ->arg('$serviceValidateFactory', service('.inner'));
 };
