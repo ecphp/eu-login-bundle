@@ -181,11 +181,6 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('orgId');
     }
 
-    public function getPayload(): array
-    {
-        return $this->user->getPayload();
-    }
-
     public function getPgt(): ?string
     {
         return $this->user->getPgt();
