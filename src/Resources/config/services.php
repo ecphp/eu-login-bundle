@@ -17,6 +17,7 @@ use EcPhp\CasLib\Contract\Configuration\PropertiesInterface;
 use EcPhp\Ecas\EcasProperties;
 use EcPhp\EuLoginBundle\Cas\SymfonyECas;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
