@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use function array_key_exists;
@@ -28,7 +27,6 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function eraseCredentials(): void
     {
-        throw new UnsupportedUserException('Unsupported method.');
     }
 
     public function get(string $key, mixed $default = null): mixed

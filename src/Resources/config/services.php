@@ -32,6 +32,11 @@ return static function (ContainerConfigurator $container) {
         ->arg('$casUserProvider', service('.inner'));
 
     $services
+        ->set(EuLoginUserProvider::class)
+        ->decorate(UserProviderInterface::class)
+        ->arg('$casUserProvider', service('.inner'));
+
+    $services
         ->set(EcasProperties::class)
         ->decorate(PropertiesInterface::class)
         ->arg('$casProperties', service('.inner'));
