@@ -17,7 +17,7 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "ecphp/cas-bundle": "^2.5",
-        "ecphp/ecas": "^2.3",
+        "ecphp/ecas": "^2.4",
         "symfony/framework-bundle": "^6.0"
     },
     "require-dev": {
