@@ -5,10 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.5.1](https://code.europa.eu/ecphp/eu-login-bundle/compare/2.5.0...2.5.1)
+## [2.5.2](https://code.europa.eu/ecphp/eu-login-bundle/compare/2.5.1...2.5.2)
 
 ### Commits
 
+- fix: get rid of `XML` data handling in favor of `JSON`. [`c4edf50`](https://code.europa.eu/ecphp/eu-login-bundle/commit/c4edf50954b1b9df37e069a1b2b12ce33b548547)
+- sa: add `psalm` baseline [`7d3bc41`](https://code.europa.eu/ecphp/eu-login-bundle/commit/7d3bc41b6be59d086171549a2ee917f1665fe6c8)
+- chore: use `ecphp/ecas` ^2.4 [`8e15da5`](https://code.europa.eu/ecphp/eu-login-bundle/commit/8e15da518966f4122a770712e6d7ae9a55705fff)
+
+## [2.5.1](https://code.europa.eu/ecphp/eu-login-bundle/compare/2.5.0...2.5.1) - 2022-12-15
+
+### Commits
+
+- docs: Update changelog. [`2c88f16`](https://code.europa.eu/ecphp/eu-login-bundle/commit/2c88f1695c090d4cb4678a59dd93b45055168b95)
 - fix: update services and decorators [`9696d5c`](https://code.europa.eu/ecphp/eu-login-bundle/commit/9696d5ce8e71ff6fd2970275f11bcb5ddee554c2)
 - feat: add `__toString` method to `EuLoginUser`. [`cb1616d`](https://code.europa.eu/ecphp/eu-login-bundle/commit/cb1616defe2a2dcc1b5de19aaf8418d3e1a96456)
 - nix: remove `-nts` prefix [`292eb2c`](https://code.europa.eu/ecphp/eu-login-bundle/commit/292eb2c2be30a052c514bd0a9aedbc4250a721eb)
