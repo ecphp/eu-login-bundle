@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.1.0@4defa177c89397c5e14737a80fe4896584130674">
+  <file src="src/Security/Core/User/EuLoginUser.php">
+    <InvalidReturnStatement occurrences="2">
+      <code>$this-&gt;getAttributes()['extendedAttributes'] ?? []</code>
+      <code>$this-&gt;getAttributes()['groups'] ?? []</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="2">
+      <code>array</code>
+      <code>array</code>
+    </InvalidReturnType>
+  </file>
+</files>
