@@ -27,20 +27,21 @@ return static function (ContainerConfigurator $container): void {
     $services
         ->set('ecas.introspector', EcasIntrospector::class)
         ->decorate('cas.introspector')
-        ->arg('$introspector', service('ecas.introspector.inner'));
+        ->arg('$introspector', service('.inner'));
 
     $services
         ->set('eulogin.userprovider', EuLoginUserProvider::class)
-        ->arg('$casUserProvider', service('cas.userprovider'));
+        ->decorate('cas.userprovider')
+        ->arg('$casUserProvider', service('.inner'));
     $services->alias(EuLoginUserProvider::class, 'eulogin.userprovider');
 
     $services
         ->set('ecas.configuration', EcasProperties::class)
         ->decorate('cas.configuration')
-        ->arg('$casProperties', service('ecas.configuration.inner'));
+        ->arg('$casProperties', service('.inner'));
 
     $services
         ->set('ecas', Ecas::class)
         ->decorate('cas')
-        ->arg('$cas', service('ecas.inner'));
+        ->arg('$cas', service('.inner'));
 };
