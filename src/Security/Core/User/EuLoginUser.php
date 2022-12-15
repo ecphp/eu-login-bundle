@@ -14,8 +14,6 @@ namespace EcPhp\EuLoginBundle\Security\Core\User;
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-use function array_key_exists;
-
 final class EuLoginUser implements EuLoginUserInterface
 {
     private CasUserInterface $user;
@@ -52,35 +50,7 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function getAttributes(): array
     {
-        $attributes = $this->user->getAttributes();
-
-        /** @Todo Ugly. Refactor this when JSON format will be available. */
-        $propertyToMangle = [
-            ['extendedAttributes', 'extendedAttribute'],
-            ['groups', 'group'],
-            ['strengths', 'strength'],
-            ['authenticationFactors', 'authenticationFactor'],
-        ];
-
-        foreach ($propertyToMangle as [$parent, $child]) {
-            if (!array_key_exists($parent, $attributes)) {
-                continue;
-            }
-
-            if (!array_key_exists($child, $attributes[$parent])) {
-                continue;
-            }
-
-            $attributes[$parent][$child] = (array) $attributes[$parent][$child];
-
-            if (array_key_exists(0, $attributes[$parent][$child])) {
-                continue;
-            }
-
-            $attributes[$parent][$child] = [$attributes[$parent][$child]];
-        }
-
-        return $attributes;
+        return $this->user->getAttributes();
     }
 
     public function getAuthenticationFactors(): array
@@ -120,29 +90,7 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function getExtendedAttributes(): array
     {
-        $attributes = $this->getAttributes();
-
-        if (!array_key_exists('extendedAttributes', $attributes)) {
-            return [];
-        }
-
-        $extendedAttributes = $attributes['extendedAttributes'];
-
-        if (!array_key_exists('extendedAttribute', $extendedAttributes)) {
-            return [];
-        }
-
-        $extendedAttributes = $attributes['extendedAttributes']['extendedAttribute'];
-
-        return array_reduce(
-            $extendedAttributes,
-            static function (array $carry, array $item): array {
-                $carry[$item['@attributes']['name']] = $item['attributeValue'];
-
-                return $carry;
-            },
-            []
-        );
+        return $this->getAttributes()['extendedAttributes'] ?? [];
     }
 
     public function getFirstName(): ?string
@@ -152,19 +100,7 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function getGroups(): array
     {
-        $attributes = $this->getAttributes();
-
-        if (!array_key_exists('groups', $attributes)) {
-            return [];
-        }
-
-        $groups = $attributes['groups'];
-
-        if (!array_key_exists('group', $groups)) {
-            return [];
-        }
-
-        return $groups['group'];
+        return $this->getAttributes()['groups'] ?? [];
     }
 
     public function getLastName(): ?string
@@ -204,9 +140,7 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function getRoles(): array
     {
-        $default = ['ROLE_CAS_AUTHENTICATED'];
-
-        return array_merge($this->getGroups(), $default);
+        return array_merge($this->getGroups(), ['ROLE_CAS_AUTHENTICATED']);
     }
 
     public function getSalt()
@@ -221,19 +155,7 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function getStrengths(): array
     {
-        $attributes = $this->getAttributes();
-
-        if (!array_key_exists('strengths', $attributes)) {
-            return [];
-        }
-
-        $strengths = $attributes['strengths'];
-
-        if (!array_key_exists('strength', $strengths)) {
-            return [];
-        }
-
-        return (array) $strengths['strength'];
+        return $this->getAttributes()['strengths'] ?? [];
     }
 
     public function getTelephoneNumber(): ?string
