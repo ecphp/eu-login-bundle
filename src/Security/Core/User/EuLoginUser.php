@@ -25,6 +25,11 @@ final class EuLoginUser implements EuLoginUserInterface
         $this->user = $user;
     }
 
+    public function __toString(): string
+    {
+        return $this->user->__toString();
+    }
+
     public function eraseCredentials(): void
     {
         // null
