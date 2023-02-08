@@ -31,7 +31,8 @@ return static function (ContainerConfigurator $container): void {
 
     $services
         ->set('eulogin.userprovider', EuLoginUserProvider::class)
-        ->arg('$casUserProvider', service('cas.userprovider'));
+        ->decorate('cas.userprovider')
+        ->arg('$casUserProvider', service('.inner'));
     $services->alias(EuLoginUserProvider::class, 'eulogin.userprovider');
 
     $services
