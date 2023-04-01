@@ -7,27 +7,51 @@ cas:
                 - service
                 - renew
                 - gateway
+                - acceptStrengths
             default_parameters:
+                # Comma separated list of user strengths: PASSWORD, MOBILE_APP, PASSWORD_SMS, PASSWORD_TOKEN, PASSWORD_TOKEN_CRAM, PASSWORD_SOFTWARE_TOKEN, PASSWORD_MOBILE_APP, CLIENT_CERT, BASIC
+                # For a mock-up server, use BASIC, default is PASSWORD.
+                acceptStrengths: "PASSWORD"
+                # Redirect the user to this path or URL after authentication.
+                # This could be an URL or a Symfony route.
                 service: cas_bundle_homepage
         serviceValidate:
             allowed_parameters:
-                - service
-                - ticket
+                - assuranceLevel
+                - format
+                - groups
                 - pgtUrl
                 - renew
-                - format
-                - userDetails
+                - service
+                - ticket
                 - ticketTypes
-            path: /serviceValidate
+                - userDetails
+            # Could be /serviceValidate, /strictValidate, /interinstitutionalValidate, /sponsorValidate, /laxValidate
+            # Make sure to read the "ECAS Client Installation and Configuration Guide - Advanced.pdf" before changing those parameters.
+            path: /laxValidate
             default_parameters:
-                userDetails: "true"
+                # Type of assurance level: TOP, HIGH, MEDIUM, LOW
+                # Default is TOP.
+                assuranceLevel: "LOW"
+                # Do not change this parameter, it won't work with ECAS.
                 format: XML
+                # Allowed user groups. "*" means all the groups.
+                groups: "*"
+                # Enable proxy authentication by setting this parameter.
+                # Make sure you know what you're doing if you change this parameter.
                 #pgtUrl: cas_bundle_proxy_callback
+                # Comma separated list of allowed ticket types: SERVICE, DESKTOP, PROXY.
+                # Default is SERVICE,PROXY
+                ticketTypes: "SERVICE,PROXY"
+                # Boolean. If true, all the user fields will be retrieved from ECAS.
+                userDetails: "true"
         logout:
             path: /logout
             allowed_parameters:
                 - service
             default_parameters:
+                # Redirect the user to this path or URL after logout.
+                # This could be an URL or a Symfony route.
                 service: cas_bundle_homepage
         proxy:
             path: /proxy
@@ -37,12 +61,29 @@ cas:
         proxyValidate:
             path: /proxyValidate
             allowed_parameters:
+                - assuranceLevel
+                - format
+                - groups
+                - pgtUrl
+                - renew
                 - service
                 - ticket
+                - ticketTypes
                 - userDetails
-                - pgtUrl
-                - format
+                - userStrengths
             default_parameters:
-                userDetails: "true"
+                # Type of assurance level: TOP, HIGH, MEDIUM, LOW
+                # Default is LOW.
+                assuranceLevel: "LOW"
+                # Do not change this parameter, it won't work with ECAS.
                 format: XML
+                # Allowed user groups. "*" means all the groups.
+                groups: "*"
+                # Enable proxy authentication by setting this parameter.
+                # Make sure you know what you're doing if you change this parameter.
                 #pgtUrl: cas_bundle_proxy_callback
+                # Comma separated list of allowed ticket types: SERVICE, DESKTOP, PROXY.
+                # Default is SERVICE,PROXY
+                ticketTypes: "SERVICE,PROXY"
+                # Boolean. If true, all the user fields will be retrieved from ECAS.
+                userDetails: "true"
