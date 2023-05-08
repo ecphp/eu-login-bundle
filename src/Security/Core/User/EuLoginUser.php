@@ -12,18 +12,13 @@ declare(strict_types=1);
 namespace EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
-
-use function array_key_exists;
 
 final class EuLoginUser implements EuLoginUserInterface
 {
-    private CasUserInterface $user;
-
-    public function __construct(CasUserInterface $user)
-    {
-        $this->user = $user;
+    public function __construct(
+        private readonly CasUserInterface $user
+    ) {
     }
 
     public function __toString(): string
@@ -33,7 +28,6 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function eraseCredentials(): void
     {
-        throw new UnsupportedUserException('Unsupported method.');
     }
 
     public function get(string $key, mixed $default = null): mixed
@@ -43,149 +37,87 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function getAssuranceLevel(): ?string
     {
-        return $this->user->getAttribute('assuranceLevel');
+        return $this->get('assuranceLevel');
     }
 
     public function getAttribute(string $key, mixed $default = null): mixed
     {
-        return $this->user->getAttribute($key, $default);
-    }
-
-    public function getAttributes(): array
-    {
-        $attributes = $this->user->getAttributes();
-
-        /** @Todo Ugly. Refactor this when JSON format will be available. */
-        $propertyToMangle = [
-            ['extendedAttributes', 'extendedAttribute'],
-            ['groups', 'group'],
-            ['strengths', 'strength'],
-            ['authenticationFactors', 'authenticationFactor'],
-        ];
-
-        foreach ($propertyToMangle as [$parent, $child]) {
-            if (!array_key_exists($parent, $attributes)) {
-                continue;
-            }
-
-            if (!array_key_exists($child, $attributes[$parent])) {
-                continue;
-            }
-
-            $attributes[$parent][$child] = (array) $attributes[$parent][$child];
-
-            if (array_key_exists(0, $attributes[$parent][$child])) {
-                continue;
-            }
-
-            $attributes[$parent][$child] = [$attributes[$parent][$child]];
-        }
-
-        return $attributes;
+        return $this->get($key, $default);
     }
 
     public function getAuthenticationFactors(): array
     {
-        return $this->user->getAttribute('authenticationFactors', []);
+        return $this->get('authenticationFactors', []);
     }
 
     public function getDepartmentNumber(): ?string
     {
-        return $this->user->getAttribute('departmentNumber');
+        return $this->get('departmentNumber');
     }
 
     public function getDomain(): ?string
     {
-        return $this->user->getAttribute('domain');
+        return $this->get('domain');
     }
 
     public function getDomainUsername(): ?string
     {
-        return $this->user->getAttribute('domainUsername');
+        return $this->get('domainUsername');
     }
 
     public function getEmail(): ?string
     {
-        return $this->user->getAttribute('email');
+        return $this->get('email');
     }
 
     public function getEmployeeNumber(): ?string
     {
-        return $this->user->getAttribute('employeeNumber');
+        return $this->get('employeeNumber');
     }
 
     public function getEmployeeType(): ?string
     {
-        return $this->user->getAttribute('employeeType');
+        return $this->get('employeeType');
     }
 
     public function getExtendedAttributes(): array
     {
-        $attributes = $this->getAttributes();
-
-        if (!array_key_exists('extendedAttributes', $attributes)) {
-            return [];
-        }
-
-        $extendedAttributes = $attributes['extendedAttributes'];
-
-        if (!array_key_exists('extendedAttribute', $extendedAttributes)) {
-            return [];
-        }
-
-        $extendedAttributes = $attributes['extendedAttributes']['extendedAttribute'];
-
-        return array_reduce(
-            $extendedAttributes,
-            static function (array $carry, array $item): array {
-                $carry[$item['@attributes']['name']] = $item['attributeValue'];
-
-                return $carry;
-            },
-            []
-        );
+        return $this->get('extendedAttributes', []);
     }
 
     public function getFirstName(): ?string
     {
-        return $this->user->getAttribute('firstName');
+        return $this->get('firstName');
     }
 
     public function getGroups(): array
     {
-        $attributes = $this->getAttributes();
-
-        if (!array_key_exists('groups', $attributes)) {
-            return [];
-        }
-
-        $groups = $attributes['groups'];
-
-        if (!array_key_exists('group', $groups)) {
-            return [];
-        }
-
-        return $groups['group'];
+        return $this->get('groups', []);
     }
 
     public function getLastName(): ?string
     {
-        return $this->user->getAttribute('lastName');
+        return $this->get('lastName');
     }
 
     public function getLocale(): ?string
     {
-        return $this->user->getAttribute('locale');
+        return $this->get('locale');
     }
 
     public function getLoginDate(): ?string
     {
-        return $this->user->getAttribute('loginDate');
+        return $this->get('loginDate');
     }
 
     public function getOrgId(): ?string
     {
-        return $this->user->getAttribute('orgId');
+        return $this->get('orgId');
+    }
+
+    public function getPayload(): array
+    {
+        return $this->user->getPayload();
     }
 
     public function getPgt(): ?string
@@ -195,7 +127,7 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function getProxyGrantingProtocol(): ?string
     {
-        return $this->user->getAttribute('proxyGrantingProtocol');
+        return $this->get('proxyGrantingProtocol');
     }
 
     public function getRoles(): array
@@ -207,49 +139,37 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function getSso(): ?string
     {
-        return $this->user->getAttribute('sso');
+        return $this->get('sso');
     }
 
     public function getStrengths(): array
     {
-        $attributes = $this->getAttributes();
-
-        if (!array_key_exists('strengths', $attributes)) {
-            return [];
-        }
-
-        $strengths = $attributes['strengths'];
-
-        if (!array_key_exists('strength', $strengths)) {
-            return [];
-        }
-
-        return (array) $strengths['strength'];
+        return $this->get('strengths', []);
     }
 
     public function getTelephoneNumber(): ?string
     {
-        return $this->user->getAttribute('telephoneNumber');
+        return $this->get('telephoneNumber');
     }
 
     public function getTeleworkingPriority(): ?string
     {
-        return $this->user->getAttribute('teleworkingPriority');
+        return $this->get('teleworkingPriority');
     }
 
     public function getTicketType(): ?string
     {
-        return $this->user->getAttribute('ticketType');
+        return $this->get('ticketType');
     }
 
     public function getTimeZone(): ?string
     {
-        return $this->user->getAttribute('timeZone');
+        return $this->get('timeZone');
     }
 
     public function getUid(): ?string
     {
-        return $this->user->getAttribute('uid');
+        return $this->get('uid');
     }
 
     public function getUserIdentifier(): string
@@ -259,7 +179,7 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function getUserManager(): ?string
     {
-        return $this->user->getAttribute('userManager');
+        return $this->get('userManager');
     }
 
     public function isEqualTo(UserInterface $user): bool

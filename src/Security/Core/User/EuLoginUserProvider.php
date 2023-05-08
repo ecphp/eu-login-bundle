@@ -21,11 +21,9 @@ use function get_class;
 
 final class EuLoginUserProvider implements CasUserProviderInterface
 {
-    private CasUserProviderInterface $casUserProvider;
-
-    public function __construct(CasUserProviderInterface $casUserProvider)
-    {
-        $this->casUserProvider = $casUserProvider;
+    public function __construct(
+        private readonly CasUserProviderInterface $casUserProvider
+    ) {
     }
 
     public function loadUserByIdentifier(string $identifier): UserInterface

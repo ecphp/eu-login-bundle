@@ -11,11 +11,15 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use EcPhp\CasBundle\Cas\SymfonyCasInterface;
 use EcPhp\CasBundle\Security\Core\User\CasUserProviderInterface;
+use EcPhp\CasLib\Contract\CasInterface;
 use EcPhp\CasLib\Contract\Configuration\PropertiesInterface;
+use EcPhp\CasLib\Contract\Response\CasResponseBuilderInterface;
+use EcPhp\Ecas\Ecas;
 use EcPhp\Ecas\EcasProperties;
-use EcPhp\EuLoginBundle\Cas\SymfonyECas;
+use EcPhp\Ecas\Response\EcasResponseBuilder;
+use EcPhp\Ecas\Service\Fingerprint\DefaultFingerprint;
+use EcPhp\Ecas\Service\Fingerprint\Fingerprint;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider;
 
 return static function (ContainerConfigurator $container): void {
@@ -37,12 +41,16 @@ return static function (ContainerConfigurator $container): void {
         ->arg('$casProperties', service('.inner'));
 
     $services
-        ->set('ecas.configuration', EcasProperties::class)
-        ->decorate('cas.configuration')
-        ->arg('$casProperties', service('ecas.configuration.inner'));
+        ->set(Ecas::class)
+        ->decorate(CasInterface::class)
+        ->arg('$cas', service('.inner'));
 
     $services
-        ->set('ecas', Ecas::class)
-        ->decorate('cas')
-        ->arg('$cas', service('ecas.inner'));
+        ->set(EcasResponseBuilder::class)
+        ->decorate(CasResponseBuilderInterface::class)
+        ->arg('$casResponseBuilder', service('.inner'));
+
+    $services
+        ->set(DefaultFingerprint::class)
+        ->alias(Fingerprint::class, DefaultFingerprint::class);
 };
