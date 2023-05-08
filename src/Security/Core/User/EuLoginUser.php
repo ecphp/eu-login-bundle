@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use function array_key_exists;
@@ -32,10 +33,10 @@ final class EuLoginUser implements EuLoginUserInterface
 
     public function eraseCredentials(): void
     {
-        // null
+        throw new UnsupportedUserException('Unsupported method.');
     }
 
-    public function get(string $key, $default = null)
+    public function get(string $key, mixed $default = null): mixed
     {
         return $this->user->get($key, $default);
     }
@@ -45,7 +46,7 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('assuranceLevel');
     }
 
-    public function getAttribute(string $key, $default = null)
+    public function getAttribute(string $key, mixed $default = null): mixed
     {
         return $this->user->getAttribute($key, $default);
     }
@@ -187,11 +188,6 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->user->getAttribute('orgId');
     }
 
-    public function getPassword()
-    {
-        return null;
-    }
-
     public function getPgt(): ?string
     {
         return $this->user->getPgt();
@@ -207,11 +203,6 @@ final class EuLoginUser implements EuLoginUserInterface
         $default = ['ROLE_CAS_AUTHENTICATED'];
 
         return array_merge($this->getGroups(), $default);
-    }
-
-    public function getSalt()
-    {
-        return null;
     }
 
     public function getSso(): ?string
@@ -269,22 +260,6 @@ final class EuLoginUser implements EuLoginUserInterface
     public function getUserManager(): ?string
     {
         return $this->user->getAttribute('userManager');
-    }
-
-    /**
-     * @deprecated since Symfony 5.3, use getUserIdentifier() instead
-     */
-    public function getUsername()
-    {
-        trigger_deprecation(
-            'ecphp/eu-login-bundle',
-            '2.3.8',
-            'The method "%s::getUsername()" is deprecated, use %s::getUserIdentifier() instead.',
-            EuLoginUser::class,
-            EuLoginUser::class
-        );
-
-        return $this->getUserIdentifier();
     }
 
     public function isEqualTo(UserInterface $user): bool

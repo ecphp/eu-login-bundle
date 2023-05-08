@@ -13,7 +13,7 @@ namespace EcPhp\EuLoginBundle\Security\Core\User;
 
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
 use EcPhp\CasBundle\Security\Core\User\CasUserProviderInterface;
-use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -21,10 +21,7 @@ use function get_class;
 
 final class EuLoginUserProvider implements CasUserProviderInterface
 {
-    /**
-     * @var CasUserProviderInterface
-     */
-    private $casUserProvider;
+    private CasUserProviderInterface $casUserProvider;
 
     public function __construct(CasUserProviderInterface $casUserProvider)
     {
@@ -33,17 +30,12 @@ final class EuLoginUserProvider implements CasUserProviderInterface
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        throw new UnsupportedUserException('Unsupported operation.');
+        return $this->casUserProvider->loadUserByIdentifier($identifier);
     }
 
-    public function loadUserByResponse(ResponseInterface $response): CasUserInterface
+    public function loadUserByResponse(Response $response): CasUserInterface
     {
         return new EuLoginUser($this->casUserProvider->loadUserByResponse($response));
-    }
-
-    public function loadUserByUsername(string $username)
-    {
-        throw new UnsupportedUserException(sprintf('Username "%s" does not exist.', $username));
     }
 
     public function refreshUser(UserInterface $user)
@@ -52,7 +44,7 @@ final class EuLoginUserProvider implements CasUserProviderInterface
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
         }
 
-        return $user;
+        return $this->casUserProvider->refreshUser($user);
     }
 
     public function supportsClass(string $class)
