@@ -21,6 +21,7 @@ use EcPhp\Ecas\Response\EcasResponseBuilder;
 use EcPhp\Ecas\Service\Fingerprint\DefaultFingerprint;
 use EcPhp\Ecas\Service\Fingerprint\Fingerprint;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUserProvider;
+use EcPhp\EuLoginBundle\Security\EcasAuthenticator;
 
 return static function (ContainerConfigurator $container): void {
     $services = $container->services();
@@ -53,4 +54,7 @@ return static function (ContainerConfigurator $container): void {
     $services
         ->set(DefaultFingerprint::class)
         ->alias(Fingerprint::class, DefaultFingerprint::class);
+
+    $services
+        ->set(EcasAuthenticator::class);
 };
