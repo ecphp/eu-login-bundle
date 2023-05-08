@@ -36,7 +36,7 @@ final class EuLoginUserProvider implements CasUserProviderInterface
         return new EuLoginUser($this->casUserProvider->loadUserByResponse($response));
     }
 
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user): UserInterface
     {
         if (!$user instanceof EuLoginUserInterface) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
@@ -45,7 +45,7 @@ final class EuLoginUserProvider implements CasUserProviderInterface
         return $this->casUserProvider->refreshUser($user);
     }
 
-    public function supportsClass(string $class)
+    public function supportsClass(string $class): bool
     {
         return EuLoginUser::class === $class;
     }
