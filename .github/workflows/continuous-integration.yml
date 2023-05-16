@@ -14,7 +14,7 @@ jobs:
             fail-fast: false
             matrix:
                 operating-system: [ubuntu-latest, windows-latest, macOS-latest]
-                php-versions: ["7.4"]
+                php-versions: ["8.1"]
 
         steps:
             - name: Set git to use LF
@@ -24,8 +24,6 @@ jobs:
 
             - name: Checkout
               uses: actions/checkout@master
-              with:
-                  fetch-depth: 1
 
             - name: Install PHP
               uses: shivammathur/setup-php@master
@@ -56,20 +54,7 @@ jobs:
               run: vendor/bin/psalm --shepherd --stats
               continue-on-error: true
 
-            - name: Send Scrutinizer data
-              run: |
-                  wget https://scrutinizer-ci.com/ocular.phar
-                  php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
-              continue-on-error: true
-
             - name: Infection score report
               run: |
                   vendor/bin/infection run -j 2
-              continue-on-error: true
-
-            - name: PHP Insights report
-              run: |
-                  rm -rf composer.lock vendor
-                  composer require nunomaduro/phpinsights --dev
-                  vendor/bin/phpinsights analyse src/ -n
               continue-on-error: true
