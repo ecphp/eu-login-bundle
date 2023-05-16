@@ -14,10 +14,7 @@ namespace EcPhp\EuLoginBundle\Security\Core\User;
 use EcPhp\CasBundle\Security\Core\User\CasUserInterface;
 use EcPhp\CasBundle\Security\Core\User\CasUserProviderInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
-
-use function get_class;
 
 final class EuLoginUserProvider implements CasUserProviderInterface
 {
@@ -38,10 +35,6 @@ final class EuLoginUserProvider implements CasUserProviderInterface
 
     public function refreshUser(UserInterface $user): UserInterface
     {
-        if (!$user instanceof EuLoginUserInterface) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
-        }
-
         return $this->casUserProvider->refreshUser($user);
     }
 

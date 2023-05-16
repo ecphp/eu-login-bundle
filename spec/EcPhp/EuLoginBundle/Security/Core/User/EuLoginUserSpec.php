@@ -11,79 +11,44 @@ declare(strict_types=1);
 
 namespace spec\EcPhp\EuLoginBundle\Security\Core\User;
 
-use EcPhp\CasBundle\Cas\SymfonyCasResponseBuilder;
 use EcPhp\CasBundle\Security\Core\User\CasUser;
 use EcPhp\CasLib\Response\CasResponseBuilder;
-use EcPhp\CasLib\Response\Factory\AuthenticationFailureFactory;
-use EcPhp\CasLib\Response\Factory\ProxyFactory;
-use EcPhp\CasLib\Response\Factory\ProxyFailureFactory;
-use EcPhp\CasLib\Response\Factory\ServiceValidateFactory;
+use EcPhp\Ecas\Response\EcasResponseBuilder;
 use EcPhp\EuLoginBundle\Security\Core\User\EuLoginUser;
-use Nyholm\Psr7\Factory\Psr17Factory;
+use Nyholm\Psr7\Response as Psr7Response;
 use PhpSpec\ObjectBehavior;
-use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 class EuLoginUserSpec extends ObjectBehavior
 {
     public function it_can_get_groups_when_no_groups_are_available()
     {
-        $data = [
-            'user' => 'username',
-            'foo' => 'bar',
-            'proxies' => [
-                'proxy' => 'foo',
-            ],
-            'attributes' => [
-                'groups' => [
-                    '@value' => '',
-                    '@attributes' => [
-                        'number' => '0',
-                    ],
-                ],
-                'extendedAttributes' => [
-                    'extendedAttribute' => [
-                        'attributeValue' => [
-                            0 => 'rex',
-                            1 => 'snoopy',
-                        ],
-                        '@attributes' => [
-                            'name' => 'http://stork.eu/motherInLawDogName',
-                        ],
-                    ],
-                ],
-            ],
-        ];
-
-        $casUser = new CasUser($data);
+        $casUser = new CasUser($this->getResponseBody()['serviceResponse']['authenticationSuccess']);
 
         $this
             ->beConstructedWith($casUser);
 
         $this
             ->getGroups()
-            ->shouldReturn([]);
+            ->shouldReturn(['A', 'B', 'C']);
         $this
             ->getUserIdentifier()
-            ->shouldReturn('username');
+            ->shouldReturn('user');
     }
 
     public function it_can_get_specific_attribute()
     {
         $this
+            ->getPayload()
+            ->shouldReturn($this->getResponseBody()['serviceResponse']['authenticationSuccess']);
+
+        $this
             ->getAssuranceLevel()
-            ->shouldReturn('40');
+            ->shouldReturn('assuranceLevel');
 
         $this
             ->getAuthenticationFactors()
             ->shouldReturn([
-                'moniker' => [
-                    '@value' => 'ecphp@ec.europa.eu',
-                    '@attributes' => [
-                        'number' => '1',
-                    ],
-                ],
+                'moniker' => 'moniker',
             ]);
 
         $this
@@ -117,8 +82,9 @@ class EuLoginUserSpec extends ObjectBehavior
         $this
             ->getGroups()
             ->shouldReturn([
-                'group1',
-                'group2',
+                'A',
+                'B',
+                'C',
             ]);
 
         $this
@@ -139,11 +105,11 @@ class EuLoginUserSpec extends ObjectBehavior
 
         $this
             ->getSso()
-            ->shouldReturn('sso');
+            ->shouldReturn(true);
 
         $this
             ->getStrengths()
-            ->shouldReturn(['strength1']);
+            ->shouldReturn(['A', 'B']);
 
         $this
             ->getTelephoneNumber()
@@ -151,7 +117,7 @@ class EuLoginUserSpec extends ObjectBehavior
 
         $this
             ->getTeleworkingPriority()
-            ->shouldReturn('teleworkingPriority');
+            ->shouldReturn(false);
 
         $this
             ->getTicketType()
@@ -162,27 +128,16 @@ class EuLoginUserSpec extends ObjectBehavior
             ->shouldReturn('uid');
 
         $this
-            ->getAttributes()
-            ->shouldReturn($this->getAttributesData());
-
-        $this
             ->getUserManager()
-            ->shouldReturn('userManager');
+            ->shouldReturn(null);
 
         $this
             ->getTimeZone()
-            ->shouldReturn('timeZone');
+            ->shouldReturn(null);
 
         $this
             ->getProxyGrantingProtocol()
-            ->shouldReturn('proxyGrantingProtocol');
-    }
-
-    public function it_can_get_the_attributes_only()
-    {
-        $this
-            ->getAttributes()
-            ->shouldReturn($this->getAttributesData());
+            ->shouldReturn(null);
     }
 
     public function it_is_initializable()
@@ -195,216 +150,75 @@ class EuLoginUserSpec extends ObjectBehavior
 
         $this
             ->getUserIdentifier()
-            ->shouldReturn('username');
+            ->shouldReturn('user');
 
         $this
             ->get('foo', 'bar')
             ->shouldReturn('bar');
 
         $this
-            ->shouldThrow(UnsupportedUserException::class)
-            ->during('eraseCredentials');
+            ->eraseCredentials()
+            ->shouldReturn(null);
     }
 
     public function let()
     {
-        $body = <<<'EOF'
-            <cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas">
-             <cas:authenticationSuccess>
-              <cas:user>username</cas:user>
-              <cas:foo>bar</cas:foo>
-              <cas:proxies>
-                <cas:proxy>foo</cas:proxy>
-              </cas:proxies>
-              <cas:proxyGrantingTicket>
-                proxyGrantingTicket
-              </cas:proxyGrantingTicket>
-              <cas:attributes>
-                  <cas:departmentNumber>
-                      departmentNumber
-                  </cas:departmentNumber>
-                  <cas:domain>
-                      domain
-                  </cas:domain>
-                  <cas:domainUsername>
-                      domainUsername
-                  </cas:domainUsername>
-                  <cas:email>
-                      email
-                  </cas:email>
-                  <cas:employeeNumber>
-                      employeeNumber
-                  </cas:employeeNumber>
-                  <cas:employeeType>
-                      employeeType
-                  </cas:employeeType>
-                  <cas:firstName>
-                      firstName
-                  </cas:firstName>
-                  <cas:lastName>
-                      lastName
-                  </cas:lastName>
-                  <cas:locale>
-                      locale
-                  </cas:locale>
-                  <cas:loginDate>
-                      loginDate
-                  </cas:loginDate>
-                  <cas:orgId>
-                      orgId
-                  </cas:orgId>
-                  <cas:sso>
-                    sso
-                  </cas:sso>
-                  <cas:strengths number="1">
-                    <cas:strength>strength1</cas:strength>
-                  </cas:strengths>
-                  <cas:telephoneNumber>
-                      telephoneNumber
-                  </cas:telephoneNumber>
-                  <cas:teleworkingPriority>
-                      teleworkingPriority
-                  </cas:teleworkingPriority>
-                  <cas:ticketType>
-                      ticketType
-                  </cas:ticketType>
-                  <cas:uid>
-                      uid
-                  </cas:uid>
-                  <cas:authenticationFactors>
-                    <cas:moniker number="1">
-                        ecphp@ec.europa.eu
-                    </cas:moniker>
-                  </cas:authenticationFactors>
-                  <cas:assuranceLevel>40</cas:assuranceLevel>
-                  <cas:proxyGrantingProtocol>
-                    proxyGrantingProtocol
-                  </cas:proxyGrantingProtocol>
-                  <cas:userManager>
-                      userManager
-                  </cas:userManager>
-                  <cas:timeZone>
-                      timeZone
-                  </cas:timeZone>
-                  <cas:groups number="2">
-                    <cas:group>group1</cas:group>
-                    <cas:group>group2</cas:group>
-                  </cas:groups>
-                  <cas:extendedAttributes>
-                    <cas:extendedAttribute name="http://stork.eu/motherInLawDogName">
-                        <cas:attributeValue>rex</cas:attributeValue>
-                        <cas:attributeValue>snoopy</cas:attributeValue>
-                    </cas:extendedAttribute>
-                  </cas:extendedAttributes>
-              </cas:attributes>
-             </cas:authenticationSuccess>
-            </cas:serviceResponse>
-            EOF;
+        $response = new Psr7Response(200, ['Content-Type' => 'application/json'], $this->makePayload());
 
-        $response = new Response($body, 200, ['Content-Type' => 'application/xml']);
+        $ecasResponseBuilder = new EcasResponseBuilder(new CasResponseBuilder());
 
-        $psr17Factory = new Psr17Factory();
-
-        $casResponseBuilder = new CasResponseBuilder(
-            new AuthenticationFailureFactory(),
-            new ProxyFactory(),
-            new ProxyFailureFactory(),
-            new ServiceValidateFactory()
-        );
-
-        $psrHttpFactory = new PsrHttpFactory(
-            $psr17Factory,
-            $psr17Factory,
-            $psr17Factory,
-            $psr17Factory
-        );
-
-        $symfonyCasResponseBuilder = new SymfonyCasResponseBuilder(
-            $casResponseBuilder,
-            $psrHttpFactory
-        );
-
-        $responseArray = $symfonyCasResponseBuilder->fromResponse($response)->toArray();
+        $responseArray = $ecasResponseBuilder->fromResponse($response)->toArray();
 
         $this->beConstructedWith(new CasUser($responseArray['serviceResponse']['authenticationSuccess']));
     }
 
-    private function getAttributesData(): array
+    private function getResponseBody(): array
     {
-        return [
-            'departmentNumber' => 'departmentNumber',
-            'domain' => 'domain',
-            'domainUsername' => 'domainUsername',
-            'email' => 'email',
-            'employeeNumber' => 'employeeNumber',
-            'employeeType' => 'employeeType',
-            'firstName' => 'firstName',
-            'lastName' => 'lastName',
-            'locale' => 'locale',
-            'loginDate' => 'loginDate',
-            'orgId' => 'orgId',
-            'sso' => 'sso',
-            'strengths' => [
-                'strength' => [
-                    'strength1',
-                ],
-                '@attributes' => [
-                    'number' => '1',
-                ],
-            ],
-            'telephoneNumber' => 'telephoneNumber',
-            'teleworkingPriority' => 'teleworkingPriority',
-            'ticketType' => 'ticketType',
-            'uid' => 'uid',
-            'authenticationFactors' => [
-                'moniker' => [
-                    '@value' => 'ecphp@ec.europa.eu',
-                    '@attributes' => [
-                        'number' => '1',
+        return json_decode($this->makePayload(), true);
+    }
+
+    private function makePayload(): string
+    {
+        return '{
+            "serviceResponse":{
+                "server":"EU Login",
+                "date":"2023-05-16T14:01:39.152+02:00",
+                "version":"8.3",
+                "authenticationSuccess":{
+                    "proxyGrantingTicket":"proxyGrantingTicket",
+                    "user":"user",
+                    "departmentNumber":"departmentNumber",
+                    "email":"email",
+                    "employeeNumber":"employeeNumber",
+                    "employeeType":"employeeType",
+                    "firstName":"firstName",
+                    "lastName":"lastName",
+                    "domain":"domain",
+                    "domainUsername":"domainUsername",
+                    "telephoneNumber":"telephoneNumber",
+                    "locale":"locale",
+                    "assuranceLevel":"assuranceLevel",
+                    "uid":"uid",
+                    "orgId":"orgId",
+                    "teleworkingPriority":false,
+                    "groups":[
+                        "A",
+                        "B",
+                        "C"
                     ],
-                ],
-            ],
-            'assuranceLevel' => '40',
-            'proxyGrantingProtocol' => 'proxyGrantingProcotol',
-            'userManager' => 'userManager',
-            'timeZone' => 'timeZone',
-            'firstName' => 'firstName',
-            'lastName' => 'lastName',
-            'domain' => 'domain',
-            'domainUsername' => 'domainUsername',
-            'telephoneNumber' => 'telephoneNumber',
-            'locale' => 'locale',
-            'uid' => 'uid',
-            'orgId' => 'orgId',
-            'teleworkingPriority' => 'teleworkingPriority',
-            'groups' => [
-                'group' => [
-                    'group1',
-                    'group2',
-                ],
-                '@attributes' => [
-                    'number' => '2',
-                ],
-            ],
-            'extendedAttributes' => [
-                'extendedAttribute' => [
-                    [
-                        'attributeValue' => [
-                            'rex',
-                            'snoopy',
-                        ],
-                        '@attributes' => [
-                            'name' => 'http://stork.eu/motherInLawDogName',
-                        ],
+                    "authenticationLevel":"authenticationLevel",
+                    "strengths":[
+                        "A",
+                        "B"
                     ],
-                ],
-            ],
-            'sso' => 'sso',
-            'ticketType' => 'ticketType',
-            'assuranceLevel' => '40',
-            'proxyGrantingProtocol' => 'proxyGrantingProtocol',
-            'timeZone' => 'timeZone',
-            'userManager' => 'userManager',
-        ];
+                    "authenticationFactors":{
+                        "moniker":"moniker"
+                    },
+                    "loginDate":"loginDate",
+                    "sso":true,
+                    "ticketType":"ticketType"
+                }
+            }
+        }';
     }
 }

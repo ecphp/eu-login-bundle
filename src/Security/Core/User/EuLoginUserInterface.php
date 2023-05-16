@@ -53,7 +53,7 @@ interface EuLoginUserInterface extends CasUserInterface
 
     public function getProxyGrantingProtocol(): ?string;
 
-    public function getSso(): ?string;
+    public function getSso(): ?bool;
 
     /**
      * @return string[]
@@ -62,7 +62,7 @@ interface EuLoginUserInterface extends CasUserInterface
 
     public function getTelephoneNumber(): ?string;
 
-    public function getTeleworkingPriority(): ?string;
+    public function getTeleworkingPriority(): ?bool;
 
     public function getTicketType(): ?string;
 

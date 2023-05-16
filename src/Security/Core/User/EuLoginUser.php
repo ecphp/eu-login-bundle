@@ -40,11 +40,6 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->get('assuranceLevel');
     }
 
-    public function getAttribute(string $key, mixed $default = null): mixed
-    {
-        return $this->get($key, $default);
-    }
-
     public function getAuthenticationFactors(): array
     {
         return $this->get('authenticationFactors', []);
@@ -137,9 +132,9 @@ final class EuLoginUser implements EuLoginUserInterface
         return array_merge($this->getGroups(), $default);
     }
 
-    public function getSso(): ?string
+    public function getSso(): bool
     {
-        return $this->get('sso');
+        return $this->get('sso', false);
     }
 
     public function getStrengths(): array
@@ -152,9 +147,9 @@ final class EuLoginUser implements EuLoginUserInterface
         return $this->get('telephoneNumber');
     }
 
-    public function getTeleworkingPriority(): ?string
+    public function getTeleworkingPriority(): bool
     {
-        return $this->get('teleworkingPriority');
+        return $this->get('teleworkingPriority', false);
     }
 
     public function getTicketType(): ?string
