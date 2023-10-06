@@ -16,13 +16,11 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v4
-              with:
-                  fetch-depth: 1
 
             - name: Determine tag
               id: tag_name
               run: |
-                  echo ::set-output name=current_version::${GITHUB_REF#refs/tags/}
+                  echo "current_version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
               shell: bash
 
             - name: Get Changelog Entry
