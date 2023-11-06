@@ -15,7 +15,7 @@
     "require": {
         "php": ">= 8.1",
         "ext-json": "*",
-        "ecphp/cas-bundle": "dev-master",
+        "ecphp/cas-bundle": "^3",
         "ecphp/ecas": "^4",
         "symfony/framework-bundle": "^6.1"
     },
@@ -28,11 +28,9 @@
         "nyholm/psr7": "^1.8",
         "phpspec/phpspec": "^7",
         "symfony/http-client": "^6.1",
-        "symfony/security-core": "^6.1",
-        "symfony/security-bundle": "^6.1"
+        "symfony/security-bundle": "^6.1",
+        "symfony/security-core": "^6.1"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "EcPhp\\EuLoginBundle\\": "src/"
@@ -48,8 +46,8 @@
         }
     },
     "scripts": {
-        "changelog-unreleased": "auto_changelog -c .auto-changelog -u",
-        "changelog-version": "auto_changelog -c .auto-changelog -v",
+        "changelog-unreleased": "auto-changelog -c .auto-changelog -u",
+        "changelog-version": "auto-changelog -c .auto-changelog -v",
         "grumphp": "./vendor/bin/grumphp run"
     }
 }
