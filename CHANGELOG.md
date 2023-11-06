@@ -5,10 +5,122 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.3.9](https://github.com/ecphp/eu-login-bundle/compare/2.3.8...2.3.9)
+## [3.0.0](https://github.com/ecphp/eu-login-bundle/compare/2.5.2...3.0.0)
+
+### Merged
+
+- chore(deps): Bump actions/checkout from 3 to 4 [`#56`](https://github.com/ecphp/eu-login-bundle/pull/56)
+- chore(deps): Bump cachix/install-nix-action from 20 to 22 [`#54`](https://github.com/ecphp/eu-login-bundle/pull/54)
+- chore(deps): Bump actions/checkout from 2.3.4 to 3.5.0 [`#51`](https://github.com/ecphp/eu-login-bundle/pull/51)
+- chore(deps): Bump cachix/install-nix-action from 19 to 20 [`#49`](https://github.com/ecphp/eu-login-bundle/pull/49)
+- chore(deps): Bump cachix/install-nix-action from 18 to 19 [`#47`](https://github.com/ecphp/eu-login-bundle/pull/47)
+- chore(deps): Bump cachix/install-nix-action from 17 to 18 [`#45`](https://github.com/ecphp/eu-login-bundle/pull/45)
+- Version 2 - Symfony 6 compatibility [`#40`](https://github.com/ecphp/eu-login-bundle/pull/40)
 
 ### Commits
 
+- cs: autofix coding standards [`6293420`](https://github.com/ecphp/eu-login-bundle/commit/6293420ac6c57674a99837a256a0f3f95fd3778d)
+- chore: update `infection` thresholds [`e965f98`](https://github.com/ecphp/eu-login-bundle/commit/e965f980b52468761b41afe258b20c28fbe633ca)
+- chore: switch to `ecphp/cas-bundle` stable [`d7e735f`](https://github.com/ecphp/eu-login-bundle/commit/d7e735f4878f057c7e5db938166038a85164dd4c)
+- ci: bump github actions and align with cas-bundle [`8cf4dc2`](https://github.com/ecphp/eu-login-bundle/commit/8cf4dc28eddcb1f4208165b9f618048618730e8c)
+- chore: bump versions [`db613a2`](https://github.com/ecphp/eu-login-bundle/commit/db613a2f0bdf47578eaf9a865a1f78902628c72d)
+- tests: rewrite [`0a3cad3`](https://github.com/ecphp/eu-login-bundle/commit/0a3cad3c9955fee41bc4fc9f8ac5933f59b81036)
+- chore: cleanup config, remove XML stuff [`309dc3e`](https://github.com/ecphp/eu-login-bundle/commit/309dc3e107636d06907558740a56d0cc0bc3031d)
+- chore: remove `ext-simplexml` requirement [`450648e`](https://github.com/ecphp/eu-login-bundle/commit/450648e516e572a9f23db352422b49a46928b6bd)
+- chore: update license [`b49d985`](https://github.com/ecphp/eu-login-bundle/commit/b49d9859e1f808c691ba1f6ce1f3d8ed4ed0f38f)
+- chore: get rid of scrutinizer [`ae822df`](https://github.com/ecphp/eu-login-bundle/commit/ae822df02e5dace167f7eaf8d361466370bff5d9)
+- add `EcasAuthenticator` decorator [`0336e11`](https://github.com/ecphp/eu-login-bundle/commit/0336e111812c64a91e66c6ba9c7ecd310d60d1ad)
+- refactor: remove deprecations [`f5137ad`](https://github.com/ecphp/eu-login-bundle/commit/f5137ad3ea69079e41d4b55a70d5e3cb3a04b623)
+- fix: update User provider [`7459400`](https://github.com/ecphp/eu-login-bundle/commit/745940003b0ca41e7a464c6eee99a917abc591dd)
+- fix: update services and decorators [`55c2c0f`](https://github.com/ecphp/eu-login-bundle/commit/55c2c0ff9d240f9ad2e561f2f9def721753b8130)
+- feat: add `__toString` method to `EuLoginUser`. [`f14d7c7`](https://github.com/ecphp/eu-login-bundle/commit/f14d7c7840c96b5107b58ec6a762c2cfc2567043)
+- nix: remove `-nts` prefix [`8d7d5a5`](https://github.com/ecphp/eu-login-bundle/commit/8d7d5a5790a1e6bd97d1e33b47108c636d45fa01)
+- Work in progress [`74015e2`](https://github.com/ecphp/eu-login-bundle/commit/74015e26454d748fbb978ab9bb23e838a7355101)
+- work in progress [`25f9d77`](https://github.com/ecphp/eu-login-bundle/commit/25f9d77ac0f2ebd73d3e0465bc8c606f946c4655)
+- work in progress [`f1b3091`](https://github.com/ecphp/eu-login-bundle/commit/f1b30912a0c751c044c851b36d1787787a66d377)
+- work in progress [`0dc18e9`](https://github.com/ecphp/eu-login-bundle/commit/0dc18e9ba8b9e5aa7dcf8c4f489507dbf23afd36)
+- chore: Prettify codebase. [`2ed9a41`](https://github.com/ecphp/eu-login-bundle/commit/2ed9a414f13a32a62bd5c5295418442d079f909b)
+- chore: Prettify codebase. [`110f9a9`](https://github.com/ecphp/eu-login-bundle/commit/110f9a968bf62666ed9d1023e4deee616197088a)
+- fix: Update return types. [`9bf9133`](https://github.com/ecphp/eu-login-bundle/commit/9bf91331b2fda1e4e320ac0d9f579226a2f8e008)
+- chore: Update composer.json. [`17f12de`](https://github.com/ecphp/eu-login-bundle/commit/17f12de628278aa5e6061939f97dd0b742c10f27)
+- Do not update the tests right now. [`5905788`](https://github.com/ecphp/eu-login-bundle/commit/59057887641daadee2a7ec714d7252d4ab01ad59)
+- chore: Update `composer.json`. [`6689c9b`](https://github.com/ecphp/eu-login-bundle/commit/6689c9b88d83d35531a79b810d020a13cd846375)
+- Autofix minor things. [`9f4163f`](https://github.com/ecphp/eu-login-bundle/commit/9f4163f60b9eda40e93931781f061a82bcc5f250)
+- Fix declared services. [`d3cfd3e`](https://github.com/ecphp/eu-login-bundle/commit/d3cfd3e2f1060c65b811a41b33e6b9a62539f413)
+- Fix return types. [`661c6cd`](https://github.com/ecphp/eu-login-bundle/commit/661c6cd5008961dc1b0e94c9b80bfdd6f351c3c6)
+- Version 3 - Use upcoming version of ecas. [`fdcde3f`](https://github.com/ecphp/eu-login-bundle/commit/fdcde3f064f65747713e22eadd220c38a70866e0)
+
+## [2.5.2](https://github.com/ecphp/eu-login-bundle/compare/2.5.1...2.5.2) - 2022-12-15
+
+### Commits
+
+- docs: Update changelog. [`ecf16cc`](https://github.com/ecphp/eu-login-bundle/commit/ecf16cc089fc8a2a49b8d88fc091dfee50126d1a)
+- fix: get rid of `XML` data handling in favor of `JSON`. [`c4edf50`](https://github.com/ecphp/eu-login-bundle/commit/c4edf50954b1b9df37e069a1b2b12ce33b548547)
+- sa: add `psalm` baseline [`7d3bc41`](https://github.com/ecphp/eu-login-bundle/commit/7d3bc41b6be59d086171549a2ee917f1665fe6c8)
+- chore: use `ecphp/ecas` ^2.4 [`8e15da5`](https://github.com/ecphp/eu-login-bundle/commit/8e15da518966f4122a770712e6d7ae9a55705fff)
+
+## [2.5.1](https://github.com/ecphp/eu-login-bundle/compare/2.5.0...2.5.1) - 2022-12-15
+
+### Commits
+
+- docs: Update changelog. [`2c88f16`](https://github.com/ecphp/eu-login-bundle/commit/2c88f1695c090d4cb4678a59dd93b45055168b95)
+- fix: update services and decorators [`9696d5c`](https://github.com/ecphp/eu-login-bundle/commit/9696d5ce8e71ff6fd2970275f11bcb5ddee554c2)
+- feat: add `__toString` method to `EuLoginUser`. [`cb1616d`](https://github.com/ecphp/eu-login-bundle/commit/cb1616defe2a2dcc1b5de19aaf8418d3e1a96456)
+- nix: remove `-nts` prefix [`292eb2c`](https://github.com/ecphp/eu-login-bundle/commit/292eb2c2be30a052c514bd0a9aedbc4250a721eb)
+
+## [2.5.0](https://github.com/ecphp/eu-login-bundle/compare/2.4.2...2.5.0) - 2022-08-29
+
+### Commits
+
+- docs: Update CHANGELOG [`4658319`](https://github.com/ecphp/eu-login-bundle/commit/4658319eb179917c3f8ba8e43faf71cc17a7a469)
+- chore: Prettify codebase. [`518f195`](https://github.com/ecphp/eu-login-bundle/commit/518f195491e0130a023bfdbb3c7802c516479f68)
+- refactor: Update codebase for PHP 8 and Symfony 6. [`a0e10f6`](https://github.com/ecphp/eu-login-bundle/commit/a0e10f6608e8ac34e06290cbbd83a1689c0df658)
+- ci: Add `prettier` workflow. [`9de0a39`](https://github.com/ecphp/eu-login-bundle/commit/9de0a394739e8649d8ecae76f16ec76b9c3bf1d1)
+
+## [2.4.2](https://github.com/ecphp/eu-login-bundle/compare/2.4.1...2.4.2) - 2023-10-23
+
+### Merged
+
+- fix: add missing argument to trigger_deprecation call [`#57`](https://github.com/ecphp/eu-login-bundle/pull/57)
+
+### Commits
+
+- docs: update changelog [`997cc68`](https://github.com/ecphp/eu-login-bundle/commit/997cc68ed60847fb19c82130f60b2383cba31d75)
+
+## [2.4.1](https://github.com/ecphp/eu-login-bundle/compare/2.4.0...2.4.1) - 2023-02-08
+
+### Commits
+
+- docs: Update changelog. [`1dd6c2c`](https://github.com/ecphp/eu-login-bundle/commit/1dd6c2c632d6f8c8b73fddab96621f0c8d36e917)
+- fix: add `__toString` method [`3eca1a5`](https://github.com/ecphp/eu-login-bundle/commit/3eca1a50383b91eddbaccc2802ac789ba8c8d177)
+- chore: update LICENSE file [`d1a24b7`](https://github.com/ecphp/eu-login-bundle/commit/d1a24b7f1398c37e212b596e63db430239034ec7)
+- fix: decorate the `CasUserProvider` properly [`7aa24ee`](https://github.com/ecphp/eu-login-bundle/commit/7aa24eee1b49d91f3b9839ba210a6700478cef43)
+- chore: update Nix development environment [`679a4e4`](https://github.com/ecphp/eu-login-bundle/commit/679a4e46be6ba6c8b5df3699e070f8b231022937)
+
+## [2.4.0](https://github.com/ecphp/eu-login-bundle/compare/2.3.9...2.4.0) - 2022-08-25
+
+### Merged
+
+- Bump actions/cache from 2.1.7 to 3 [`#39`](https://github.com/ecphp/eu-login-bundle/pull/39)
+- Bump actions/cache from 2.1.6 to 2.1.7 [`#38`](https://github.com/ecphp/eu-login-bundle/pull/38)
+
+### Commits
+
+- docs: Add changelog. [`0f408cc`](https://github.com/ecphp/eu-login-bundle/commit/0f408ccb0e394084851199fbfbe73662b0f8cdf1)
+- ci: Update workflows. [`109d0eb`](https://github.com/ecphp/eu-login-bundle/commit/109d0ebbcf498c664e80db32bc9a399bc1ef2682)
+- refactor: Update minor things. [`14bdb91`](https://github.com/ecphp/eu-login-bundle/commit/14bdb9165c3d2ac60a92008828114729f74dda05)
+- chore: Align static files. [`06bf12c`](https://github.com/ecphp/eu-login-bundle/commit/06bf12c822597a0c9b74f251b2057afd219e5001)
+- docs: Update documentation. [`0ecd91e`](https://github.com/ecphp/eu-login-bundle/commit/0ecd91e68cda920132488c1780b95eb2c15f0845)
+- refactor: Update for Symfony &gt;= 5.4. [`fa5b2dc`](https://github.com/ecphp/eu-login-bundle/commit/fa5b2dc59a9c9cf5a0d3abeb5212645f2463666a)
+- chore: Remove docker stuff, replace with `.envrc`. [`2eb1f48`](https://github.com/ecphp/eu-login-bundle/commit/2eb1f48d852475ac8188c253154b515a02ceb988)
+- chore: Update licence holder. [`99130b7`](https://github.com/ecphp/eu-login-bundle/commit/99130b7d116e5002bbb95460c9bce389d0dcdc28)
+- chore: Normalize `composer.json`. [`f93945f`](https://github.com/ecphp/eu-login-bundle/commit/f93945f5b3b2419f567db34a6817138f1cd2766a)
+
+## [2.3.9](https://github.com/ecphp/eu-login-bundle/compare/2.3.8...2.3.9) - 2021-11-12
+
+### Commits
+
+- docs: Add/update CHANGELOG. [`076c736`](https://github.com/ecphp/eu-login-bundle/commit/076c73638d0b5b91e4b2665b0a59e665d10e5145)
 - fix: Add missing methods. [`09d24cb`](https://github.com/ecphp/eu-login-bundle/commit/09d24cb5f15e45ade4522015d30ddce2333f3b82)
 - chore: Add missing dev package. [`11ba629`](https://github.com/ecphp/eu-login-bundle/commit/11ba6291cdfc493742c4287360c43f5ef21e3741)
 
@@ -184,7 +296,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use decorator pattern. [`314975a`](https://github.com/ecphp/eu-login-bundle/commit/314975a5e603a0bbaf23d4a0de6c0343a7c9041a)
 - Update composer.json. [`d6d12ff`](https://github.com/ecphp/eu-login-bundle/commit/d6d12ffc1413bbe88ddc46e930d08a7488ff1d5a)
 
-## [2.0.0](https://github.com/ecphp/eu-login-bundle/compare/1.3.6...2.0.0) - 2020-01-31
+## [2.0.0](https://github.com/ecphp/eu-login-bundle/compare/1.3.7...2.0.0) - 2020-01-31
 
 ### Merged
 
@@ -205,6 +317,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update composer.json file. [`4cfcbf3`](https://github.com/ecphp/eu-login-bundle/commit/4cfcbf3b88f3a026065230026fcaa42eb0add7a0)
 - Remove obsolete tests. [`5291260`](https://github.com/ecphp/eu-login-bundle/commit/52912606035e542c32bf2e1a5862fbb5edae6056)
 - Remove Travis, use Github actions. [`f5448d2`](https://github.com/ecphp/eu-login-bundle/commit/f5448d24ee5c0e4ef4a9d41c09b4050f0be40fee)
+
+## [1.3.7](https://github.com/ecphp/eu-login-bundle/compare/1.3.6...1.3.7) - 2022-08-22
+
+### Merged
+
+- fix: add missing arg to trigger_deprecation call [`#41`](https://github.com/ecphp/eu-login-bundle/pull/41)
+
+### Commits
+
+- chore: Update `composer.json`. [`7caa3dd`](https://github.com/ecphp/eu-login-bundle/commit/7caa3dd78e63b041e684b95e49e6dc579cb49f77)
+- docs: Update link to ecphp/cas-bundle documentation. [`804b995`](https://github.com/ecphp/eu-login-bundle/commit/804b99536621418483ebb802fb46418f4682f0a2)
 
 ## [1.3.6](https://github.com/ecphp/eu-login-bundle/compare/1.3.5...1.3.6) - 2020-10-05
 
