@@ -20,8 +20,7 @@ final class EuLoginUserProvider implements CasUserProviderInterface
 {
     public function __construct(
         private readonly CasUserProviderInterface $casUserProvider
-    ) {
-    }
+    ) {}
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {

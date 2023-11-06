@@ -13,6 +13,4 @@ namespace EcPhp\EuLoginBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class EuLoginBundle extends Bundle
-{
-}
+final class EuLoginBundle extends Bundle {}

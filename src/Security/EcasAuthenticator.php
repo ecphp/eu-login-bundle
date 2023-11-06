@@ -25,8 +25,7 @@ final class EcasAuthenticator extends AbstractAuthenticator implements Authentic
 {
     public function __construct(
         private readonly CasAuthenticator $casAuthenticator
-    ) {
-    }
+    ) {}
 
     public function authenticate(Request $request): Passport
     {

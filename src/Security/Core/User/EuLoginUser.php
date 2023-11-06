@@ -18,17 +18,14 @@ final class EuLoginUser implements EuLoginUserInterface
 {
     public function __construct(
         private readonly CasUserInterface $user
-    ) {
-    }
+    ) {}
 
     public function __toString(): string
     {
         return $this->user->__toString();
     }
 
-    public function eraseCredentials(): void
-    {
-    }
+    public function eraseCredentials(): void {}
 
     public function get(string $key, mixed $default = null): mixed
     {
