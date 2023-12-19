@@ -156,11 +156,6 @@ html_static_path = ['_static']
 # typographically correct entities.
 #html_use_smartypants = True
 
-
-def setup(app):
-    app.add_stylesheet('custom.css')
-    app.add_stylesheet('highlight.css')
-
 # Custom sidebar templates, maps document names to template names.
 #html_sidebars = {}
 
@@ -290,5 +285,3 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
-
-
