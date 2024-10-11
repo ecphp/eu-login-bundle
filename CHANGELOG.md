@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.0.0](https://github.com/ecphp/eu-login-bundle/compare/2.5.2...3.0.0)
+## [3.0.1](https://github.com/ecphp/eu-login-bundle/compare/3.0.0...3.0.1)
+
+### Commits
+
+- chore: symfony 7 compatibility, maintenance [`61f32d8`](https://github.com/ecphp/eu-login-bundle/commit/61f32d8d6b97bb6c9c0e545f0593b146f5f0356a)
+- chore: update documentation [`84bc821`](https://github.com/ecphp/eu-login-bundle/commit/84bc82194bf72f0ab2a682b5598dd170f6b146d6)
+- chore: add `.readthedocs.yml` config [`5ecd0a6`](https://github.com/ecphp/eu-login-bundle/commit/5ecd0a63483c283d92b0c023bc0cd17b5c94de4c)
+
+## [3.0.0](https://github.com/ecphp/eu-login-bundle/compare/2.5.2...3.0.0) - 2023-11-06
 
 ### Merged
 
@@ -19,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Commits
 
+- docs: update changelog [`f942d80`](https://github.com/ecphp/eu-login-bundle/commit/f942d80c754fed1e17a2872bf6a55917a8748bfd)
 - cs: autofix coding standards [`6293420`](https://github.com/ecphp/eu-login-bundle/commit/6293420ac6c57674a99837a256a0f3f95fd3778d)
 - chore: update `infection` thresholds [`e965f98`](https://github.com/ecphp/eu-login-bundle/commit/e965f980b52468761b41afe258b20c28fbe633ca)
 - chore: switch to `ecphp/cas-bundle` stable [`d7e735f`](https://github.com/ecphp/eu-login-bundle/commit/d7e735f4878f057c7e5db938166038a85164dd4c)
